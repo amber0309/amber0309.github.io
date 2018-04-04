@@ -338,6 +338,7 @@
 </ol>
 <a id="more"></a>
 <h2 id="1-Code"><a href="#1-Code" class="headerlink" title="1. Code"></a>1. Code</h2><h3 id="KEBC-py"><a href="#KEBC-py" class="headerlink" title="KEBC.py"></a>KEBC.py</h3><p>(Implementation of KEBC using kernel trick)</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -360,7 +361,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="KEBC-bochner-py"><a href="#KEBC-bochner-py" class="headerlink" title="KEBC_bochner.py"></a>KEBC_bochner.py</h3><p>(Implementation of KEBC using explicit kernel mapping (Bochner’s theorem))</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -379,7 +382,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="test-KEBC-py"><a href="#test-KEBC-py" class="headerlink" title="test_KEBC.py"></a>test_KEBC.py</h3><p>(a toy synthetic test)</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -402,8 +407,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h2 id="2-Usage"><a href="#2-Usage" class="headerlink" title="2. Usage"></a>2. Usage</h2><h3 id="KEBC-KEBC-py"><a href="#KEBC-KEBC-py" class="headerlink" title="KEBC (KEBC.py)"></a>KEBC (KEBC.py)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">label = KEBC_cond(XY, label_true, score_flg)</span><br><span class="line">label = KEBC_cond_ref(XY, label_true, score_flg)</span><br><span class="line">label = KEBC_marg(XY, label_true, score_flg)</span><br></pre></td></tr></table></figure>
 <p>Inputs:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -426,7 +433,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>Output:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -441,8 +450,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="KEBC-bochner-KEBC-bochner-py"><a href="#KEBC-bochner-KEBC-bochner-py" class="headerlink" title="KEBC_bochner (KEBC_bochner.py)"></a>KEBC_bochner (KEBC_bochner.py)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">label = KEBC_cond_bochner(XY, label_true, k, score_flg)</span><br><span class="line">label = KEBC_marg_bochner(XY, label_true, k, score_flg)</span><br></pre></td></tr></table></figure>
 <p>Inputs:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -469,7 +480,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>Output:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -484,8 +497,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="Synthetic-experiment-test-KEBC-py"><a href="#Synthetic-experiment-test-KEBC-py" class="headerlink" title="Synthetic experiment (test_KEBC.py)"></a>Synthetic experiment (test_KEBC.py)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exp_synth(n_clu, n_grp)</span><br></pre></td></tr></table></figure>
 <p>Inputs:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -504,7 +519,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="3-Contact"><a href="#3-Contact" class="headerlink" title="3. Contact"></a>3. Contact</h2><p><a href="mailto:&#x73;&#x68;&#x6f;&#117;&#98;&#111;&#46;&#x68;&#x75;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#111;&#x6d;" target="_blank" rel="noopener">&#x73;&#x68;&#x6f;&#117;&#98;&#111;&#46;&#x68;&#x75;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#111;&#x6d;</a><br><a href="mailto:&#99;&#x68;&#x65;&#x6e;&#122;&#x68;&#105;&#x74;&#x61;&#x6e;&#x67;&#x32;&#64;&#x68;&#x75;&#x61;&#119;&#101;&#x69;&#x2e;&#x63;&#x6f;&#x6d;" target="_blank" rel="noopener">&#99;&#x68;&#x65;&#x6e;&#122;&#x68;&#105;&#x74;&#x61;&#x6e;&#x67;&#x32;&#64;&#x68;&#x75;&#x61;&#119;&#101;&#x69;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
+</div>
+<h2 id="3-Contact"><a href="#3-Contact" class="headerlink" title="3. Contact"></a>3. Contact</h2><p><a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#58;&#115;&#104;&#111;&#x75;&#x62;&#111;&#46;&#x68;&#x75;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#x6f;&#109;">&#115;&#104;&#111;&#x75;&#x62;&#111;&#46;&#x68;&#x75;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#x6f;&#109;</a><br><a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#x63;&#104;&#101;&#110;&#122;&#x68;&#x69;&#x74;&#97;&#110;&#103;&#x32;&#x40;&#x68;&#x75;&#97;&#119;&#x65;&#105;&#46;&#x63;&#111;&#109;">&#x63;&#104;&#101;&#110;&#122;&#x68;&#x69;&#x74;&#97;&#110;&#103;&#x32;&#x40;&#x68;&#x75;&#97;&#119;&#x65;&#105;&#46;&#x63;&#111;&#109;</a></p>
 
       
     </div>
@@ -626,7 +642,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -865,6 +881,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
