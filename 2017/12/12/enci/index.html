@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="Reticentor">
 <meta property="og:description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Model DescriptionIn general, ENCI discovers casual structure of">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-05T07:50:03.117Z">
+<meta property="og:updated_time" content="2018-04-05T08:15:38.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kernel Embedding-based Nonstationary Causal model Inference">
 <meta name="twitter:description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Model DescriptionIn general, ENCI discovers casual structure of">
@@ -339,7 +339,7 @@
 <li>$p(X)$ and $p(Y|X)$ vary in different domains.</li>
 <li>The causal direction between $X$ and $Y$ stays the same throughout the data generating process.</li>
 </ol>
-<p>We term observations collected from one domain a group which consists of bi-variate tuples, i.e. <script type="math/tex">G\_{i} = \lbrace (x^{(i)}\_{j}, y^{(i)}\_{j}) \rbrace\_{j=1, \dots, N\_{i}}</script>, where $i$ is the index of group, $j$ is the index of observations in group $i$ and $N_{i}$ is the total number of observations in group $i$. Then the entire data set is given by $ \mathcal{D} = \lbrace G_{1}, \dots, G_{N} \rbrace$ where $N$ is the total number of groups.</p>
+<p>We term observations collected from one domain a group which consists of bi-variate tuples, i.e. \begin{aligned} G_{i} = \lbrace (x^{(i)}_{j}, y^{(i)}_{j}) \rbrace_{j=1, \dots, N_{i}} \end{aligned}, where $i$ is the index of group, $j$ is the index of observations in group $i$ and $N_{i}$ is the total number of observations in group $i$. Then the entire data set is given by $ \mathcal{D} = \lbrace G_{1}, \dots, G_{N} \rbrace$ where $N$ is the total number of groups.</p>
 <p>ENCI uses groups of data collected from different domains to estimate the causal direction between $X$ and $Y$.</p>
 <h2 id="Scope-of-Application"><a href="#Scope-of-Application" class="headerlink" title="Scope of Application"></a>Scope of Application</h2><h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>Python implementation of ENCI for cause-effect pairs is available at<br><a href="https://github.com/amber0309/ENCI_cause-effect-pair" target="_blank" rel="noopener">https://github.com/amber0309/ENCI_cause-effect-pair</a>.</p>
 
