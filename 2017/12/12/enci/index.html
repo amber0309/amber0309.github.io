@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ML,Causality,Embedding," />
+  <meta name="keywords" content="ML,Embedding,Causality," />
 
 
 
@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Problem definitionIn general, ENCI discovers casual structure of">
-<meta name="keywords" content="ML,Causality,Embedding">
+<meta name="description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Model DescriptionIn general, ENCI discovers casual structure of">
+<meta name="keywords" content="ML,Embedding,Causality">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kernel Embedding-based Nonstationary Causal model Inference">
 <meta property="og:url" content="http://amber0309.github.io/2017/12/12/enci/index.html">
 <meta property="og:site_name" content="Reticentor">
-<meta property="og:description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Problem definitionIn general, ENCI discovers casual structure of">
+<meta property="og:description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Model DescriptionIn general, ENCI discovers casual structure of">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-05T07:17:21.828Z">
+<meta property="og:updated_time" content="2018-04-05T07:23:46.945Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kernel Embedding-based Nonstationary Causal model Inference">
-<meta name="twitter:description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Problem definitionIn general, ENCI discovers casual structure of">
+<meta name="twitter:description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Model DescriptionIn general, ENCI discovers casual structure of">
 
 
 
@@ -331,7 +331,7 @@
 
       
         <p>This post is an introduction to my causal inference approach called kernel <strong>E</strong>mbedding-based <strong>N</strong>onstationary <strong>C</strong>ausal model <strong>I</strong>nference (ENCI).</p>
-<h2 id="Problem-definition"><a href="#Problem-definition" class="headerlink" title="Problem definition"></a>Problem definition</h2><p>In general, ENCI discovers casual structure of <em>nonstationary causal model</em> which is not considered in most of the existing causal inference approaches.</p>
+<h2 id="Model-Description"><a href="#Model-Description" class="headerlink" title="Model Description"></a>Model Description</h2><p>In general, ENCI discovers casual structure of <em>nonstationary causal model</em> which is not considered in most of the existing causal inference approaches.</p>
 <a id="more"></a>
 <p>Firstly, we give the formal definition of the nonstationary causal model where ENCI is applied. Let $X$ be the cause with density $p(X)$ and $Y$ be the effect with density $p(Y)$ without loss of generality, the data generating process of a nonstationary causal model fulfills the following properties:</p>
 <ol>
@@ -339,9 +339,9 @@
 <li>$p(X)$ and $p(Y|X)$ vary in different domains.</li>
 <li>The causal direction between $X$ and $Y$ stays the same throughout the data generating process.</li>
 </ol>
-<p>We term observations collected from one domain a group which consists of bi-variate tuples, i.e. $ \begin{align} G_{i} = \left{ (x^{(i)}_{j}, y^{(i)}_{j}) \right}_{j=1, \dots, N_{i}} \end{align}$, where $i$ is the index of group, $j$ is the index of observations in group $i$ and $N_{i}$ is the total number of observations in group $i$. Then the entire data set is given by $ \mathcal{D} = { G_{1}, \dots, G_{N} }$ where $N$ is the total number of groups.</p>
+<p>We term observations collected from one domain a group which consists of bi-variate tuples, i.e. <script type="math/tex">G\_{i} = \left{ (x^{(i)}\_{j}, y^{(i)}\_{j}) \right}\_{j=1, \dots, N\_{i}}</script>, where $i$ is the index of group, $j$ is the index of observations in group $i$ and $N_{i}$ is the total number of observations in group $i$. Then the entire data set is given by $ \mathcal{D} = \left{ G_{1}, \dots, G_{N} \right}$ where $N$ is the total number of groups.</p>
 <p>ENCI uses groups of data collected from different domains to estimate the causal direction between $X$ and $Y$</p>
-<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>Python implementation of ENCI for cause-effect pairs is available at<br><a href="https://github.com/amber0309/ENCI_cause-effect-pair" target="_blank" rel="noopener">https://github.com/amber0309/ENCI_cause-effect-pair</a>.</p>
+<h2 id="Scope-of-Application"><a href="#Scope-of-Application" class="headerlink" title="Scope of Application"></a>Scope of Application</h2><h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>Python implementation of ENCI for cause-effect pairs is available at<br><a href="https://github.com/amber0309/ENCI_cause-effect-pair" target="_blank" rel="noopener">https://github.com/amber0309/ENCI_cause-effect-pair</a>.</p>
 
       
     </div>
@@ -361,9 +361,9 @@
           
             <a href="/tags/ML/" rel="tag"># ML</a>
           
-            <a href="/tags/Causality/" rel="tag"># Causality</a>
-          
             <a href="/tags/Embedding/" rel="tag"># Embedding</a>
+          
+            <a href="/tags/Causality/" rel="tag"># Causality</a>
           
         </div>
       
@@ -526,7 +526,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-definition"><span class="nav-number">1.</span> <span class="nav-text">Problem definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">2.</span> <span class="nav-text">Implementation</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Description"><span class="nav-number">1.</span> <span class="nav-text">Model Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scope-of-Application"><span class="nav-number">2.</span> <span class="nav-text">Scope of Application</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">3.</span> <span class="nav-text">Implementation</span></a></li></ol></div>
             
 
           </div>
