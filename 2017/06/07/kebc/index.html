@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ML,Embedding," />
+  <meta name="keywords" content="ML,Embedding,Clustering," />
 
 
 
@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="Python code for the Kernel Embedding-based Clustering (KEBC) algorithm(Anaconda 4.3.0 64-bit for python 2.7 on Windows 10).  Code Usage Contact">
-<meta name="keywords" content="ML,Embedding">
+<meta name="description" content="This post is an introduction to my clustering method called kernel Embedding-Based Clustering (KEBC). Problem DescriptionKEBC aims to cluster $N$ data groups into $C$ clusters according to the conditi">
+<meta name="keywords" content="ML,Embedding,Clustering">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KEBC">
+<meta property="og:title" content="kernel Embedding-Based Clustering">
 <meta property="og:url" content="http://amber0309.github.io/2017/06/07/kebc/index.html">
 <meta property="og:site_name" content="Reticentor">
-<meta property="og:description" content="Python code for the Kernel Embedding-based Clustering (KEBC) algorithm(Anaconda 4.3.0 64-bit for python 2.7 on Windows 10).  Code Usage Contact">
+<meta property="og:description" content="This post is an introduction to my clustering method called kernel Embedding-Based Clustering (KEBC). Problem DescriptionKEBC aims to cluster $N$ data groups into $C$ clusters according to the conditi">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-04T07:39:55.698Z">
+<meta property="og:updated_time" content="2018-04-05T09:59:11.926Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KEBC">
-<meta name="twitter:description" content="Python code for the Kernel Embedding-based Clustering (KEBC) algorithm(Anaconda 4.3.0 64-bit for python 2.7 on Windows 10).  Code Usage Contact">
+<meta name="twitter:title" content="kernel Embedding-Based Clustering">
+<meta name="twitter:description" content="This post is an introduction to my clustering method called kernel Embedding-Based Clustering (KEBC). Problem DescriptionKEBC aims to cluster $N$ data groups into $C$ clusters according to the conditi">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <title>KEBC | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>kernel Embedding-Based Clustering | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">KEBC</h1>
+          <h1 class="post-title" itemprop="name headline">kernel Embedding-Based Clustering</h1>
         
 
         <div class="post-meta">
@@ -330,197 +330,13 @@
       
 
       
-        <p>Python code for the Kernel Embedding-based Clustering (KEBC) algorithm<br>(Anaconda 4.3.0 64-bit for python 2.7 on Windows 10).</p>
-<ol>
-<li>Code</li>
-<li>Usage</li>
-<li>Contact</li>
-</ol>
+        <p>This post is an introduction to my clustering method called <strong>k</strong>ernel <strong>E</strong>mbedding-<strong>B</strong>ased <strong>C</strong>lustering (KEBC).</p>
+<h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>KEBC aims to cluster $N$ data groups into $C$ clusters according to the conditional distribution of each group.</p>
 <a id="more"></a>
-<h2 id="1-Code"><a href="#1-Code" class="headerlink" title="1. Code"></a>1. Code</h2><h3 id="KEBC-py"><a href="#KEBC-py" class="headerlink" title="KEBC.py"></a>KEBC.py</h3><p>(Implementation of KEBC using kernel trick)</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>KEBC_cond</td>
-<td>KEBC using conditional distributions</td>
-</tr>
-<tr>
-<td>KEBC_cond_ref</td>
-<td>KEBC using conditional distributions with reference distribution</td>
-</tr>
-<tr>
-<td>KEBC_marg</td>
-<td>KEBC using marginal distributions</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="KEBC-bochner-py"><a href="#KEBC-bochner-py" class="headerlink" title="KEBC_bochner.py"></a>KEBC_bochner.py</h3><p>(Implementation of KEBC using explicit kernel mapping (Bochner’s theorem))</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>KEBC_cond_bochner</td>
-<td>KEBC using conditional distributions</td>
-</tr>
-<tr>
-<td>KEBC_marg_bochner</td>
-<td>KEBC using marginal distributions</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="test-KEBC-py"><a href="#test-KEBC-py" class="headerlink" title="test_KEBC.py"></a>test_KEBC.py</h3><p>(a toy synthetic test)</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>gen_stat</td>
-<td>compute the precision and recall of clustering results</td>
-</tr>
-<tr>
-<td>Generate_XY</td>
-<td>generate synthetic data</td>
-</tr>
-<tr>
-<td>exp_synth</td>
-<td>conduct synthetic experiment</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="2-Usage"><a href="#2-Usage" class="headerlink" title="2. Usage"></a>2. Usage</h2><h3 id="KEBC-KEBC-py"><a href="#KEBC-KEBC-py" class="headerlink" title="KEBC (KEBC.py)"></a>KEBC (KEBC.py)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">label = KEBC_cond(XY, label_true, score_flg)</span><br><span class="line">label = KEBC_cond_ref(XY, label_true, score_flg)</span><br><span class="line">label = KEBC_marg(XY, label_true, score_flg)</span><br></pre></td></tr></table></figure>
-<p>Inputs:</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>XY</td>
-<td>input data, list of numpy arrays. rows of each array are i.i.d. samples, column of each array represent variables</td>
-</tr>
-<tr>
-<td>label_true</td>
-<td>the ground truth of cluster label of each group</td>
-</tr>
-<tr>
-<td>score_flg</td>
-<td>output score file or not. 1 - yes, 0 - no</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Output:</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>label</td>
-<td>list of cluster label for each group</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="KEBC-bochner-KEBC-bochner-py"><a href="#KEBC-bochner-KEBC-bochner-py" class="headerlink" title="KEBC_bochner (KEBC_bochner.py)"></a>KEBC_bochner (KEBC_bochner.py)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">label = KEBC_cond_bochner(XY, label_true, k, score_flg)</span><br><span class="line">label = KEBC_marg_bochner(XY, label_true, k, score_flg)</span><br></pre></td></tr></table></figure>
-<p>Inputs:</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>XY</td>
-<td>input data, list of numpy arrays. rows of each array are i.i.d. samples, column of each array represent variables</td>
-</tr>
-<tr>
-<td>label_true</td>
-<td>the ground truth of cluster label of each group</td>
-</tr>
-<tr>
-<td>k</td>
-<td>the length of explicit kernel mapping</td>
-</tr>
-<tr>
-<td>score_flg</td>
-<td>output score file or not. 1 - yes, 0 - no</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Output:</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>label</td>
-<td>list of cluster label for each group</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="Synthetic-experiment-test-KEBC-py"><a href="#Synthetic-experiment-test-KEBC-py" class="headerlink" title="Synthetic experiment (test_KEBC.py)"></a>Synthetic experiment (test_KEBC.py)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exp_synth(n_clu, n_grp)</span><br></pre></td></tr></table></figure>
-<p>Inputs:</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>n_clu</td>
-<td>number of clusters</td>
-</tr>
-<tr>
-<td>n_grp</td>
-<td>number of groups</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="3-Contact"><a href="#3-Contact" class="headerlink" title="3. Contact"></a>3. Contact</h2><p><a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#115;&#x68;&#x6f;&#x75;&#98;&#111;&#x2e;&#104;&#117;&#x40;&#x67;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#115;&#x68;&#x6f;&#x75;&#98;&#111;&#x2e;&#104;&#117;&#x40;&#x67;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br><a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#x63;&#104;&#101;&#x6e;&#122;&#104;&#105;&#116;&#x61;&#x6e;&#x67;&#x32;&#64;&#104;&#117;&#97;&#119;&#101;&#x69;&#46;&#x63;&#x6f;&#x6d;">&#x63;&#104;&#101;&#x6e;&#122;&#104;&#105;&#116;&#x61;&#x6e;&#x67;&#x32;&#64;&#104;&#117;&#97;&#119;&#101;&#x69;&#46;&#x63;&#x6f;&#x6d;</a></p>
+<p>Specifically, assume we are given a set $\mathbf{G}$ which consists of $N$ data groups, i.e. $\mathbf{G} = \lbrace G_{1}, \dots, G_{N} \rbrace $ and each group consists of bi-variate tuples, e.g. $ G_{i} = \lbrace \left(x^{(i)}_{1}, y^{(i)}_{1} \right), \dots, \left(x^{(i)}_{n_{i}}, y^{(i)}_{n_{i}} \right) \rbrace $ ($n_{i}$ denotes the number of points in group $i$), the goal of KEBC is to find the clustering such that groups within each cluster follow the same or very similar conditional distributions.</p>
+<p>Formally, let $d\left( P^{(i)}_{Y|X}, P^{(j)}_{Y|X} \right) $ be a <em>dissimilarity measure</em> between conditional distributions, where $P^{(i)}_{Y|X}$ denotes the conditional distribution of $Y$ on $X$ of group $i$. Our objective is to find a $C$-partitioning of the $N$ groups s.t., for $\mu_{S_{j}}$ being the mean conditional distribution representation of cluster $S_{j}$, we have<br>\begin{aligned} \mathbf{S}^{*} = arg\max_{\mathbf{S}} \sum_{i=1}^{N} \sum_{P^{(i)}_{Y|X} \in S_{j}} d^{2}\left( P^{(i)}_{Y|X}, \mu_{S_{j}} \right) \end{aligned}</p>
+<h2 id="Scope-of-Application"><a href="#Scope-of-Application" class="headerlink" title="Scope of Application"></a>Scope of Application</h2><p>KEBC could be applied in any problem that has a (conditional) distribution-distinguishable interpretation.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>Python code of KEBC for clustering based on both marginal and conditional distributions is available at<br><a href="https://github.com/amber0309/KEBC" target="_blank" rel="noopener">https://github.com/amber0309/KEBC</a></p>
 
       
     </div>
@@ -541,6 +357,8 @@
             <a href="/tags/ML/" rel="tag"># ML</a>
           
             <a href="/tags/Embedding/" rel="tag"># Embedding</a>
+          
+            <a href="/tags/Clustering/" rel="tag"># Clustering</a>
           
         </div>
       
@@ -642,7 +460,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -655,7 +473,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -703,7 +521,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Code"><span class="nav-number">1.</span> <span class="nav-text">1. Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KEBC-py"><span class="nav-number">1.1.</span> <span class="nav-text">KEBC.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KEBC-bochner-py"><span class="nav-number">1.2.</span> <span class="nav-text">KEBC_bochner.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#test-KEBC-py"><span class="nav-number">1.3.</span> <span class="nav-text">test_KEBC.py</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Usage"><span class="nav-number">2.</span> <span class="nav-text">2. Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KEBC-KEBC-py"><span class="nav-number">2.1.</span> <span class="nav-text">KEBC (KEBC.py)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KEBC-bochner-KEBC-bochner-py"><span class="nav-number">2.2.</span> <span class="nav-text">KEBC_bochner (KEBC_bochner.py)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Synthetic-experiment-test-KEBC-py"><span class="nav-number">2.3.</span> <span class="nav-text">Synthetic experiment (test_KEBC.py)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Contact"><span class="nav-number">3.</span> <span class="nav-text">3. Contact</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Description"><span class="nav-number">1.</span> <span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scope-of-Application"><span class="nav-number">2.</span> <span class="nav-text">Scope of Application</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
             
 
           </div>
