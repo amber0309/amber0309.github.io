@@ -97,14 +97,14 @@
 <meta name="description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Problem definitionIn general, ENCI discovers casual structure of">
 <meta name="keywords" content="ML,Causality,Embedding">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kernel Embedding-based Nonstationary Causal model Inference">
+<meta property="og:title" content="Kernel Embedding-based Nonstationary Causal model Inference">
 <meta property="og:url" content="http://amber0309.github.io/2017/12/12/enci/index.html">
 <meta property="og:site_name" content="Reticentor">
 <meta property="og:description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Problem definitionIn general, ENCI discovers casual structure of">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-05T07:05:32.266Z">
+<meta property="og:updated_time" content="2018-04-05T07:12:15.794Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kernel Embedding-based Nonstationary Causal model Inference">
+<meta name="twitter:title" content="Kernel Embedding-based Nonstationary Causal model Inference">
 <meta name="twitter:description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Problem definitionIn general, ENCI discovers casual structure of">
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <title>kernel Embedding-based Nonstationary Causal model Inference | Reticentor</title>
+  <title>Kernel Embedding-based Nonstationary Causal model Inference | Reticentor</title>
   
 
 
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kernel Embedding-based Nonstationary Causal model Inference</h1>
+          <h1 class="post-title" itemprop="name headline">Kernel Embedding-based Nonstationary Causal model Inference</h1>
         
 
         <div class="post-meta">
@@ -332,13 +332,14 @@
       
         <p>This post is an introduction to my causal inference approach called kernel <strong>E</strong>mbedding-based <strong>N</strong>onstationary <strong>C</strong>ausal model <strong>I</strong>nference (ENCI).</p>
 <h2 id="Problem-definition"><a href="#Problem-definition" class="headerlink" title="Problem definition"></a>Problem definition</h2><p>In general, ENCI discovers casual structure of <em>nonstationary causal model</em> which is not considered in most of the existing causal inference approaches.</p>
+<a id="more"></a>
 <p>Firstly, we give the formal definition of the nonstationary causal model where ENCI is applied. Let $X$ be the cause with density $p(X)$ and $Y$ be the effect with density $p(Y)$ without loss of generality, the data generating process of a nonstationary causal model fulfills the following properties:</p>
 <ol>
 <li>Observations of $X$ and $Y$ are collected from $N$ different domains. In each domain, $p(X)$ and $p(Y|X)$ are fixed.</li>
 <li>$p(X)$ and $p(Y|X)$ vary in different domains.</li>
 <li>The causal direction between $X$ and $Y$ stays the same throughout the data generating process.</li>
 </ol>
-<p>We term observations collected from one domain a group which consists of bi-variate tuples, i.e. <script type="math/tex">G_{i} = \{ (x^{(i)}_{j}, y^{(i)}_{j}) \}_{j=1, \dots, N_{i}}</script>, where $i$ is the index of group, $j$ is the index of observations in group $i$ and $N<em>{i}$ is the total number of observations in group $i$. Then the entire data set is given by $ \mathcal{D} = { G</em>{1}, \dots, G_{N} }$ where $N$ is the total number of groups.</p>
+<p>We term observations collected from one domain a group which consists of bi-variate tuples, i.e. $ \begin{align}<br>G<em>{i} = { (x^{(i)}</em>{j}, y^{(i)}<em>{j}) }</em>{j=1, \dots, N<em>{i}}<br>\end{align}$, where $i$ is the index of group, $j$ is the index of observations in group $i$ and $N</em>{i}$ is the total number of observations in group $i$. Then the entire data set is given by $ \mathcal{D} = { G<em>{1}, \dots, G</em>{N} }$ where $N$ is the total number of groups.</p>
 <p>ENCI uses groups of data collected from different domains to estimate the causal direction between $X$ and $Y$</p>
 <h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>Python implementation of ENCI for cause-effect pairs is available at <a href="https://github.com/amber0309/ENCI_cause-effect-pair" target="_blank" rel="noopener">https://github.com/amber0309/ENCI_cause-effect-pair</a>.</p>
 
