@@ -97,14 +97,14 @@
 <meta name="description" content="This post is an introduction to my clustering method called kernel Embedding-Based Clustering (KEBC). Problem DescriptionKEBC aims to cluster $N$ data groups into $C$ clusters according to the conditi">
 <meta name="keywords" content="ML,Embedding,Clustering">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kernel Embedding-Based Clustering">
+<meta property="og:title" content="Kernel Embedding-Based Clustering">
 <meta property="og:url" content="http://amber0309.github.io/2017/06/07/kebc/index.html">
 <meta property="og:site_name" content="Reticentor">
 <meta property="og:description" content="This post is an introduction to my clustering method called kernel Embedding-Based Clustering (KEBC). Problem DescriptionKEBC aims to cluster $N$ data groups into $C$ clusters according to the conditi">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-05T10:07:52.180Z">
+<meta property="og:updated_time" content="2018-04-05T11:56:55.432Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kernel Embedding-Based Clustering">
+<meta name="twitter:title" content="Kernel Embedding-Based Clustering">
 <meta name="twitter:description" content="This post is an introduction to my clustering method called kernel Embedding-Based Clustering (KEBC). Problem DescriptionKEBC aims to cluster $N$ data groups into $C$ clusters according to the conditi">
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <title>kernel Embedding-Based Clustering | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Kernel Embedding-Based Clustering | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kernel Embedding-Based Clustering</h1>
+          <h1 class="post-title" itemprop="name headline">Kernel Embedding-Based Clustering</h1>
         
 
         <div class="post-meta">
@@ -334,9 +334,9 @@
 <h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>KEBC aims to cluster $N$ data groups into $C$ clusters according to the conditional distribution of each group.</p>
 <a id="more"></a>
 <p>Specifically, assume we are given a set $\mathbf{G}$ which consists of $N$ data groups, i.e. $\mathbf{G} = \lbrace G_{1}, \dots, G_{N} \rbrace $ and each group consists of bi-variate tuples, e.g. $ G_{i} = \lbrace (x^{(i)}_{1}, y^{(i)}_{1} ), \dots, (x^{(i)}_{n_{i}}, y^{(i)}_{n_{i}} ) \rbrace $ ($n_{i}$ denotes the number of points in group $i$), the goal of KEBC is to find the clustering such that groups within each cluster follow the same or very similar conditional distributions.</p>
-<p>Formally, let $d\left( P^{(i)}_{Y|X}, P^{(j)}_{Y|X} \right) $ be a <em>dissimilarity measure</em> between conditional distributions, where $P^{(i)}_{Y|X}$ denotes the conditional distribution of $Y$ on $X$ of group $i$. Our objective is to find a $C$-partitioning of the $N$ groups s.t., for $\mu_{S_{j}}$ being the mean conditional distribution representation of cluster $S_{j}$, we have<br>\begin{aligned} \mathbf{S}^{*} = arg\max_{\mathbf{S}} \sum_{i=1}^{N} \sum_{P^{(i)}_{Y|X} \in S_{j}} d^{2}\left( P^{(i)}_{Y|X}, \mu_{S_{j}} \right) \end{aligned}</p>
+<p>Formally, let $d\left( P^{(i)}_{Y|X}, P^{(j)}_{Y|X} \right) $ be a <em>dissimilarity measure</em> between conditional distributions, where $P^{(i)}_{Y|X}$ denotes the conditional distribution of $Y$ on $X$ of group $i$. Our objective is to find a $C$-partitioning of the $N$ groups s.t., for $\mu_{S_{j}}$ being the mean conditional distribution representation of cluster $S_{j}$,<br>\begin{aligned} \mathbf{S}^{*} = arg\max_{\mathbf{S}} \sum_{i=1}^{N} \sum_{P^{(i)}_{Y|X} \in S_{j}} d^{2}\left( P^{(i)}_{Y|X}, \mu_{S_{j}} \right) \end{aligned}</p>
 <h2 id="Scope-of-Application"><a href="#Scope-of-Application" class="headerlink" title="Scope of Application"></a>Scope of Application</h2><p>KEBC could be applied in any problem that has a (conditional) distribution-distinguishable interpretation.</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>Python code of KEBC for clustering based on both marginal and conditional distributions is available at <a href="https://github.com/amber0309/KEBC" target="_blank" rel="noopener">https://github.com/amber0309/KEBC</a>.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>Python code of KEBC for clustering based on both marginal and conditional distributions is available at <a href="https://github.com/amber0309/KEBC" target="_blank" rel="noopener">GitHub</a>.</p>
 
       
     </div>
@@ -381,8 +381,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/12/enci/" rel="prev" title="Kernel Embedding-based Nonstationary Causal model Inference">
-                Kernel Embedding-based Nonstationary Causal model Inference <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/12/enci/" rel="prev" title="Kernel Embedding-based Nonstationary Causal Model Inference">
+                Kernel Embedding-based Nonstationary Causal Model Inference <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
