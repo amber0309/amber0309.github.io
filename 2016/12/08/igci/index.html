@@ -2,10 +2,8 @@
 
 
 
-  
 
-
-<html class="theme-next pisces use-motion" lang="en">
+<html class="theme-next pisces" lang="en">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -102,7 +100,7 @@
 <meta property="og:site_name" content="Reticentor">
 <meta property="og:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized. Orthogonality in information spaceFirst of all, the relative entropy distance or Kullback-Leibler d">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-08T09:38:57.501Z">
+<meta property="og:updated_time" content="2018-04-08T10:08:52.960Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understanding Information Geometric Causal Inference">
 <meta name="twitter:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized. Orthogonality in information spaceFirst of all, the relative entropy distance or Kullback-Leibler d">
@@ -117,7 +115,7 @@
     sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
-    motion: true,
+    motion: false,
     duoshuo: {
       userId: '0',
       author: 'Author'
@@ -350,7 +348,7 @@
 <p>which is equivalent to the following additivity of KL divergence<br>\begin{align} D(q||s) = D(q||r) + D(r||s). \end{align}</p>
 <p>The above condition is called <em>orthogonality</em> between $\vec{qr}$ and $\vec{rs}$ [1]. Intuitively, it embodies that the vector formed by densities $q$ and $r$ is orthogonal to the one formed by $r$ and $s$ in the space of probability densities.</p>
 <h2 id="Causal-model"><a href="#Causal-model" class="headerlink" title="Causal model"></a>Causal model</h2><p>Without loss of generality, $x$ is assumed to be the cause and $y$ the effect.</p>
-<h3 id="Independence-assumption-between-p-x-and-f"><a href="#Independence-assumption-between-p-x-and-f" class="headerlink" title="Independence assumption between $p(x)$ and $f$"></a>Independence assumption between $p(x)$ and $f$</h3><p>Consider the density of $x$, $p(x)$, on $[0,1]$ and a $f$ be a diffeomorphism of $[0,1]$ with $f(0)=0$ and $f(1)=1$, we denote the inverse of $f$ by $g:=f^{-1}$. IGCI assumes the independence between $p(x)$ and $f$ as<br>\begin{align} \int_{0}^{1} p(x) \log f^{\prime}(x) dx= \int_{0}^{1} \log f^{\prime}(x)dx. \label{asmp} \tag{1} \end{align}</p>
+<h3 id="Independence-assumption-between-p-x-and-f"><a href="#Independence-assumption-between-p-x-and-f" class="headerlink" title="Independence assumption between $p(x)$ and $f$"></a>Independence assumption between $p(x)$ and $f$</h3><p>Consider the density of $x$, $p(x)$, on $[0,1]$ and a $f$ be a diffeomorphism of $[0,1]$ with $f(0)=0$ and $f(1)=1$, we denote the inverse of $f$ by $g:=f^{-1}$. The relation between the cause $x$ and the effect $y$ is $y=f(x)$ which is deterministic. IGCI assumes the independence between $p(x)$ and $f$ as<br>\begin{align} \int_{0}^{1} p(x) \log f^{\prime}(x) dx= \int_{0}^{1} \log f^{\prime}(x)dx. \label{asmp} \tag{1} \end{align}</p>
 <p>This assumption can be interpreted as follows: regard $p(x)$ and $\log f^{\prime}(x)$ as two random variables on $[0,1]$. Then their covariane w.r.t. the uniform distribution on $[0,1]$, $u(x)$, reads<br>\begin{align} cov\left(p(x), \log f^{\prime}(x)\right)&amp; = \mathbb{E}_{u}\left[ p(x) \log f^{\prime}(x) \right] - \mathbb{E}_{u}\left[ p(x) \right]\mathbb{E}_{u}\left[ \log f^{\prime}(x) \right] \\<br>&amp; = \int_{0}^{1} p(x) \log f^{\prime}(x) dx - \int_{0}^{1} p(x)dx \int_{0}^{1} \log f^{\prime}(x)dx \\<br>&amp; = \int_{0}^{1} p(x) \log f^{\prime}(x) dx - \int_{0}^{1} \log f^{\prime}(x)dx.<br>\end{align}</p>
 <p>Therefore, $p(x)$ is uncorrelated with $\log f^{\prime}(x)$ if the independence assumption holds.</p>
 <p>Remarkbly, in the backward direction a positive correlation between $p(y)$ and $\log g^{\prime}(y)$ is derived. The l.h.s of (4) could be equivalent to<br>\begin{align} \int_{0}^{1} p(x) \log f^{\prime}(x) dx= \int_{0}^{1} p(y) \log \frac{1}{g^{\prime}(y)} dy = -\int_{0}^{1} p(y) \log g^{\prime}(y) dy.<br>\end{align}</p>
@@ -546,6 +544,17 @@
                 </a>
               </span>
             
+              <span class="links-of-author-item">
+                <a href="shoubo.sub@gmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
           
         </div>
 
@@ -592,7 +601,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2015 - 
   <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
