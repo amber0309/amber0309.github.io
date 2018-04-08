@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ML,Causality,Embedding," />
+  <meta name="keywords" content="ML,Causality,Paper-reading," />
 
 
 
@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Model DescriptionIn general, ENCI discovers casual structure of">
-<meta name="keywords" content="ML,Causality,Embedding">
+<meta name="description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized. Orthogonality in information spaceFirst of all, the relative entropy distance or Kullback-Leibler d">
+<meta name="keywords" content="ML,Causality,Paper-reading">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kernel Embedding-based Nonstationary Causal Model Inference">
-<meta property="og:url" content="http://amber0309.github.io/2017/12/12/enci/index.html">
+<meta property="og:title" content="Understanding Information Geometric Causal Inference">
+<meta property="og:url" content="http://amber0309.github.io/2016/12/08/igci/index.html">
 <meta property="og:site_name" content="Reticentor">
-<meta property="og:description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Model DescriptionIn general, ENCI discovers casual structure of">
+<meta property="og:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized. Orthogonality in information spaceFirst of all, the relative entropy distance or Kullback-Leibler d">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-07T14:54:29.716Z">
+<meta property="og:updated_time" content="2018-04-08T08:53:57.341Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kernel Embedding-based Nonstationary Causal Model Inference">
-<meta name="twitter:description" content="This post is an introduction to my causal inference approach called kernel Embedding-based Nonstationary Causal model Inference (ENCI). Model DescriptionIn general, ENCI discovers casual structure of">
+<meta name="twitter:title" content="Understanding Information Geometric Causal Inference">
+<meta name="twitter:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized. Orthogonality in information spaceFirst of all, the relative entropy distance or Kullback-Leibler d">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://amber0309.github.io/2017/12/12/enci/"/>
+  <link rel="canonical" href="http://amber0309.github.io/2016/12/08/igci/"/>
 
 
 
 
 
-  <title>Kernel Embedding-based Nonstationary Causal Model Inference | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Understanding Information Geometric Causal Inference | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2017/12/12/enci/">
+    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2016/12/08/igci/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="__Seth__">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kernel Embedding-based Nonstationary Causal Model Inference</h1>
+          <h1 class="post-title" itemprop="name headline">Understanding Information Geometric Causal Inference</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-12T10:25:16+08:00">
-                2017-12-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-08T13:28:14+08:00">
+                2016-12-08
               </time>
             
 
@@ -311,9 +311,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/12/12/enci/#comments" itemprop="discussionUrl">
+                <a href="/2016/12/08/igci/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/12/12/enci/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2016/12/08/igci/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -341,25 +341,71 @@
       
 
       
-        <p>This post is an introduction to my causal inference approach called kernel <strong>E</strong>mbedding-based <strong>N</strong>onstationary <strong>C</strong>ausal model <strong>I</strong>nference (ENCI).</p>
-<h2 id="Model-Description"><a href="#Model-Description" class="headerlink" title="Model Description"></a>Model Description</h2><p>In general, ENCI discovers casual structure of <em>nonstationary causal model</em> which is not considered in most of the existing causal inference approaches.</p>
+        <p>In this post, the basic idea of <a href="http://event.cwi.nl/uai2010/papers/UAI2010_0121.pdf" target="_blank" rel="noopener">Information Geometric Causal Inference</a> (IGCI) is briefly summarized.</p>
+<h2 id="Orthogonality-in-information-space"><a href="#Orthogonality-in-information-space" class="headerlink" title="Orthogonality in information space"></a>Orthogonality in information space</h2><p>First of all, the <em>relative entropy distance</em> or <em>Kullback-Leibler divergence</em> (KL divergence) between two probability densities $p$ and $q$ is defined as</p>
 <a id="more"></a>
-<p>Firstly, we give the formal definition of the nonstationary causal model where ENCI is applied. Let $X$ be the cause with density $p(X)$ and $Y$ be the effect with density $p(Y)$ without loss of generality, the data generating process of a nonstationary causal model fulfills the following properties:</p>
-<ol>
-<li>Observations of $X$ and $Y$ are collected from $N$ different domains. In each domain, $p(X)$ and $p(Y|X)$ are fixed.</li>
-<li>$p(X)$ and $p(Y|X)$ vary in different domains.</li>
-<li>The causal direction between $X$ and $Y$ stays the same throughout the data generating process.</li>
+<p>\begin{aligned} D(p||q):= \int p(x)\log \frac{p(x)}{q(x)}dx. \end{aligned}</p>
+<p>It can be interpreted as the distance between two probability densities. In the following, two elementary properties of KL divergence will be used. One is positivity, i.e., $D(p||q) \ge 0$. The other is its invariance under bijective mappings, i.e., $D(p_{f}||q_{f}) = D(p||q)$ for any bijection $f$, where $p_{f}$ and $q_{f}$ are the images of $p$ and $q$ under $f$ on the corresponding variables.</p>
+<p>Then we need the following Lemma in information space<br><strong>Lemma 1 (orthogonality in information space)</strong><br>Let $q,r,s$ be three probability densities. Then<br>\begin{aligned} \int q(x) \log \frac{r(x)}{s(x)} dx= \int r(x)\log \frac{r(x)}{s(x)}dx \end{aligned}<br>which is equivalent to the following additivity of KL divergence<br>\begin{aligned} D(q||s) = D(q||r) + D(r||s). \end{aligned}</p>
+<p>The above condition is called <em>orthogonality</em> between $\vec{qr}$ and $\vec{rs}$ [1]. Intuitively, it embodies that the vector formed by densities $q$ and $r$ is orthogonal to the one formed by $r$ and $s$ in the space of probability densities.</p>
+<h2 id="Causal-model"><a href="#Causal-model" class="headerlink" title="Causal model"></a>Causal model</h2><p>Without loss of generality, $x$ is assumed to be the cause and $y$ the effect.</p>
+<h3 id="Independence-assumption-between-p-x-and-f"><a href="#Independence-assumption-between-p-x-and-f" class="headerlink" title="Independence assumption between $p(x)$ and $f$"></a>Independence assumption between $p(x)$ and $f$</h3><p>Consider the density of $x$, $p(x)$, on $[0,1]$ and a $f$ be a diffeomorphism of $[0,1]$ with $f(0)=0$ and $f(1)=1$, we denote the inverse of $f$ by $g:=f^{-1}$. IGCI assumes the independence between $p(x)$ and $f$ as</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center"></th>
+<th style="text-align:right"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align:center">$\int_{0}^{1} p(x) \log f^{\prime}(x) dx= \int_{0}^{1} \log f^{\prime}(x)dx.$</td>
+<td style="text-align:right">(1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This assumption can be interpreted as follows: regard $p(x)$ and $\log f^{\prime}(x)$ as two random variables on $[0,1]$. Then their covariane w.r.t. the uniform distribution on $[0,1]$, $u(x)$, reads<br>\begin{aligned} cov\left(p(x), \log f^{\prime}(x)\right)&amp; = \mathbb{E}_{u}\left[ p(x) \log f^{\prime}(x) \right] - \mathbb{E}_{u}\left[ p(x) \right]\mathbb{E}_{u}\left[ \log f^{\prime}(x) \right] \\<br>&amp; = \int_{0}^{1} p(x) \log f^{\prime}(x) dx - \int_{0}^{1} p(x)dx \int_{0}^{1} \log f^{\prime}(x)dx \\<br>&amp; = \int_{0}^{1} p(x) \log f^{\prime}(x) dx - \int_{0}^{1} \log f^{\prime}(x)dx\end{aligned}<br>Therefore, $p(x)$ is uncorrelated with $\log f^{\prime}(x)$ if the independence assumption holds.</p>
+<p>Remarkbly, in the backward direction a positive correlation between $p(y)$ and $\log g^{\prime}(y)$ is derived. The l.h.s of (4) could be equivalent to<br>\begin{aligned} \int_{0}^{1} p(x) \log f^{\prime}(x) dx= \int_{0}^{1} p(y) \log \frac{1}{g^{\prime}(y)} dy = -\int_{0}^{1} p(y) \log g^{\prime}(y) dy. \end{aligned}<br>Similarly for the r.h.s we have<br>\begin{aligned} \int_{0}^{1} \log f^{\prime}(x) dx= \int_{g(0)}^{g(1)} g^{\prime}(y) \log f^{\prime}(g(y)) dy = -\int_{0}^{1} g^{\prime}(y) \log g^{\prime}(y) dy. \end{aligned}<br>where we use $p(y) = g^{\prime}(y) = \frac{1}{f^{\prime}(x)}$ in the above derivations. Then the independence assumption leads to<br>\begin{aligned} \int_{0}^{1} p(y) \log g^{\prime}(y) dy = \int_{0}^{1} g^{\prime}(y) \log g^{\prime}(y) dy. \end{aligned}<br>The covariance between them w.r.t. the uniform distribution on $[0,1]$, $v(y)$, reads<br>\begin{aligned} cov\left(p(y), \log g^{\prime}(y)\right)&amp; = \mathbb{E}_{v}\left[ p(y) \log g^{\prime}(y) \right] - \mathbb{E}_{v}\left[ p(y) \right]\mathbb{E}_{v}\left[ \log g^{\prime}(y) \right] \\<br>&amp; = \int_{0}^{1} p(y) \log g^{\prime}(y) dy - \int_{0}^{1} p(y)dy \int_{0}^{1} \log g^{\prime}(y)dy \\<br>&amp; = \int_{0}^{1} g^{\prime}(y) \log g^{\prime}(y) dy - \int_{0}^{1} \log g^{\prime}(y)dy \\<br>&amp; = \int_{0}^{1} g^{\prime}(y) \log \frac{ g^{\prime}(y)}{v(y)} dy + \int_{0}^{1} v(y) \log \frac{v(y)}{ g^{\prime}(y)} dy \\<br>&amp; = D(g^{\prime}||v) + D(v||g^{\prime}) \ge 0. \end{aligned}</p>
+<h3 id="Reformulation-in-information-space"><a href="#Reformulation-in-information-space" class="headerlink" title="Reformulation in information space"></a>Reformulation in information space</h3><p>We firstly introduce the <em>reference measures</em>, $u(x)$ and $v(y)$. They denote the uniform distributions for $x$ and $y$, respectively. Also, we let $u_{f}$ and $v_{g}$ be their images under $f$ and $g$:<br>\begin{aligned} u_{f}(y) := u(x) g^{\prime}(y) = g^{\prime}(y). \\<br>v_{g}(x) := v(y) f^{\prime}(x) = f^{\prime}(x).\end{aligned}<br>which are derived by simple variable transformation and the property of uniform distribuitons. For $u_{f}(y)$<br>\begin{aligned} u_{f}(y)dy &amp;= u(x)dx \\<br>u_{f}(y) &amp;= u(x)\frac{dx}{dy} \\<br>u_{f}(y) &amp;= u(x)g^{\prime}(y) \\<br>u_{f}(y) &amp;= u(x)g^{\prime}(y).\end{aligned}<br>The same goes for $v_{g}(x)$.</p>
+<p>Then by applying Lemma 1 on Eq. (1), we have<br>\begin{aligned} \int_{0}^{1} p(x) \log f^{\prime}(x) dx &amp;= \int_{0}^{1} \log f^{\prime}(x)dx \\<br>\int_{0}^{1} p(x) \log \frac{1}{f^{\prime}(x)} dx &amp;= \int_{0}^{1} \log \frac{1}{f^{\prime}(x)} dx \\<br>\int_{0}^{1} p(x) \log \frac{u(x)}{f^{\prime}(x)} dx &amp;= \int_{0}^{1} u(x) \log \frac{u(x)}{f^{\prime}(x)} dx \\<br>D(p(x)|| v_{g}(x)) &amp;= D(p(x)|| u(x)) + D(u(x)|| v_{g}(x))<br>\end{aligned}</p>
+<p>Since KL divergence is conserved under bijective maps, the above relation between three KL divergences is also equivalent to</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center"></th>
+<th style="text-align:right"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align:center">$D(p(y)\vert\vert v(y)) = D(p(x)\vert\vert u(x)) + D(u_{f}(y)\vert\vert v(y)).$</td>
+<td style="text-align:right">(2)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In [2], the relation is interpreted as follows</p>
+<blockquote>
+<p>since D(p(x)|| u(x)) depends only on the structure of $p(x)$ and D(u_{f}(y)|| v(y)) depends on the structure of $f$, it seems reasonable to postulate that the vector $\vec{pu}$ and $\vec{uv_{g}}$ are typically (close to) orthogonal. We interprete by saying that the amount of irregularities of $p(y)$ is given by the irregularities of $p(x)$ plus thos of $f$.</p>
+</blockquote>
+<h2 id="Causal-Inference"><a href="#Causal-Inference" class="headerlink" title="Causal Inference"></a>Causal Inference</h2><p>In the above model where $x$ causes $y$ ($x \to y$), we can define from Eq. (2) that<br>\begin{aligned} C_{x\to y} := D(p(x)|| u(x)) - D(p(y)|| v(y)) = D(u_{f}(y)|| v(y)) \le 0.<br>\end{aligned}<br>In models where $y \to x$, we have<br>\begin{aligned} C_{y\to x} := D(p(y)|| v(y)) - D(p(x)|| u(x)) \le 0.<br>\end{aligned}</p>
+<p>Therefore, except in cases where $D(u_{f}(y)|| v(y))=0$ (i.e. the function is “too simple”), inference could be conducted by simply check the sign of $C_{x\to y}$. This is called the Information Geometric Causal Inference (IGCI):</p>
+<p><strong>Information Geometric Causal Inference (IGCI)</strong>: Given $C_{x\to y}$, infer</p>
+<ul>
+<li>$x \to y$ if $C_{x\to y} &lt; 0$</li>
+<li>$y \to x$ if $C_{x\to y} &gt; 0$.</li>
+</ul>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li>Amari, S. I. (2001). Information geometry on hierarchy of probability distributions. IEEE transactions on information theory, 47(5), 1701-1711.</li>
+<li>Daniusis, P., Janzing, D., Mooij, J., Zscheischler, J., Steudel, B., Zhang, K., &amp; Schölkopf, B. (2012). Inferring deterministic causal relations. arXiv preprint arXiv:1203.3475.</li>
 </ol>
-<p>We term observations collected from one domain a group which consists of bi-variate tuples, i.e. \begin{aligned} G_{i} = \lbrace (x^{(i)}_{j}, y^{(i)}_{j}) \rbrace_{j=1, \dots, N_{i}}, \end{aligned}where $i$ is the index of group, $j$ is the index of observations in group $i$ and $N_{i}$ is the total number of observations in group $i$. Then the entire data set is given by $ \mathcal{D} = \lbrace G_{1}, \dots, G_{N} \rbrace$ where $N$ is the total number of groups.</p>
-<p>Above is the definition of nonstataionary causal model and data set we have for causal discovery in two-variable (usually called a <em>cause-effect pair</em>) case. It can be seamlessly extended to models with more than two variables (causal graphs) by requiring the density of each variable (e.g. $p(X_{j})$) and the conditional density of the same variable given all its direct parent nodes (e.g. $p(X_{j}|PA_{j})$, $PA_{j}$ denotes the set of parental nodes of $X_{j}$) to fulfill properties 1-3.</p>
-<p>ENCI uses groups of data from different domains as input and estimates the complete causal structure among all variables. For more details please refer to our <a href="https://www.mitpressjournals.org/doi/abs/10.1162/neco_a_01064" target="_blank" rel="noopener">paper</a>.</p>
-<h2 id="Scope-of-Application"><a href="#Scope-of-Application" class="headerlink" title="Scope of Application"></a>Scope of Application</h2><p>We briefly list some cases that are suitable for applying ENCI.</p>
-<ol>
-<li>data set of a cause-effect pair collected from different settings (e.g. different time, location or experimental settings.) and the number of observations in each group is not enough to conduct reliable estimation.</li>
-<li>data set of more than two variables from different settings and the relations among them are non-linear.</li>
-<li>data set of more than two variables from the same settings and the relations among them are non-linear. (we obtained inspiring empirical results using real data in our paper.)</li>
-</ol>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>MATLAB and Python code of ENCI for <strong>cause-effect pairs</strong> is available at <a href="https://github.com/amber0309/ENCI_cause-effect-pair" target="_blank" rel="noopener">GitHub</a>.<br>MATLAB code of ENCI for <strong>causal graphs</strong> is available at <a href="https://github.com/amber0309/ENCI_graph" target="_blank" rel="noopener">GitHub</a>.</p>
 
       
     </div>
@@ -381,7 +427,7 @@
           
             <a href="/tags/Causality/" rel="tag"># Causality</a>
           
-            <a href="/tags/Embedding/" rel="tag"># Embedding</a>
+            <a href="/tags/Paper-reading/" rel="tag"># Paper-reading</a>
           
         </div>
       
@@ -394,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/07/kebc/" rel="next" title="Kernel Embedding-Based Clustering">
-                <i class="fa fa-chevron-left"></i> Kernel Embedding-Based Clustering
+              <a href="/2016/10/05/ref/" rel="next" title="Reference Sheet for natbib Usage">
+                <i class="fa fa-chevron-left"></i> Reference Sheet for natbib Usage
               </a>
             
           </div>
@@ -403,6 +449,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/13/hsic/" rel="prev" title="HSIC">
+                HSIC <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -547,7 +597,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Description"><span class="nav-number">1.</span> <span class="nav-text">Model Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scope-of-Application"><span class="nav-number">2.</span> <span class="nav-text">Scope of Application</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Orthogonality-in-information-space"><span class="nav-number">1.</span> <span class="nav-text">Orthogonality in information space</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Causal-model"><span class="nav-number">2.</span> <span class="nav-text">Causal model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Independence-assumption-between-p-x-and-f"><span class="nav-number">2.1.</span> <span class="nav-text">Independence assumption between $p(x)$ and $f$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reformulation-in-information-space"><span class="nav-number">2.2.</span> <span class="nav-text">Reformulation in information space</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Causal-Inference"><span class="nav-number">3.</span> <span class="nav-text">Causal Inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">4.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
@@ -697,9 +747,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://amber0309.github.io/2017/12/12/enci/';
-          this.page.identifier = '2017/12/12/enci/';
-          this.page.title = 'Kernel Embedding-based Nonstationary Causal Model Inference';
+          this.page.url = 'http://amber0309.github.io/2016/12/08/igci/';
+          this.page.identifier = '2016/12/08/igci/';
+          this.page.title = 'Understanding Information Geometric Causal Inference';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Seth.disqus.com/embed.js';
