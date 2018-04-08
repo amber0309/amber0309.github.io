@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="Reticentor">
 <meta property="og:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized. Orthogonality in information spaceFirst of all, the relative entropy distance or Kullback-Leibler d">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-08T09:26:21.457Z">
+<meta property="og:updated_time" content="2018-04-08T09:32:24.840Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understanding Information Geometric Causal Inference">
 <meta name="twitter:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized. Orthogonality in information spaceFirst of all, the relative entropy distance or Kullback-Leibler d">
@@ -368,12 +368,13 @@
 </blockquote>
 <h2 id="Causal-Inference"><a href="#Causal-Inference" class="headerlink" title="Causal Inference"></a>Causal Inference</h2><p>In the above model where $x$ causes $y$ ($x \to y$), we can define from Eq. ($\ref{ddd}$) that<br>\begin{align} C_{x\to y} := D(p(x)|| u(x)) - D(p(y)|| v(y)) = D(u_{f}(y)|| v(y)) \le 0.<br>\end{align}</p>
 <p>In models where $y \to x$, we have<br>\begin{align} C_{y\to x} := D(p(y)|| v(y)) - D(p(x)|| u(x)) \le 0.<br>\end{align}</p>
-<p>Therefore, except in cases where $D(u_{f}(y)|| v(y))=0$ (i.e. the function is “too simple”), inference could be conducted by simply check the sign of $C_{x\to y}$. This is called the Information Geometric Causal Inference (IGCI):</p>
+<p>Therefore, except in cases where $D(u_{f}(y)|| v(y))=0$ (i.e. the function is “too simple”), inference could be conducted by simply checking the sign of $C_{x\to y}$. This is called the Information Geometric Causal Inference (IGCI):</p>
 <p><strong>Information Geometric Causal Inference (IGCI)</strong>: Given $C_{x\to y}$, infer</p>
 <ul>
 <li>$x \to y$ if $C_{x\to y} &lt; 0$</li>
 <li>$y \to x$ if $C_{x\to y} &gt; 0$.</li>
 </ul>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>The original MATLAB code and my Python re-implementation are available at <a href="https://github.com/amber0309/IGCI" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li>Amari, S. I. (2001). Information geometry on hierarchy of probability distributions. IEEE transactions on information theory, 47(5), 1701-1711.</li>
 <li>Daniusis, P., Janzing, D., Mooij, J., Zscheischler, J., Steudel, B., Zhang, K., &amp; Schölkopf, B. (2012). Inferring deterministic causal relations. arXiv preprint arXiv:1203.3475.</li>
@@ -569,7 +570,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Orthogonality-in-information-space"><span class="nav-number">1.</span> <span class="nav-text">Orthogonality in information space</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Causal-model"><span class="nav-number">2.</span> <span class="nav-text">Causal model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Independence-assumption-between-p-x-and-f"><span class="nav-number">2.1.</span> <span class="nav-text">Independence assumption between $p(x)$ and $f$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reformulation-in-information-space"><span class="nav-number">2.2.</span> <span class="nav-text">Reformulation in information space</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Causal-Inference"><span class="nav-number">3.</span> <span class="nav-text">Causal Inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">4.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Orthogonality-in-information-space"><span class="nav-number">1.</span> <span class="nav-text">Orthogonality in information space</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Causal-model"><span class="nav-number">2.</span> <span class="nav-text">Causal model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Independence-assumption-between-p-x-and-f"><span class="nav-number">2.1.</span> <span class="nav-text">Independence assumption between $p(x)$ and $f$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reformulation-in-information-space"><span class="nav-number">2.2.</span> <span class="nav-text">Reformulation in information space</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Causal-Inference"><span class="nav-number">3.</span> <span class="nav-text">Causal Inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
