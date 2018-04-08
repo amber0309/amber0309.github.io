@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="Reticentor">
 <meta property="og:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized. Orthogonality in information spaceFirst of all, the relative entropy distance or Kullback-Leibler d">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-08T09:32:24.840Z">
+<meta property="og:updated_time" content="2018-04-08T09:38:57.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understanding Information Geometric Causal Inference">
 <meta name="twitter:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized. Orthogonality in information spaceFirst of all, the relative entropy distance or Kullback-Leibler d">
@@ -366,7 +366,7 @@
 <blockquote>
 <p>Since D(p(x)|| u(x)) depends only on the structure of $p(x)$ and D(u_{f}(y)|| v(y)) depends on the structure of $f$, it seems reasonable to postulate that the vector $\vec{pu}$ and $\vec{uv_{g}}$ are typically (close to) orthogonal. We interprete by saying that the amount of irregularities of $p(y)$ is given by the irregularities of $p(x)$ plus thos of $f$.</p>
 </blockquote>
-<h2 id="Causal-Inference"><a href="#Causal-Inference" class="headerlink" title="Causal Inference"></a>Causal Inference</h2><p>In the above model where $x$ causes $y$ ($x \to y$), we can define from Eq. ($\ref{ddd}$) that<br>\begin{align} C_{x\to y} := D(p(x)|| u(x)) - D(p(y)|| v(y)) = D(u_{f}(y)|| v(y)) \le 0.<br>\end{align}</p>
+<h2 id="Causal-Inference"><a href="#Causal-Inference" class="headerlink" title="Causal Inference"></a>Causal Inference</h2><p>In the above model where $x$ causes $y$ ($x \to y$), we can define from Eq. ($\ref{ddd}$) that<br>\begin{align} C_{x\to y} := D(p(x)|| u(x)) - D(p(y)|| v(y)) = - D(u_{f}(y)|| v(y)) \le 0.<br>\end{align}</p>
 <p>In models where $y \to x$, we have<br>\begin{align} C_{y\to x} := D(p(y)|| v(y)) - D(p(x)|| u(x)) \le 0.<br>\end{align}</p>
 <p>Therefore, except in cases where $D(u_{f}(y)|| v(y))=0$ (i.e. the function is “too simple”), inference could be conducted by simply checking the sign of $C_{x\to y}$. This is called the Information Geometric Causal Inference (IGCI):</p>
 <p><strong>Information Geometric Causal Inference (IGCI)</strong>: Given $C_{x\to y}$, infer</p>
