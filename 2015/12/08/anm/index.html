@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="Reticentor">
 <meta property="og:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-13T09:29:58.577Z">
+<meta property="og:updated_time" content="2018-04-13T10:01:41.998Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understanding Additive Noise Model">
 <meta name="twitter:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
@@ -351,6 +351,7 @@
 <p><em>where $p_{\epsilon}$, $p_{X}$ are probability densities on $\mathbb{R}$. If there is a backward model of the same form, i.e.,</em><br>\begin{align}<br>p(X,Y) = p_{\tilde{\epsilon}}(X-g(Y))p_{Y}(Y), \tag{3}<br>\end{align}</p>
 <p><em>then, denoting $\nu := \log p_{\epsilon}$ and $\xi := \log p_{X}$, the triple $(f, p_{X}, p_{\epsilon})$ must satisfy the following differential equation for all $x$, $y$ with $\nu^{\prime\prime}(Y-f(X)) f^{\prime}(X) \neq 0$:</em><br>\begin{align}<br>\xi^{\prime\prime\prime} = \xi^{\prime\prime}\left( -\frac{\nu^{\prime\prime\prime} f^{\prime}}{\nu^{\prime\prime} } + \frac{f^{\prime\prime}}{f^{\prime}} \right) - 2\nu^{\prime\prime} f^{\prime\prime} f^{\prime} + \nu^{\prime} f^{\prime\prime\prime} + \frac{ \nu^{\prime} \nu^{\prime\prime\prime} f^{\prime} f^{\prime\prime} }{ \nu^{\prime\prime} } - \frac{ \nu^{\prime} \left( f^{\prime\prime}\right)^{2} }{f^{\prime}}, \tag{4}<br>\label{condition}<br>\end{align}</p>
 <p><em>where the arguments $Y-f(X)$, $X$, and $X$ for $\nu$, $\xi$, $f$ and their derivatives are skipped for clarity. Moreover, if for a fixed pair $(f, \nu)$ there exists $Y\in \mathbb{R}$ such that $\nu^{\prime\prime} (Y-f(X)) f^{\prime}(X) \neq 0$ for all but a countable set of points $X \in \mathbb{R}$, the set of all $p_{X}$ for which $p$ has a backward model is contained in a 3-dimensional affine space.</em></p>
+<p>The theorem is proved by taking derivative of the log of joint distribution $p(X,Y)$ for both models. Specifically, let the log of the joint distribution be $\pi(X,Y)$. Then $\frac{\partial}{\partial X}\left( \frac{\partial^{2} \pi / \partial X^{2}}{ \partial^{2} \pi / \partial X \partial Y } \right)$ of the two hypothetical models should be consistent if the backward model exists. The condition shown in Eq. (\ref{condition}) is deduced by computing the derivatives of both models and making them equal.</p>
 <p>It is hard for me to grasp the infomation Eq. (\ref{condition}) conveys. By now my personal interpretation of it is that only by fulfilling such a <em>complicated</em> and <em>stange</em> differential equation can the backward model exist. Therefore, one may say that the model that is identifiable is <em>typically</em> the case, however, not always.</p>
 <h2 id="Causal-inference"><a href="#Causal-inference" class="headerlink" title="Causal inference"></a>Causal inference</h2><p>The inference procedure is very intuitive. Consider $X$ and $Y$ which are statistically dependent,</p>
 <ol>
