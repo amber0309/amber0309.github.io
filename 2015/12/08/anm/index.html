@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ML,Paper-reading,Embedding,Independence," />
+  <meta name="keywords" content="ML,Causality,Paper-reading," />
 
 
 
@@ -92,18 +92,18 @@
 
 
 
-<meta name="description" content="This post introduces the basic idea of Hilbert-Schmidt Independence Criterion (HSIC).">
-<meta name="keywords" content="ML,Paper-reading,Embedding,Independence">
+<meta name="description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference. Model descriptionWe focus on the two-variable (often termed a cause-effect pair) case where the relation between">
+<meta name="keywords" content="ML,Causality,Paper-reading">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Understanding Hilbert-Schmidt Independence Criterion">
-<meta property="og:url" content="http://amber0309.github.io/2017/01/13/hsic/index.html">
+<meta property="og:title" content="Understanding Additive Noise Model">
+<meta property="og:url" content="http://amber0309.github.io/2015/12/08/anm/index.html">
 <meta property="og:site_name" content="Reticentor">
-<meta property="og:description" content="This post introduces the basic idea of Hilbert-Schmidt Independence Criterion (HSIC).">
+<meta property="og:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference. Model descriptionWe focus on the two-variable (often termed a cause-effect pair) case where the relation between">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-11T16:13:11.125Z">
+<meta property="og:updated_time" content="2018-04-13T09:18:52.316Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Understanding Hilbert-Schmidt Independence Criterion">
-<meta name="twitter:description" content="This post introduces the basic idea of Hilbert-Schmidt Independence Criterion (HSIC).">
+<meta name="twitter:title" content="Understanding Additive Noise Model">
+<meta name="twitter:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference. Model descriptionWe focus on the two-variable (often termed a cause-effect pair) case where the relation between">
 
 
 
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://amber0309.github.io/2017/01/13/hsic/"/>
+  <link rel="canonical" href="http://amber0309.github.io/2015/12/08/anm/"/>
 
 
 
 
 
-  <title>Understanding Hilbert-Schmidt Independence Criterion | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Understanding Additive Noise Model | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2017/01/13/hsic/">
+    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2015/12/08/anm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="__Seth__">
@@ -278,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Understanding Hilbert-Schmidt Independence Criterion</h1>
+          <h1 class="post-title" itemprop="name headline">Understanding Additive Noise Model</h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-13T14:08:33+08:00">
-                2017-01-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-08T17:09:17+08:00">
+                2015-12-08
               </time>
             
 
@@ -309,9 +309,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/01/13/hsic/#comments" itemprop="discussionUrl">
+                <a href="/2015/12/08/anm/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/01/13/hsic/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2015/12/08/anm/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -339,29 +339,37 @@
       
 
       
-        <p>This post introduces the basic idea of <a href="https://papers.nips.cc/paper/3201-a-kernel-statistical-test-of-independence.pdf" target="_blank" rel="noopener">Hilbert-Schmidt Independence Criterion</a> (HSIC).</p>
-<a id="more"></a>
-<h2 id="Problem-definition"><a href="#Problem-definition" class="headerlink" title="Problem definition"></a>Problem definition</h2><p>Intuitively, we are given a data set $\mathbf{D}=\lbrace (x_{1},y_{1}), \dots, (x_{m}, y_{m}) \rbrace$ draw independently and identically distributed according to the joint distribution $\mathbf{P}_{xy}$ and interested in whether $x$ and $y$ are statistically independent.</p>
-<p>Below is the formal problem setting in <a href="https://papers.nips.cc/paper/3201-a-kernel-statistical-test-of-independence.pdf" target="_blank" rel="noopener">[1]</a>:<br>Let $\mathbf{P}_{xy}$ be a Borel probability measure defined on a domain $\mathcal{X}\times \mathcal{Y}$, and let $\mathbf{P}_{x}$ and $\mathbf{P}_{y}$ be the respective marginal distributions on $\mathcal{X}$ and $\mathcal{Y}$. Given an i.i.d. sample $Z:=(X,Y)=\lbrace(x_{1}, y_{1}), \dots,(x_{m}, y_{m})\rbrace$ of size $m$ drawn independently and identically distributed according to $\mathbf{P}_{xy}$, does $\mathbf{P}_{xy}$ factorize as $\mathbf{P}_{x}\mathbf{P}_{y}$ (equivalently, we may write $x \perp\!\!\!\perp y$)?</p>
-<h2 id="HSIC"><a href="#HSIC" class="headerlink" title="HSIC"></a>HSIC</h2><p><strong>Definition (HSIC)</strong> (<a href="http://www.gatsby.ucl.ac.uk/~gretton/papers/GreBouSmoSch05.pdf" target="_blank" rel="noopener">[2]</a>, Definition 1).<br>Given separable RKHSs $\mathcal{F}$, $\mathcal{G}$ and a joint measure $\mathbf{P}_{xy}$ over $(\mathcal{X}\times \mathcal{Y}, \Gamma \times \Lambda)$, the Hilbert-Schmidt Independence Criterion (HSIC) is defined as the squared Hilbert-Schmidt (HS) norm of the associated cross-covariance operator $C_{xy}$:<br>\begin{align}<br>\text{HSIC}(P_{xy},\mathcal{F},\mathcal{G}):=\Vert C_{xy} \Vert^{2}_{HS} \tag{1}<br>\end{align}</p>
-<p>Above definition of HSIC involves two other definitions. One is <em>corss-covariance operator</em> which is defined such that for all $f\in \mathcal{F}$ and $g\in \mathcal{G}$,<br>\begin{align}<br>\langle f, C_{xy}g \rangle_{\mathcal{F}} = \mathbf{E}_{xy}(\left[f(x)-\mathbf{E}_{x}(f(x))\right] \left[ g(y)- \mathbf{E}_{y}(g(y)) \right] ),<br>\end{align}</p>
-<p>following (<a href="https://www.di.ens.fr/~fbach/fukumizu04a.pdf" target="_blank" rel="noopener">[3]</a>, Eq.(5)). It is obvious that $C_{xy}$ is a linear operator that maps from $\mathcal{G}$ to $\mathcal{F}$. The oeprator itself can be written in<br>\begin{align}<br>C_{xy} := \mathbf{E}_{xy}\left[ (\phi(x) - \mu_{x})\otimes(\psi(y)-\mu_{y}) \right],<br>\end{align}</p>
-<p>where $\mu_{x}:=\mathbf{E}_{x}\phi(x)$, $\mu_{y}:=\mathbf{E}_{y}\phi(y)$ and $\otimes$ denotes the tensor product.</p>
-<p>The other definition is squared HS-norm (<a href="http://www.gatsby.ucl.ac.uk/~gretton/papers/GreBouSmoSch05.pdf" target="_blank" rel="noopener">[2]</a>, Eq.(1)). Denote by $C:\mathcal{G} \to \mathcal{F}$ a linear operator, the HS-norm of $C$ is defined as<br>\begin{align}<br>\Vert C \Vert^{2}_{HS}:= \sum_{i,j}\langle Cv_{i}, u_{j}\rangle^{2}_{\mathcal{F}}<br>\end{align}</p>
-<p>where $v_{i}$ and $u_{j}$ are orthonormal basis of $\mathcal{G}$ and $\mathcal{F}$, respectively.</p>
-<h2 id="Independence-test-using-HSIC"><a href="#Independence-test-using-HSIC" class="headerlink" title="Independence test using HSIC"></a>Independence test using HSIC</h2><p>The following theorem elaborates the relation between HSIC and statistical independence.</p>
-<p><strong>Theorem ($C_{xy}$ and Independence)</strong> (<a href="http://www.gatsby.ucl.ac.uk/~gretton/papers/GreBouSmoSch05.pdf" target="_blank" rel="noopener">[2]</a>, Theorem 4).<br><em>Denote by $\mathcal{F}$, $\mathcal{G}$ RKHSs with universal kernels $k$,$l$ on the compact domains $\mathcal{X}$ and $\mathcal{Y}$ respectively. We assume without loss of generality that $\Vert f \Vert_{\infty} \le 1$ and $\Vert g \Vert_{\infty} \le 1$ for all $f\in\mathcal{F}$ and $g\in\mathcal{G}$. Then $\Vert C_{xy} \Vert_{HS}=0$ if and only if $x$ and $y$ are independent.</em></p>
-<p>The above theorem is proved using the results in <a href="https://pdfs.semanticscholar.org/39eb/fbb53b041b97332cd351886749c0395037fb.pdf#page=121" target="_blank" rel="noopener">[5]</a> that the largest singular value (i.e., the spectral<br>norm), $\Vert C_{xy}\Vert_{S}$, is zero if and only if $x$ and $y$ are independent, under the conditions specified in the above theorem. Since $\Vert C_{xy}\Vert_{S} = 0$ if and only if $\Vert C_{xy}\Vert_{HS} = 0$, it follows that $\Vert C_{xy}\Vert_{HS} = 0$ if and only if $x$ and $y$ are independent.</p>
-<p>A continuous kernel $k(\cdot,\cdot)$ on a compact metric space $(X,d)$ is called <em>universal</em> if and only if the RKHS $\mathcal{F}$ induced by the kernel is dense in $C(\mathcal{X})$, the space of continuous functions on $\mathcal{X}$, with respect to the infinity norm $\Vert f-g\Vert_{\infty}$ (<a href="http://www.jmlr.org/papers/volume6/gretton05a/gretton05a.pdf" target="_blank" rel="noopener">[4]</a>, Definition 5).</p>
-<p>Besides, <a href="http://www.jmlr.org/papers/volume2/steinwart01a/steinwart01a.pdf" target="_blank" rel="noopener">[6]</a> shows the following two kernel are universal on the compact subset of $\mathbb{R}^{d}$:<br>\begin{align}<br>k(x,x^{\prime}) &amp;= \exp\left( -\lambda \Vert x - x^{\prime} \Vert^{2}\right) \\<br>k(x,x^{\prime}) &amp;= \exp\left( -\lambda \Vert x - x^{\prime} \Vert\right), \text{for} \, \lambda &gt; 0.<br>\end{align}</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>The original MATLAB code and my Python re-implementation of HSIC are available at <a href="https://github.com/amber0309/HSIC" target="_blank" rel="noopener">GitHub</a>.</p>
+        <p>This post introduces the basic idea of <a href="https://papers.nips.cc/paper/3548-nonlinear-causal-discovery-with-additive-noise-models.pdf" target="_blank" rel="noopener">Additive Noise Model</a> (ANM) for causal inference.</p>
+<h2 id="Model-description"><a href="#Model-description" class="headerlink" title="Model description"></a>Model description</h2><p>We focus on the two-variable (often termed a <em>cause-effect pair</em>) case where the relation between the cause $X$ and the effect $Y$ is given by<br>\begin{align}<br>Y = f(X) + \epsilon, \tag{1}<br>\end{align}</p>
+<p>where $f$ is an arbitrary function and noise $\epsilon$, which is independent of $X$, may have arbitrary probability densities $p(\epsilon)$.</p>
+<p>The goal of causal inference is, given data $\mathcal{D}=\lbrace (x_{i}, y_{i}) \rbrace^{N}_{i = 1}$ sampled independently from the joint distribution of the casue and the effect $p(X,Y)$, to infer whether $X$ causes $Y$ ($X \to Y$) or the opposite ($Y \to X$).</p>
+<h2 id="Identifiability"><a href="#Identifiability" class="headerlink" title="Identifiability"></a>Identifiability</h2><p>As the most commonly used benchmark approach for inferring the causal direction of cause-effect pairs, ANM can be viewed as the first to exploit <em>cause-effect asymmetry</em>, which means the property that only holds in the true causal direction and is violated in the anti-causal direction. The causal models with cause-effect asymmetry are said to be <em>identifiable</em>. The analysis of most subsequent causal inference approaches can all be viewed as finding the cause-effect asymmetry based on different model assumptions.</p>
+<p>In ANM, this kind of asymmetry stems from how the data fits an ANM in both hypothetical direcitons. In other words, how likely the given data is generated from an ANM. First of all, note that not all cases in ANM is identifiable. For example, when $f(X) = X$ and $\epsilon$ is Gaussian, the backward model still fulfills an ANM.</p>
+<p>Besides the simple linear-Gaussian and some other relatively artificial cases, the identifiability of ANM is given by the following Theorem (<a href="https://papers.nips.cc/paper/3548-nonlinear-causal-discovery-with-additive-noise-models.pdf" target="_blank" rel="noopener">[1]</a>, Theorem 1)</p>
+<p><strong>Theorem 1</strong> <em>Let the joint probability density of $X$ and $Y$ be given by</em><br>\begin{align}<br>p(X,Y) = p_{\epsilon}(Y-f(X))p_{X}(X), \tag{2}<br>\end{align}</p>
+<p>*where $p_{\epsilon}$, $p_{X}$ are probability densities on $\mathbb{R}$. If there is a backward model of the same form, i.e.,<br>\begin{align}<br>p(X,Y) = p_{\tilde{\epsilon}}(X-g(Y))p_{Y}(Y), \tag{3}<br>\end{align}</p>
+<p>then, denoting $\nu := \log p_{\epsilon}$ and $\xi := \log p_{X}$, the triple $(f, p_{X}, p_{\epsilon})$ must satisfy the following differential equation for all $x$, $y$ with $\nu^{\prime\prime}(Y-f(X)) f^{\prime}(X) \neq 0$:<br>\begin{align}<br>\xi^{\prime\prime\prime} = \xi^{\prime\prime}\left( -\frac{\nu^{\prime\prime\prime} f^{\prime}}{\nu^{\prime\prime} } + \frac{f^{\prime\prime}}{f^{\prime}} \right) - 2\nu^{\prime\prime} f^{\prime\prime} f^{\prime} + \nu^{\prime} f^{\prime\prime\prime} + \frac{ \nu^{\prime} \nu^{\prime\prime\prime} f^{\prime} f^{\prime\prime} }{ \nu^{\prime\prime} } - \frac{ \nu^{\prime} \left( f^{\prime\prime}\right)^{2} }{f^{\prime}}, \tag{4}<br>\label{condition}<br>\end{align}*</p>
+<p><em>where the arguments $Y-f(X)$, $X$, and $X$ for $\nu$, $\xi$, $f$ and their derivatives are skipped for clarity. Moreover, if for a fixed pair $(f, \nu)$ there exists $Y\in \mathbb{R}$ such that $\nu^{\prime\prime} (Y-f(X)) f^{\prime}(X) \neq 0$ for all but a countable set of points $X \in \mathbb{R}$, the set of all $p_{X}$ for which $p$ has a backward model is contained in a 3-dimensional affine space.</em></p>
+<p>It is very hard for me to grasp the infomation Eq. (\ref{condition}) conveys. By now my personal interpretation of it is that only by fulfilling such a <em>complicated</em> and <em>stange</em> differential equation can the backward model exist. Therefore, one may say that the model that is identifiable is <em>typically</em> the case, however, not always.</p>
+<h2 id="Causal-inference"><a href="#Causal-inference" class="headerlink" title="Causal inference"></a>Causal inference</h2><p>The inference procedure is very intuitive. Consider $X$ and $Y$ which are statistically dependent,</p>
+<ol>
+<li>test whether the data fits the model $Y=f(X)+\epsilon$ by <ul>
+<li>doing nonlinear regression of $Y$ on $X$;</li>
+<li>computing the corresponding residuals $\hat{\epsilon}$;</li>
+<li>testing whether $\hat{\epsilon}$ is independent of $X$.</li>
+</ul>
+</li>
+<li>test whether the data fits the backward model $X=g(Y) + \varepsilon$ similarly.</li>
+<li>conclude the inference result<ul>
+<li>cannot infer the direction if both models are accepted or rejected;</li>
+<li>$X \to Y$ if only $Y=f(X)+\epsilon$ is accepted;</li>
+<li>$Y \to X$ if only $X=g(Y) + \varepsilon$ is accepted.</li>
+</ul>
+</li>
+</ol>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>The code provided by the paper authors is available at <a href="https://github.com/amber0309/Additive-Noise-Model" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li>Gretton, A., Fukumizu, K., Teo, C. H., Song, L., Schölkopf, B., &amp; Smola, A. J. (2008). A kernel statistical test of independence. In Advances in neural information processing systems (pp. 585-592).</li>
-<li>Gretton, A., Bousquet, O., Smola, A., &amp; Schölkopf, B. (2005, October). Measuring statistical dependence with Hilbert-Schmidt norms. In International conference on algorithmic learning theory (pp. 63-77). Springer, Berlin, Heidelberg.</li>
-<li>Fukumizu, K., Bach, F. R., &amp; Jordan, M. I. (2004). Dimensionality reduction for supervised learning with reproducing kernel Hilbert spaces. Journal of Machine Learning Research, 5(Jan), 73-99.</li>
-<li>Gretton, A., Herbrich, R., Smola, A., Bousquet, O., &amp; Schölkopf, B. (2005). Kernel methods for measuring independence. Journal of Machine Learning Research, 6(Dec), 2075-2129.</li>
-<li>Gretton, A., Smola, A. J., Bousquet, O., Herbrich, R., Belitski, A., Augath, M., … &amp; Logothetis, N. K. (2005, January). Kernel Constrained Covariance for Dependence Measurement. In AISTATS (Vol. 10, pp. 112-119).</li>
-<li>Steinwart, I. (2001). On the influence of the kernel on the consistency of support vector machines. Journal of machine learning research, 2(Nov), 67-93.</li>
+<li>Hoyer, P. O., Janzing, D., Mooij, J. M., Peters, J., &amp; Schölkopf, B. (2009). Nonlinear causal discovery with additive noise models. In Advances in neural information processing systems (pp. 689-696).</li>
 </ol>
 
       
@@ -382,11 +390,9 @@
           
             <a href="/tags/ML/" rel="tag"># ML</a>
           
+            <a href="/tags/Causality/" rel="tag"># Causality</a>
+          
             <a href="/tags/Paper-reading/" rel="tag"># Paper-reading</a>
-          
-            <a href="/tags/Embedding/" rel="tag"># Embedding</a>
-          
-            <a href="/tags/Independence/" rel="tag"># Independence</a>
           
         </div>
       
@@ -399,18 +405,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/08/igci/" rel="next" title="Understanding Information Geometric Causal Inference">
-                <i class="fa fa-chevron-left"></i> Understanding Information Geometric Causal Inference
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/07/kebc/" rel="prev" title="Kernel Embedding-Based Clustering">
-                Kernel Embedding-Based Clustering <i class="fa fa-chevron-right"></i>
+              <a href="/2016/03/23/math/" rel="prev" title="Reference of LaTeX Math Commands">
+                Reference of LaTeX Math Commands <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -556,7 +558,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-definition"><span class="nav-number">1.</span> <span class="nav-text">Problem definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HSIC"><span class="nav-number">2.</span> <span class="nav-text">HSIC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Independence-test-using-HSIC"><span class="nav-number">3.</span> <span class="nav-text">Independence test using HSIC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-description"><span class="nav-number">1.</span> <span class="nav-text">Model description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Identifiability"><span class="nav-number">2.</span> <span class="nav-text">Identifiability</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Causal-inference"><span class="nav-number">3.</span> <span class="nav-text">Causal inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
@@ -706,9 +708,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://amber0309.github.io/2017/01/13/hsic/';
-          this.page.identifier = '2017/01/13/hsic/';
-          this.page.title = 'Understanding Hilbert-Schmidt Independence Criterion';
+          this.page.url = 'http://amber0309.github.io/2015/12/08/anm/';
+          this.page.identifier = '2015/12/08/anm/';
+          this.page.title = 'Understanding Additive Noise Model';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Seth.disqus.com/embed.js';
