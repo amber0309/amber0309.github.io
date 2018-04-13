@@ -92,18 +92,18 @@
 
 
 
-<meta name="description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized. Orthogonality in information spaceFirst of all, the relative entropy distance or Kullback-Leibler d">
+<meta name="description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized.">
 <meta name="keywords" content="ML,Causality,Paper-reading">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Understanding Information Geometric Causal Inference">
 <meta property="og:url" content="http://amber0309.github.io/2016/12/08/igci/index.html">
 <meta property="og:site_name" content="Reticentor">
-<meta property="og:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized. Orthogonality in information spaceFirst of all, the relative entropy distance or Kullback-Leibler d">
+<meta property="og:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-08T17:09:10.020Z">
+<meta property="og:updated_time" content="2018-04-13T10:14:36.340Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understanding Information Geometric Causal Inference">
-<meta name="twitter:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized. Orthogonality in information spaceFirst of all, the relative entropy distance or Kullback-Leibler d">
+<meta name="twitter:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized.">
 
 
 
@@ -340,8 +340,8 @@
 
       
         <p>In this post, the basic idea of <a href="http://event.cwi.nl/uai2010/papers/UAI2010_0121.pdf" target="_blank" rel="noopener">Information Geometric Causal Inference</a> (IGCI) is briefly summarized.</p>
-<h2 id="Orthogonality-in-information-space"><a href="#Orthogonality-in-information-space" class="headerlink" title="Orthogonality in information space"></a>Orthogonality in information space</h2><p>First of all, the <em>relative entropy distance</em> or <em>Kullback-Leibler divergence</em> (KL divergence) between two probability densities $p$ and $q$ is defined as</p>
 <a id="more"></a>
+<h2 id="Orthogonality-in-information-space"><a href="#Orthogonality-in-information-space" class="headerlink" title="Orthogonality in information space"></a>Orthogonality in information space</h2><p>First of all, the <em>relative entropy distance</em> or <em>Kullback-Leibler divergence</em> (KL divergence) between two probability densities $p$ and $q$ is defined as</p>
 <p>\begin{align} D(p||q):= \int p(x)\log \frac{p(x)}{q(x)}dx. \end{align}</p>
 <p>It can be interpreted as the distance between two probability densities. In the following, two elementary properties of KL divergence will be used. One is positivity, i.e., $D(p||q) \ge 0$. The other is its invariance under bijective mappings, i.e., $D(p_{f}||q_{f}) = D(p||q)$ for any bijection $f$, where $p_{f}$ and $q_{f}$ are the images of $p$ and $q$ under $f$ on the corresponding variables.</p>
 <p>Then we need the following Lemma in information space<br><strong>Lemma 1 (orthogonality in information space)</strong><br>Let $q,r,s$ be three probability densities. Then<br>\begin{align} \int q(x) \log \frac{r(x)}{s(x)} dx= \int r(x)\log \frac{r(x)}{s(x)}dx,<br>\end{align}</p>
