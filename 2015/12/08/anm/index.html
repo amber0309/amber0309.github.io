@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ML,Paper-reading,Causality," />
+  <meta name="keywords" content="ML,Causality,Paper-reading," />
 
 
 
@@ -92,18 +92,18 @@
 
 
 
-<meta name="description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference. Model descriptionWe focus on the two-variable (often termed a cause-effect pair) case where the relation between">
-<meta name="keywords" content="ML,Paper-reading,Causality">
+<meta name="description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
+<meta name="keywords" content="ML,Causality,Paper-reading">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Understanding Additive Noise Model">
 <meta property="og:url" content="http://amber0309.github.io/2015/12/08/anm/index.html">
 <meta property="og:site_name" content="Reticentor">
-<meta property="og:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference. Model descriptionWe focus on the two-variable (often termed a cause-effect pair) case where the relation between">
+<meta property="og:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-13T09:27:06.275Z">
+<meta property="og:updated_time" content="2018-04-13T09:29:58.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understanding Additive Noise Model">
-<meta name="twitter:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference. Model descriptionWe focus on the two-variable (often termed a cause-effect pair) case where the relation between">
+<meta name="twitter:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
 
 
 
@@ -340,6 +340,7 @@
 
       
         <p>This post introduces the basic idea of <a href="https://papers.nips.cc/paper/3548-nonlinear-causal-discovery-with-additive-noise-models.pdf" target="_blank" rel="noopener">Additive Noise Model</a> (ANM) for causal inference.</p>
+<a id="more"></a>
 <h2 id="Model-description"><a href="#Model-description" class="headerlink" title="Model description"></a>Model description</h2><p>We focus on the two-variable (often termed a <em>cause-effect pair</em>) case where the relation between the cause $X$ and the effect $Y$ is given by<br>\begin{align}<br>Y = f(X) + \epsilon, \tag{1}<br>\end{align}</p>
 <p>where $f$ is an arbitrary function and noise $\epsilon$, which is independent of $X$, may have arbitrary probability densities $p(\epsilon)$.</p>
 <p>The goal of causal inference is, given data $\mathcal{D}=\lbrace (x_{i}, y_{i}) \rbrace^{N}_{i = 1}$ sampled independently from the joint distribution of the casue and the effect $p(X,Y)$, to infer whether $X$ causes $Y$ ($X \to Y$) or the opposite ($Y \to X$).</p>
@@ -347,10 +348,10 @@
 <p>In ANM, this kind of asymmetry stems from how the data fits an ANM in both hypothetical direcitons. In other words, how likely the given data is generated from an ANM. First of all, note that not all cases in ANM is identifiable. For example, when $f(X) = X$ and $\epsilon$ is Gaussian, the backward model still fulfills an ANM.</p>
 <p>Besides the simple linear-Gaussian and some other relatively artificial cases, the identifiability of ANM is given by the following Theorem (<a href="https://papers.nips.cc/paper/3548-nonlinear-causal-discovery-with-additive-noise-models.pdf" target="_blank" rel="noopener">[1]</a>, Theorem 1)</p>
 <p><strong>Theorem 1</strong> <em>Let the joint probability density of $X$ and $Y$ be given by</em><br>\begin{align}<br>p(X,Y) = p_{\epsilon}(Y-f(X))p_{X}(X), \tag{2}<br>\end{align}</p>
-<p>*where $p_{\epsilon}$, $p_{X}$ are probability densities on $\mathbb{R}$. If there is a backward model of the same form, i.e.,<br>\begin{align}<br>p(X,Y) = p_{\tilde{\epsilon}}(X-g(Y))p_{Y}(Y), \tag{3}<br>\end{align}</p>
-<p>then, denoting $\nu := \log p_{\epsilon}$ and $\xi := \log p_{X}$, the triple $(f, p_{X}, p_{\epsilon})$ must satisfy the following differential equation for all $x$, $y$ with $\nu^{\prime\prime}(Y-f(X)) f^{\prime}(X) \neq 0$:<br>\begin{align}<br>\xi^{\prime\prime\prime} = \xi^{\prime\prime}\left( -\frac{\nu^{\prime\prime\prime} f^{\prime}}{\nu^{\prime\prime} } + \frac{f^{\prime\prime}}{f^{\prime}} \right) - 2\nu^{\prime\prime} f^{\prime\prime} f^{\prime} + \nu^{\prime} f^{\prime\prime\prime} + \frac{ \nu^{\prime} \nu^{\prime\prime\prime} f^{\prime} f^{\prime\prime} }{ \nu^{\prime\prime} } - \frac{ \nu^{\prime} \left( f^{\prime\prime}\right)^{2} }{f^{\prime}}, \tag{4}<br>\label{condition}<br>\end{align}*</p>
+<p><em>where $p_{\epsilon}$, $p_{X}$ are probability densities on $\mathbb{R}$. If there is a backward model of the same form, i.e.,</em><br>\begin{align}<br>p(X,Y) = p_{\tilde{\epsilon}}(X-g(Y))p_{Y}(Y), \tag{3}<br>\end{align}</p>
+<p><em>then, denoting $\nu := \log p_{\epsilon}$ and $\xi := \log p_{X}$, the triple $(f, p_{X}, p_{\epsilon})$ must satisfy the following differential equation for all $x$, $y$ with $\nu^{\prime\prime}(Y-f(X)) f^{\prime}(X) \neq 0$:</em><br>\begin{align}<br>\xi^{\prime\prime\prime} = \xi^{\prime\prime}\left( -\frac{\nu^{\prime\prime\prime} f^{\prime}}{\nu^{\prime\prime} } + \frac{f^{\prime\prime}}{f^{\prime}} \right) - 2\nu^{\prime\prime} f^{\prime\prime} f^{\prime} + \nu^{\prime} f^{\prime\prime\prime} + \frac{ \nu^{\prime} \nu^{\prime\prime\prime} f^{\prime} f^{\prime\prime} }{ \nu^{\prime\prime} } - \frac{ \nu^{\prime} \left( f^{\prime\prime}\right)^{2} }{f^{\prime}}, \tag{4}<br>\label{condition}<br>\end{align}</p>
 <p><em>where the arguments $Y-f(X)$, $X$, and $X$ for $\nu$, $\xi$, $f$ and their derivatives are skipped for clarity. Moreover, if for a fixed pair $(f, \nu)$ there exists $Y\in \mathbb{R}$ such that $\nu^{\prime\prime} (Y-f(X)) f^{\prime}(X) \neq 0$ for all but a countable set of points $X \in \mathbb{R}$, the set of all $p_{X}$ for which $p$ has a backward model is contained in a 3-dimensional affine space.</em></p>
-<p>It is very hard for me to grasp the infomation Eq. (\ref{condition}) conveys. By now my personal interpretation of it is that only by fulfilling such a <em>complicated</em> and <em>stange</em> differential equation can the backward model exist. Therefore, one may say that the model that is identifiable is <em>typically</em> the case, however, not always.</p>
+<p>It is hard for me to grasp the infomation Eq. (\ref{condition}) conveys. By now my personal interpretation of it is that only by fulfilling such a <em>complicated</em> and <em>stange</em> differential equation can the backward model exist. Therefore, one may say that the model that is identifiable is <em>typically</em> the case, however, not always.</p>
 <h2 id="Causal-inference"><a href="#Causal-inference" class="headerlink" title="Causal inference"></a>Causal inference</h2><p>The inference procedure is very intuitive. Consider $X$ and $Y$ which are statistically dependent,</p>
 <ol>
 <li>test whether the data fits the model $Y=f(X)+\epsilon$ by <ul>
@@ -390,9 +391,9 @@
           
             <a href="/tags/ML/" rel="tag"># ML</a>
           
-            <a href="/tags/Paper-reading/" rel="tag"># Paper-reading</a>
-          
             <a href="/tags/Causality/" rel="tag"># Causality</a>
+          
+            <a href="/tags/Paper-reading/" rel="tag"># Paper-reading</a>
           
         </div>
       
