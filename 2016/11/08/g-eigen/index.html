@@ -92,18 +92,18 @@
 
 
 
-<meta name="description" content="Problem definitionThe problem is formulated below\begin{align}\mathbf{u}^{*} = \arg \max_{\mathbf{u}^{T} \mathbf{u}=1}{\mathbf{u}^{T} \mathbf{K} \mathbf{u}}, \tag{1}\end{align} where $\mathbf{u}$ is a">
+<meta name="description" content="This post shows the derivation of the solution of quadratic form maximization where the matrix $\mathbf{K}$ is positive definite.">
 <meta name="keywords" content="ML,Optimization,Math">
 <meta property="og:type" content="article">
 <meta property="og:title" content="The Solution of Quadratic Form Maximization">
 <meta property="og:url" content="http://amber0309.github.io/2016/11/08/g-eigen/index.html">
 <meta property="og:site_name" content="Reticentor">
-<meta property="og:description" content="Problem definitionThe problem is formulated below\begin{align}\mathbf{u}^{*} = \arg \max_{\mathbf{u}^{T} \mathbf{u}=1}{\mathbf{u}^{T} \mathbf{K} \mathbf{u}}, \tag{1}\end{align} where $\mathbf{u}$ is a">
+<meta property="og:description" content="This post shows the derivation of the solution of quadratic form maximization where the matrix $\mathbf{K}$ is positive definite.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-08T09:12:50.624Z">
+<meta property="og:updated_time" content="2018-05-08T09:20:29.041Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The Solution of Quadratic Form Maximization">
-<meta name="twitter:description" content="Problem definitionThe problem is formulated below\begin{align}\mathbf{u}^{*} = \arg \max_{\mathbf{u}^{T} \mathbf{u}=1}{\mathbf{u}^{T} \mathbf{K} \mathbf{u}}, \tag{1}\end{align} where $\mathbf{u}$ is a">
+<meta name="twitter:description" content="This post shows the derivation of the solution of quadratic form maximization where the matrix $\mathbf{K}$ is positive definite.">
 
 
 
@@ -339,17 +339,19 @@
       
 
       
-        <h2 id="Problem-definition"><a href="#Problem-definition" class="headerlink" title="Problem definition"></a>Problem definition</h2><p>The problem is formulated below<br>\begin{align}<br>\mathbf{u}^{*} = \arg \max_{\mathbf{u}^{T} \mathbf{u}=1}{\mathbf{u}^{T} \mathbf{K} \mathbf{u}}, \tag{1}<br>\end{align}</p>
-<p>where $\mathbf{u}$ is a column vector and $\mathbf{K}$ is a positive definite matrix.</p>
+        <p>This post shows the derivation of the solution of quadratic form maximization where the matrix $\mathbf{K}$ is positive definite.</p>
+<a id="more"></a>
+<h2 id="Problem-definition"><a href="#Problem-definition" class="headerlink" title="Problem definition"></a>Problem definition</h2><p>The problem is formulated below<br>\begin{align}<br>\mathbf{u}^{*} = \arg \max_{\mathbf{u}^{T} \mathbf{u}=1}{\mathbf{u}^{T} \mathbf{K} \mathbf{u}}, \tag{1}<br>\end{align}</p>
+<p>where $\mathbf{u}$ is a column vector and $\mathbf{K}$ is a positive definite $n$ by $n$ matrix.</p>
 <h2 id="Derivation"><a href="#Derivation" class="headerlink" title="Derivation"></a>Derivation</h2><p>The solution of the problem in Eq. (1) is to let $\mathbf{u}$ be the eigenvector of $\mathbf{K}$ associated with its largest eigenvalue. Below we show how it is derived.</p>
 <p>Firstly, we conduct eigendecomposition on $\mathbf{K}$<br>\begin{align}<br>\mathbf{K} = \mathbf{V \Lambda V}^{T}  = \left[ \mathbf{v}_{1}, \dots, \mathbf{v}_{n} \right] \mathbf{\Lambda} \left[ \mathbf{v}_{1}, \dots, \mathbf{v}_{n} \right]^{T} = \sum_{i=1}^{n}{\lambda_{i} \mathbf{v}_{i} \mathbf{v}^{T}_{i}}. \tag{2}<br>\end{align}</p>
 <p>By substituting Eq. (2) into Eq. (1), the objective becomes<br>\begin{align}<br>\mathbf{u}^{T} \mathbf{Ku} = \mathbf{u}^{T} \left( \sum_{i=1}^{n}{\lambda_{i} \mathbf{v}_{i} \mathbf{v}^{T}_{i}} \right) \mathbf{u} = \sum_{i=1}^{n}{\lambda_{i} \left( \mathbf{u}^{T} \mathbf{v}_{i} \right)^{2} }.<br>\end{align}</p>
 <p>Since $\mathbf{u}$ is a vector of the same size as eigenvectors of $\mathbf{K}$, it can be represented using a linear combinations of $\mathbf{K}$’s eigenvectors, i.e.<br>\begin{align}<br>\mathbf{u} = \sum_{j=1}^{n} \alpha_{j} \mathbf{v}_{j}.<br>\end{align}</p>
 <p>Then the product between $\mathbf{u}^{T}$ and $\mathbf{v}_{i}$ can be simplified as<br>\begin{align}<br>\mathbf{u}^{T} \mathbf{v}_{i} = \left( \sum_{j=1}^{n} \alpha_{j} \mathbf{v}_{j} \right)^{T} \mathbf{v}_{i} = \sum_{j}^{n} \alpha_{j} \mathbf{v}_{j}^{T} \mathbf{v}_{i} = \alpha_{i}.<br>\end{align}</p>
 <p>From the constrain on the vector $\mathbf{u}$, we obtain that<br>\begin{align}<br>&amp; \mathbf{u}^{T} \mathbf{u} = 1 \\<br>\Rightarrow \quad &amp; \left( \mathbf{V} \boldsymbol{\alpha} \right)^{T} \left( \mathbf{V} \boldsymbol{\alpha} \right) = 1 \\<br>\Rightarrow \quad &amp; \boldsymbol{\alpha}^{T} \mathbf{V}^{T} \mathbf{V} \boldsymbol{\alpha} = 1 \\<br>\Rightarrow \quad &amp; \boldsymbol{\alpha}^{T} \boldsymbol{\alpha} = 1.<br>\end{align}</p>
-<p>Lastly, the objective becomes<br>\begin{align}<br>\mathbf{u}^{T} \mathbf{Ku} = \sum_{i=1}^{n}{\lambda_{i} \left( \mathbf{u}^{T} \mathbf{v}_{i} \right)^{2} } = \sum_{i=1}^{n} \lambda_{i} \alpha^{2}_{i} \le \lambda_{\text{max}} \sum^{n}_{i=1} \alpha^{2}_{i} = \lambda_{\text{max}.<br>\end{align}</p>
+<p>Lastly, the objective becomes<br>\begin{align}<br>\mathbf{u}^{T} \mathbf{Ku} = \sum_{i=1}^{n} \lambda_{i} \left( \mathbf{u}^{T} \mathbf{v}_{i} \right)^{2}  = \sum_{i=1}^{n} \lambda_{i} \alpha^{2}_{i} \le \lambda_{\text{max}} \sum^{n}_{i=1} \alpha^{2}_{i} = \lambda_{\text{max}}.<br>\end{align}</p>
 <p>Furthermore, if $\mathbf{U}$ is a matrix of $m$ columns, then the solution of<br>\begin{align}<br>\mathbf{U}^{*} = \arg \max_{\mathbf{U}^{T} \mathbf{U}=1}{\mathbf{U}^{T} \mathbf{K} \mathbf{U}}<br>\end{align}</p>
-<p>is given by letting columns of $\mathbf{U}$ be the top $m$ eigenvectors of matrix $#\mathbf{K}$.</p>
+<p>is given by letting columns of $\mathbf{U}$ be the top $m$ eigenvectors of matrix $\mathbf{K}$.</p>
 
       
     </div>
