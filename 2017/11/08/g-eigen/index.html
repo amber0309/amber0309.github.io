@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ML,Embedding,Clustering," />
+  <meta name="keywords" content="ML,Optimization,Math," />
 
 
 
@@ -92,18 +92,18 @@
 
 
 
-<meta name="description" content="This post is an introduction to my clustering method called kernel Embedding-Based Clustering (KEBC).">
-<meta name="keywords" content="ML,Embedding,Clustering">
+<meta name="description" content="Problem definitionThe problem is formulated below\begin{align}\mathbf{u}^{*} = \arg \max_{\mathbf{u}^{T} \mathbf{u}=1}{\mathbf{u}^{T} \mathbf{K} \mathbf{u}}, \tag{1}\end{align} where $\mathbf{u}$ is a">
+<meta name="keywords" content="ML,Optimization,Math">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kernel Embedding-Based Clustering">
-<meta property="og:url" content="http://amber0309.github.io/2017/06/07/kebc/index.html">
+<meta property="og:title" content="The Solution of Quadratic Form Maximization">
+<meta property="og:url" content="http://amber0309.github.io/2017/11/08/g-eigen/index.html">
 <meta property="og:site_name" content="Reticentor">
-<meta property="og:description" content="This post is an introduction to my clustering method called kernel Embedding-Based Clustering (KEBC).">
+<meta property="og:description" content="Problem definitionThe problem is formulated below\begin{align}\mathbf{u}^{*} = \arg \max_{\mathbf{u}^{T} \mathbf{u}=1}{\mathbf{u}^{T} \mathbf{K} \mathbf{u}}, \tag{1}\end{align} where $\mathbf{u}$ is a">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-13T10:14:50.963Z">
+<meta property="og:updated_time" content="2018-05-08T09:11:18.309Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kernel Embedding-Based Clustering">
-<meta name="twitter:description" content="This post is an introduction to my clustering method called kernel Embedding-Based Clustering (KEBC).">
+<meta name="twitter:title" content="The Solution of Quadratic Form Maximization">
+<meta name="twitter:description" content="Problem definitionThe problem is formulated below\begin{align}\mathbf{u}^{*} = \arg \max_{\mathbf{u}^{T} \mathbf{u}=1}{\mathbf{u}^{T} \mathbf{K} \mathbf{u}}, \tag{1}\end{align} where $\mathbf{u}$ is a">
 
 
 
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://amber0309.github.io/2017/06/07/kebc/"/>
+  <link rel="canonical" href="http://amber0309.github.io/2017/11/08/g-eigen/"/>
 
 
 
 
 
-  <title>Kernel Embedding-Based Clustering | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>The Solution of Quadratic Form Maximization | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2017/06/07/kebc/">
+    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2017/11/08/g-eigen/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="__Seth__">
@@ -278,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kernel Embedding-Based Clustering</h1>
+          <h1 class="post-title" itemprop="name headline">The Solution of Quadratic Form Maximization</h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-07T10:25:16+08:00">
-                2017-06-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-08T01:10:27+08:00">
+                2017-11-08
               </time>
             
 
@@ -309,9 +309,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/07/kebc/#comments" itemprop="discussionUrl">
+                <a href="/2017/11/08/g-eigen/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/06/07/kebc/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/11/08/g-eigen/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -339,13 +339,17 @@
       
 
       
-        <p>This post is an introduction to my clustering method called <strong>k</strong>ernel <strong>E</strong>mbedding-<strong>B</strong>ased <strong>C</strong>lustering (KEBC).</p>
-<a id="more"></a>
-<h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>KEBC aims to cluster $N$ data groups into $C$ clusters according to the conditional distribution of each group.</p>
-<p>Specifically, assume we are given a set $\mathbf{G}$ which consists of $N$ data groups, i.e. $\mathbf{G} = \lbrace G_{1}, \dots, G_{N} \rbrace $ and each group consists of bi-variate tuples, e.g. $ G_{i} = \lbrace (x^{(i)}_{1}, y^{(i)}_{1} ), \dots, (x^{(i)}_{n_{i}}, y^{(i)}_{n_{i}} ) \rbrace $ ($n_{i}$ denotes the number of points in group $i$), the goal of KEBC is to find the clustering such that groups within each cluster follow the same or very similar conditional distributions.</p>
-<p>Formally, let $d\left( P^{(i)}_{Y|X}, P^{(j)}_{Y|X} \right) $ be a <em>dissimilarity measure</em> between conditional distributions, where $P^{(i)}_{Y|X}$ denotes the conditional distribution of $Y$ on $X$ of group $i$. Our objective is to find a $C$-partitioning of the $N$ groups s.t., for $\mu_{S_{j}}$ being the mean conditional distribution representation of cluster $S_{j}$,<br>\begin{aligned} \mathbf{S}^{*} = arg\max_{\mathbf{S}} \sum_{i=1}^{N} \sum_{P^{(i)}_{Y|X} \in S_{j}} d^{2}\left( P^{(i)}_{Y|X}, \mu_{S_{j}} \right) \end{aligned}</p>
-<h2 id="Scope-of-Application"><a href="#Scope-of-Application" class="headerlink" title="Scope of Application"></a>Scope of Application</h2><p>KEBC could be applied in any problem that has a (conditional) distribution-distinguishable interpretation.</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>Python code of KEBC for clustering based on both marginal and conditional distributions is available at <a href="https://github.com/amber0309/KEBC" target="_blank" rel="noopener">GitHub</a>.</p>
+        <h2 id="Problem-definition"><a href="#Problem-definition" class="headerlink" title="Problem definition"></a>Problem definition</h2><p>The problem is formulated below<br>\begin{align}<br>\mathbf{u}^{*} = \arg \max_{\mathbf{u}^{T} \mathbf{u}=1}{\mathbf{u}^{T} \mathbf{K} \mathbf{u}}, \tag{1}<br>\end{align}</p>
+<p>where $\mathbf{u}$ is a column vector and $\mathbf{K}$ is a positive definite matrix.</p>
+<h2 id="Derivation"><a href="#Derivation" class="headerlink" title="Derivation"></a>Derivation</h2><p>The solution of the problem in Eq. (1) is to let $\mathbf{u}$ be the eigenvector of $\mathbf{K}$ associated with its largest eigenvalue. Below we show how it is derived.</p>
+<p>Firstly, we conduct eigendecomposition on $\mathbf{K}$<br>\begin{align}<br>\mathbf{K} = \mathbf{V \Lambda V}^{T}  = \left[ \mathbf{v}_{1}, \dots, \mathbf{v}_{n} \right] \mathbf{\Lambda} \left[ \mathbf{v}_{1}, \dots, \mathbf{v}_{n} \right]^{T} = \sum_{i=1}^{n}{\lambda_{i} \mathbf{v}_{i} \mathbf{v}^{T}_{i}}. \tag{2}<br>\end{align}</p>
+<p>By substituting Eq. (2) into Eq. (1), the objective becomes<br>\begin{align}<br>\mathbf{u}^{T} \mathbf{Ku} = \mathbf{u}^{T} \left( \sum_{i=1}^{n}{\lambda_{i} \mathbf{v}_{i} \mathbf{v}^{T}_{i}} \right) \mathbf{u} = \sum_{i=1}^{n}{\lambda_{i} \left( \mathbf{u}^{T} \mathbf{v}_{i} \right)^{2} }.<br>\end{align}</p>
+<p>Since $\mathbf{u}$ is a vector of the same size as eigenvectors of $\mathbf{K}$, it can be represented using a linear combinations of $\mathbf{K}$’s eigenvectors, i.e.<br>\begin{align}<br>\mathbf{u} = \sum_{j=1}^{n} \alpha_{j} \mathbf{v}_{j}.<br>\end{align}</p>
+<p>Then the product between $\mathbf{u}^{T}$ and $\mathbf{v}_{i}$ can be simplified as<br>\begin{align}<br>\mathbf{u}^{T} \mathbf{v}_{i} = \left( \sum_{j=1}^{n} \alpha_{j} \mathbf{v}_{j} \right)^{T} \mathbf{v}_{i} = \sum_{j}^{n} \alpha_{j} \mathbf{v}_{j}^{T} \mathbf{v}_{i} = \alpha_{i}.<br>\end{align}</p>
+<p>From the constrain on the vector $\mathbf{u}$, we obtain that<br>\begin{align}<br>&amp; \mathbf{u}^{T} \mathbf{u} = 1 \\<br>\Rightarrow \quad &amp; \left( \mathbf{V} \boldsymbol{\alpha} \right)^{T} \left( \mathbf{V} \boldsymbol{\alpha} \right) = 1 \\<br>\Rightarrow \quad &amp; \boldsymbol{\alpha}^{T} \mathbf{V}^{T} \mathbf{V} \boldsymbol{\alpha} = 1 \\<br>\Rightarrow \quad &amp; \boldsymbol{\alpha}^{T} \boldsymbol{\alpha} = 1.<br>\end{align}</p>
+<p>Lastly, the objective becomes<br>\begin{align}<br>\mathbf{u}^{T} \mathbf{Ku} = \sum_{i=1}^{n}{\lambda_{i} \left( \mathbf{u}^{T} \mathbf{v}_{i} \right)^{2} } = \sum_{i=1}^{n} \lambda_{i} \alpha^{2}_{i} \le \lambda_{\text{max}} \sum^{n}_{i=1} \alpha^{2}_{i} = \lambda_{\text{max}.<br>\end{align}</p>
+<p>Furthermore, if $\mathbf{U}$ is a matrix of $m$ columns, then the solution of<br>\begin{align}<br>\mathbf{U}^{*} = \arg \max_{\mathbf{U}^{T} \mathbf{U}=1}{\mathbf{U}^{T} \mathbf{K} \mathbf{U}}<br>\end{align}</p>
+<p>is given by letting columns of $\mathbf{U}$ be the top $m$ eigenvectors of matrix $#\mathbf{K}$.</p>
 
       
     </div>
@@ -365,9 +369,9 @@
           
             <a href="/tags/ML/" rel="tag"># ML</a>
           
-            <a href="/tags/Embedding/" rel="tag"># Embedding</a>
+            <a href="/tags/Optimization/" rel="tag"># Optimization</a>
           
-            <a href="/tags/Clustering/" rel="tag"># Clustering</a>
+            <a href="/tags/Math/" rel="tag"># Math</a>
           
         </div>
       
@@ -380,8 +384,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/13/hsic/" rel="next" title="Understanding Hilbert-Schmidt Independence Criterion">
-                <i class="fa fa-chevron-left"></i> Understanding Hilbert-Schmidt Independence Criterion
+              <a href="/2017/06/07/kebc/" rel="next" title="Kernel Embedding-Based Clustering">
+                <i class="fa fa-chevron-left"></i> Kernel Embedding-Based Clustering
               </a>
             
           </div>
@@ -390,8 +394,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/08/g-eigen/" rel="prev" title="The Solution of Quadratic Form Maximization">
-                The Solution of Quadratic Form Maximization <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/12/enci/" rel="prev" title="Kernel Embedding-based Nonstationary Causal Model Inference">
+                Kernel Embedding-based Nonstationary Causal Model Inference <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -537,7 +541,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Description"><span class="nav-number">1.</span> <span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scope-of-Application"><span class="nav-number">2.</span> <span class="nav-text">Scope of Application</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-definition"><span class="nav-number">1.</span> <span class="nav-text">Problem definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Derivation"><span class="nav-number">2.</span> <span class="nav-text">Derivation</span></a></li></ol></div>
             
 
           </div>
@@ -687,9 +691,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://amber0309.github.io/2017/06/07/kebc/';
-          this.page.identifier = '2017/06/07/kebc/';
-          this.page.title = 'Kernel Embedding-Based Clustering';
+          this.page.url = 'http://amber0309.github.io/2017/11/08/g-eigen/';
+          this.page.identifier = '2017/11/08/g-eigen/';
+          this.page.title = 'The Solution of Quadratic Form Maximization';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Seth.disqus.com/embed.js';
