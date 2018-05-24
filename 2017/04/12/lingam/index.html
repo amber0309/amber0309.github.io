@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ML,Causality,Paper-reading," />
+  <meta name="keywords" content="ML,Causality,Paper-reading,Math," />
 
 
 
@@ -92,18 +92,18 @@
 
 
 
-<meta name="description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
-<meta name="keywords" content="ML,Causality,Paper-reading">
+<meta name="description" content="This post shows the proof of the identifiability of Linear non-Gaussian Additive Model.[1]">
+<meta name="keywords" content="ML,Causality,Paper-reading,Math">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Understanding Additive Noise Model">
-<meta property="og:url" content="http://amber0309.github.io/2015/12/08/anm/index.html">
+<meta property="og:title" content="Identifiability of Linear non-Gaussian Additive Model">
+<meta property="og:url" content="http://amber0309.github.io/2017/04/12/lingam/index.html">
 <meta property="og:site_name" content="Reticentor">
-<meta property="og:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
+<meta property="og:description" content="This post shows the proof of the identifiability of Linear non-Gaussian Additive Model.[1]">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-13T10:09:48.603Z">
+<meta property="og:updated_time" content="2018-05-24T15:33:22.827Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Understanding Additive Noise Model">
-<meta name="twitter:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
+<meta name="twitter:title" content="Identifiability of Linear non-Gaussian Additive Model">
+<meta name="twitter:description" content="This post shows the proof of the identifiability of Linear non-Gaussian Additive Model.[1]">
 
 
 
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://amber0309.github.io/2015/12/08/anm/"/>
+  <link rel="canonical" href="http://amber0309.github.io/2017/04/12/lingam/"/>
 
 
 
 
 
-  <title>Understanding Additive Noise Model | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Identifiability of Linear non-Gaussian Additive Model | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2015/12/08/anm/">
+    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2017/04/12/lingam/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="__Seth__">
@@ -278,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Understanding Additive Noise Model</h1>
+          <h1 class="post-title" itemprop="name headline">Identifiability of Linear non-Gaussian Additive Model</h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-08T17:09:17+08:00">
-                2015-12-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-12T23:24:28+08:00">
+                2017-04-12
               </time>
             
 
@@ -309,9 +309,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2015/12/08/anm/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/12/lingam/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2015/12/08/anm/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/12/lingam/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -339,39 +339,22 @@
       
 
       
-        <p>This post introduces the basic idea of <a href="https://papers.nips.cc/paper/3548-nonlinear-causal-discovery-with-additive-noise-models.pdf" target="_blank" rel="noopener">Additive Noise Model</a> (ANM) for causal inference.</p>
+        <p>This post shows the proof of the identifiability of <a href="http://www.ar.sanken.osaka-u.ac.jp/~sshimizu/papers/aic30_web2.pdf" target="_blank" rel="noopener">Linear non-Gaussian Additive Model</a>.[1]</p>
 <a id="more"></a>
-<h2 id="Model-description"><a href="#Model-description" class="headerlink" title="Model description"></a>Model description</h2><p>We focus on the two-variable (often termed a <em>cause-effect pair</em>) case where the relation between the cause $X$ and the effect $Y$ is given by<br>\begin{align}<br>Y = f(X) + \epsilon, \tag{1}<br>\end{align}</p>
-<p>where $f$ is an arbitrary function and noise $\epsilon$, which is independent of $X$, may have arbitrary probability densities $p(\epsilon)$.</p>
-<p>The goal of causal inference is, given data $\mathcal{D}=\lbrace (x_{i}, y_{i}) \rbrace^{N}_{i = 1}$ sampled independently from the joint distribution of the casue and the effect $p(X,Y)$, to infer whether $X$ causes $Y$ ($X \to Y$) or the opposite ($Y \to X$).</p>
-<h2 id="Identifiability"><a href="#Identifiability" class="headerlink" title="Identifiability"></a>Identifiability</h2><p>As the most commonly used benchmark approach for inferring the causal direction of cause-effect pairs, ANM can be viewed as the first to exploit <em>cause-effect asymmetry</em>, which means the property that only holds in the true causal direction and is violated in the anti-causal direction. The causal models with cause-effect asymmetry are said to be <em>identifiable</em>. The analysis of most subsequent causal inference approaches can all be viewed as finding the cause-effect asymmetry based on different model assumptions.</p>
-<p>In ANM, this kind of asymmetry stems from how the data fits an ANM in both hypothetical direcitons. In other words, how likely the given data is generated from an ANM. First of all, note that not all cases in ANM is identifiable. For example, when $f(X) = X$ and $\epsilon$ is Gaussian, the backward model still fulfills an ANM.</p>
-<p>Besides the simple linear-Gaussian and some other relatively artificial cases, the identifiability of ANM is given by the following Theorem (<a href="https://papers.nips.cc/paper/3548-nonlinear-causal-discovery-with-additive-noise-models.pdf" target="_blank" rel="noopener">[1]</a>, Theorem 1)</p>
-<p><strong>Theorem 1</strong> <em>Let the joint probability density of $X$ and $Y$ be given by</em><br>\begin{align}<br>p(X,Y) = p_{\epsilon}(Y-f(X))p_{X}(X), \tag{2}<br>\end{align}</p>
-<p><em>where $p_{\epsilon}$, $p_{X}$ are probability densities on $\mathbb{R}$. If there is a backward model of the same form, i.e.,</em><br>\begin{align}<br>p(X,Y) = p_{\varepsilon}(X-g(Y))p_{Y}(Y), \tag{3}<br>\end{align}</p>
-<p><em>then, denoting $\nu := \log p_{\epsilon}$ and $\xi := \log p_{X}$, the triple $(f, p_{X}, p_{\epsilon})$ must satisfy the following differential equation for all $x$, $y$ with $\nu^{\prime\prime}(Y-f(X)) f^{\prime}(X) \neq 0$:</em><br>\begin{align}<br>\xi^{\prime\prime\prime} = \xi^{\prime\prime}\left( -\frac{\nu^{\prime\prime\prime} f^{\prime}}{\nu^{\prime\prime} } + \frac{f^{\prime\prime}}{f^{\prime}} \right) - 2\nu^{\prime\prime} f^{\prime\prime} f^{\prime} + \nu^{\prime} f^{\prime\prime\prime} + \frac{ \nu^{\prime} \nu^{\prime\prime\prime} f^{\prime} f^{\prime\prime} }{ \nu^{\prime\prime} } - \frac{ \nu^{\prime} \left( f^{\prime\prime}\right)^{2} }{f^{\prime}}, \tag{4}<br>\label{condition}<br>\end{align}</p>
-<p><em>where the arguments $Y-f(X)$, $X$, and $X$ for $\nu$, $\xi$, $f$ and their derivatives are skipped for clarity. Moreover, if for a fixed pair $(f, \nu)$ there exists $Y\in \mathbb{R}$ such that $\nu^{\prime\prime} (Y-f(X)) f^{\prime}(X) \neq 0$ for all but a countable set of points $X \in \mathbb{R}$, the set of all $p_{X}$ for which $p$ has a backward model is contained in a 3-dimensional affine space.</em></p>
-<p>The theorem is proved by taking derivative of the log of joint distribution $p(X,Y)$ for both models. Specifically, let the log of the joint distribution be $\pi(X,Y)$. Then $\frac{\partial}{\partial X}\left( \frac{\partial^{2} \pi / \partial X^{2}}{ \partial^{2} \pi / \partial X \partial Y } \right)$ of the two hypothetical models should be consistent if the backward model exists. The condition shown in Eq. (\ref{condition}) is deduced by computing the derivatives of both models and making them equal.</p>
-<p>It is hard for me to grasp the infomation Eq. (\ref{condition}) conveys. By now my personal interpretation of it is that only by fulfilling such a <em>complicated</em> and <em>stange</em> differential equation can the backward model exist. Therefore, one may say that the model that is identifiable is <em>typically</em> the case, however, not always.</p>
-<h2 id="Causal-inference"><a href="#Causal-inference" class="headerlink" title="Causal inference"></a>Causal inference</h2><p>The inference procedure is very intuitive. Consider $X$ and $Y$ which are statistically dependent,</p>
-<ol>
-<li>test whether the data fits the model $Y=f(X)+\epsilon$ by <ul>
-<li>doing nonlinear regression of $Y$ on $X$;</li>
-<li>computing the corresponding residuals $\hat{\epsilon}$;</li>
-<li>testing whether $\hat{\epsilon}$ is independent of $X$.</li>
-</ul>
-</li>
-<li>test whether the data fits the backward model $X=g(Y) + \varepsilon$ similarly.</li>
-<li>conclude the inference result<ul>
-<li>cannot infer the direction if both models are accepted or rejected;</li>
-<li>$X \to Y$, if only $Y=f(X)+\epsilon$ is accepted;</li>
-<li>$Y \to X$, if only $X=g(Y) + \varepsilon$ is accepted.</li>
-</ul>
-</li>
-</ol>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>The code provided by the paper authors is available at <a href="https://github.com/amber0309/Additive-Noise-Model" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li>Hoyer, P. O., Janzing, D., Mooij, J. M., Peters, J., &amp; Schölkopf, B. (2009). Nonlinear causal discovery with additive noise models. In Advances in neural information processing systems (pp. 689-696).</li>
+<h2 id="Model-definition"><a href="#Model-definition" class="headerlink" title="Model definition"></a>Model definition</h2><p>Let $X$ be the cause and $Y$ be effect ($X \to Y$) without loss of generality. The causal realtion between them is given by<br>\begin{align}<br>Y = a X + \epsilon, \tag{1}<br>\label{df}<br>\end{align}</p>
+<p>where $a$ is a constant coefficient and $\epsilon$ is a non-Gaussian noise which is independent of $X$. The model in \ref{df} is called Linear non-Gaussian Additive Model (LiNGAM).[1]</p>
+<h2 id="Identifiability"><a href="#Identifiability" class="headerlink" title="Identifiability"></a>Identifiability</h2><p>Showing the identifiablity of a causal model is actually exploiting its <em>cause-effect asymmetry</em>, which means the property that holds only in the true causal direction and is violated in the anti-causal direction, from the given model. Causal models with cause-effect asymmetry are said to be <em>identifiable</em>.</p>
+<p>The identifiability of LiNGAM is proved using Darmois - Skitovitch theorem, which reads,<br><strong>Darmois-Skitovitch theorem (D-S Theorem)</strong> [2,3] <em>Define two random variables $L_{1}$ and $L_{2}$ as linear combinations of independent random variables $s_{i}, (i=1, …, q)$:</em><br>\begin{align}<br>L_{1} = \sum_{i=1}^{q} \alpha_{i} s_{i}, \quad L_{2} = \sum_{i=1}^{q} \beta_{i} s_{i},<br>\end{align}</p>
+<p><em>where $\alpha_{i}$ and $\beta_{i}$ are constant coefficients. Then, if $L_{1}$ and $L_{2}$ are independent, all variables $s_{j}$  for which $\alpha_{j} \beta_{j} \neq 0$ are Gaussian.</em></p>
+<p>In other words, this theorem means that if there exists a non-Gaussian $s_{j}$ for which $\alpha_{j} \beta_{j} \neq 0$, $L_{1}$ and $L_{2}$ are dependent.</p>
+<p>Now we assume there exist a backward model $X = bY + \tilde{\epsilon}$ for a forward LiNGAM, then in the forward model $Y = aX + \epsilon$ we have<br>\begin{align}<br>s_{1} &amp; := X \\<br>s_{2} &amp; := Y - a X<br>\end{align}</p>
+<p>where $s_{1}$ and $s_{2}$ should be independent according to the assumption of LiNGAM. Similarly in the backward model we have<br>\begin{align}<br>L_{1} &amp; := Y \\<br>L_{2} &amp; := X - b Y<br>\end{align}</p>
+<p>It is obvious that both $L_{1}$ and $L_{2}$ can be written as a linear combination of $s_{1}$ and $s_{2}$, i.e.<br>\begin{align}<br>L_{1} &amp; := a s_{1} + s_{2} \\<br>L_{2} &amp; := (1 - ba)s_{1} -b s_{2}<br>\end{align}</p>
+<p>Since $s_{2}$ is non-Gaussian, $L_{1}$ and $L_{2}$ will be dependent according to D-S theorem as long as $b \neq 0$, which is ensured by the existence of the causal relation between $X$ and $Y$. Thus, we conclude that the cause and the noise in the backward model will be dependent if the forward model follows a LiNGAM. This asymmetry of LiNGAM allows us to infer its causal direction.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Kano, Y., &amp; Shimizu, S. (2003). Causal inference using nonnormality. In Proceedings of the international symposium on science of modeling, the 30th anniversary of the information criterion (pp. 261-270).</li>
+<li>Darmois, G. (1953). Analyse générale des liaisons stochastiques: etude particulière de l’analyse factorielle linéaire. Revue de l’Institut international de statistique, 2-8.</li>
+<li>Skitovitch, V. P. (1953). On a property of the normal distribution. DAN SSSR, 89, 217-219.</li>
 </ol>
 
       
@@ -396,6 +379,8 @@
           
             <a href="/tags/Paper-reading/" rel="tag"># Paper-reading</a>
           
+            <a href="/tags/Math/" rel="tag"># Math</a>
+          
         </div>
       
 
@@ -407,14 +392,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/01/13/hsic/" rel="next" title="Understanding Hilbert-Schmidt Independence Criterion">
+                <i class="fa fa-chevron-left"></i> Understanding Hilbert-Schmidt Independence Criterion
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/26/anmprf/" rel="prev" title="Derivation of Theorem 1 in ANM">
-                Derivation of Theorem 1 in ANM <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/07/kebc/" rel="prev" title="Kernel Embedding-Based Clustering">
+                Kernel Embedding-Based Clustering <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -560,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-description"><span class="nav-number">1.</span> <span class="nav-text">Model description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Identifiability"><span class="nav-number">2.</span> <span class="nav-text">Identifiability</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Causal-inference"><span class="nav-number">3.</span> <span class="nav-text">Causal inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-definition"><span class="nav-number">1.</span> <span class="nav-text">Model definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Identifiability"><span class="nav-number">2.</span> <span class="nav-text">Identifiability</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
@@ -710,9 +699,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://amber0309.github.io/2015/12/08/anm/';
-          this.page.identifier = '2015/12/08/anm/';
-          this.page.title = 'Understanding Additive Noise Model';
+          this.page.url = 'http://amber0309.github.io/2017/04/12/lingam/';
+          this.page.identifier = '2017/04/12/lingam/';
+          this.page.title = 'Identifiability of Linear non-Gaussian Additive Model';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Seth.disqus.com/embed.js';
