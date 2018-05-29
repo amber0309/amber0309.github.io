@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="Reticentor">
 <meta property="og:description" content="This post shows the derivation step by step of the condition that ANM [1] is not identifiable (Eq. (4) in [1]).">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-26T17:56:11.838Z">
+<meta property="og:updated_time" content="2018-05-29T15:40:57.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Derivation of Theorem 1 in ANM">
 <meta name="twitter:description" content="This post shows the derivation step by step of the condition that ANM [1] is not identifiable (Eq. (4) in [1]).">
@@ -342,10 +342,12 @@
         <p>This post shows the derivation step by step of the condition that ANM <a href="https://is.tuebingen.mpg.de/fileadmin/user_upload/files/publications/NIPS2008-Hoyer-neu_5406[0].pdf" target="_blank" rel="noopener">[1]</a> is not identifiable (Eq. (4) in <a href="https://is.tuebingen.mpg.de/fileadmin/user_upload/files/publications/NIPS2008-Hoyer-neu_5406[0].pdf" target="_blank" rel="noopener">[1]</a>).</p>
 <a id="more"></a>
 <h2 id="Identifiability-of-ANM"><a href="#Identifiability-of-ANM" class="headerlink" title="Identifiability of ANM"></a>Identifiability of ANM</h2><p>The identifiability results of ANM is given by the following theorem in <a href="https://is.tuebingen.mpg.de/fileadmin/user_upload/files/publications/NIPS2008-Hoyer-neu_5406[0].pdf" target="_blank" rel="noopener">[1]</a></p>
+<blockquote>
 <p><strong>Theorem 1</strong> <em>Let the joint probability density of $x$ and $y$ be given by</em><br>\begin{align}<br>p(x,y) = p_{\epsilon}(y-f(x))p_{x}(x), \tag{2}<br>\end{align}</p>
 <p><em>where $p_{\epsilon}$, $p_{x}$ are probability densities on $\mathbb{R}$. If there is a backward model of the same form, i.e.,</em><br>\begin{align}<br>p(x,y) = p_{\varepsilon}(x-g(y))p_{y}(y), \tag{3}<br>\end{align}</p>
 <p><em>then, denoting $\nu := \log p_{\epsilon}$ and $\xi := \log p_{x}$, the triple $(f, p_{x}, p_{\epsilon})$ must satisfy the following differential equation for all $x$, $y$ with $\nu^{\prime\prime}(y-f(x)) f^{\prime}(x) \neq 0$:</em><br>\begin{align}<br>\xi^{\prime\prime\prime} = \xi^{\prime\prime}\left( -\frac{\nu^{\prime\prime\prime} f^{\prime}}{\nu^{\prime\prime} } + \frac{f^{\prime\prime}}{f^{\prime}} \right) - 2\nu^{\prime\prime} f^{\prime\prime} f^{\prime} + \nu^{\prime} f^{\prime\prime\prime} + \frac{ \nu^{\prime} \nu^{\prime\prime\prime} f^{\prime} f^{\prime\prime} }{ \nu^{\prime\prime} } - \frac{ \nu^{\prime} \left( f^{\prime\prime}\right)^{2} }{f^{\prime}}, \tag{4}<br>\label{condition}<br>\end{align}</p>
 <p><em>where the arguments $y-f(x)$, $x$, and $x$ for $\nu$, $\xi$, $f$ and their derivatives are skipped for clarity. Moreover, if for a fixed pair $(f, \nu)$ there exists $y\in \mathbb{R}$ such that $\nu^{\prime\prime} (y-f(x)) f^{\prime}(x) \neq 0$ for all but a countable set of points $x \in \mathbb{R}$, the set of all $p_{x}$ for which $p$ has a backward model is contained in a 3-dimensional affine space.</em></p>
+</blockquote>
 <h2 id="Derivation-of-Eq-4"><a href="#Derivation-of-Eq-4" class="headerlink" title="Derivation of Eq. (4)"></a>Derivation of Eq. (4)</h2><p>Now we show how Eq. (4) is derived. Let<br>\begin{align}<br>\pi(x, y) := \log p(x,y)=\nu (y-f(x)) + \xi(x), \tag{5}<br>\end{align}</p>
 <p>and $\tilde{\nu}:= \log p_{\tilde{n}}$, $\eta := \log p_{y}$. If the backward model exists, which means Eq. (3) holds, then<br>\begin{align}<br>\pi(x, y) := \log p(x,y)=\tilde{\nu} (x-g(y)) + \eta(y). \tag{6}<br>\end{align}</p>
 <p>In the causal direction ($x \to y$), taking the derivatives of Eq. (5) we have,<br>\begin{align}<br>\frac{\partial^{2} \pi}{\partial x \partial y} &amp; = \frac{\partial}{\partial x} \left[ \nu{\prime}(y-f(x)) \right] \\<br>&amp; = -\nu{\prime \prime}(y-f(x))f^{\prime} (x),<br>\end{align}</p>
