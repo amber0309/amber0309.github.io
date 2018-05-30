@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ML,Causality,Paper-reading,Math," />
+  <meta name="keywords" content="ML,Causality,Paper-reading," />
 
 
 
@@ -92,18 +92,18 @@
 
 
 
-<meta name="description" content="This post shows the proof of the identifiability of Linear non-Gaussian Additive Model.[1]">
-<meta name="keywords" content="ML,Causality,Paper-reading,Math">
+<meta name="description" content="This post summarizes the logic of the journal version of Information Geometric Causal Inference [1] .">
+<meta name="keywords" content="ML,Causality,Paper-reading">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Identifiability of Linear non-Gaussian Additive Model">
-<meta property="og:url" content="http://amber0309.github.io/2017/04/12/lingam/index.html">
+<meta property="og:title" content="Theoretical Generalization of Information Geometric Causal Inference">
+<meta property="og:url" content="http://amber0309.github.io/2018/01/30/igci-2012/index.html">
 <meta property="og:site_name" content="Reticentor">
-<meta property="og:description" content="This post shows the proof of the identifiability of Linear non-Gaussian Additive Model.[1]">
+<meta property="og:description" content="This post summarizes the logic of the journal version of Information Geometric Causal Inference [1] .">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-25T04:38:55.392Z">
+<meta property="og:updated_time" content="2018-05-30T16:45:57.184Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Identifiability of Linear non-Gaussian Additive Model">
-<meta name="twitter:description" content="This post shows the proof of the identifiability of Linear non-Gaussian Additive Model.[1]">
+<meta name="twitter:title" content="Theoretical Generalization of Information Geometric Causal Inference">
+<meta name="twitter:description" content="This post summarizes the logic of the journal version of Information Geometric Causal Inference [1] .">
 
 
 
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://amber0309.github.io/2017/04/12/lingam/"/>
+  <link rel="canonical" href="http://amber0309.github.io/2018/01/30/igci-2012/"/>
 
 
 
 
 
-  <title>Identifiability of Linear non-Gaussian Additive Model | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Theoretical Generalization of Information Geometric Causal Inference | Reticentor</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2017/04/12/lingam/">
+    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2018/01/30/igci-2012/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="__Seth__">
@@ -278,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Identifiability of Linear non-Gaussian Additive Model</h1>
+          <h1 class="post-title" itemprop="name headline">Theoretical Generalization of Information Geometric Causal Inference</h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-12T23:24:28+08:00">
-                2017-04-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-30T23:31:18+08:00">
+                2018-01-30
               </time>
             
 
@@ -309,9 +309,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/12/lingam/#comments" itemprop="discussionUrl">
+                <a href="/2018/01/30/igci-2012/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/12/lingam/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/01/30/igci-2012/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -339,25 +339,22 @@
       
 
       
-        <p>This post shows the proof of the identifiability of <a href="http://www.ar.sanken.osaka-u.ac.jp/~sshimizu/papers/aic30_web2.pdf" target="_blank" rel="noopener">Linear non-Gaussian Additive Model</a>.[1]</p>
+        <p>This post summarizes the logic of the journal version of <a href="https://ac.els-cdn.com/S0004370212000045/1-s2.0-S0004370212000045-main.pdf?_tid=3fb37933-22b8-42b8-917b-9aa8e61cfa1c&amp;acdnat=1527690879_d121b6cd6ecfbf6f437189e6314129cb" target="_blank" rel="noopener">Information Geometric Causal Inference</a> [1] .</p>
 <a id="more"></a>
-<h2 id="Model-definition"><a href="#Model-definition" class="headerlink" title="Model definition"></a>Model definition</h2><p>Let $X$ be the cause and $Y$ be effect ($X \to Y$) without loss of generality. The causal realtion between them is given by<br>\begin{align}<br>Y = a X + \epsilon, \tag{1}<br>\label{df}<br>\end{align}</p>
-<p>where $a$ is a constant coefficient and $\epsilon$ is a non-Gaussian noise which is independent of $X$. The model in \eqref{df} is called Linear non-Gaussian Additive Model (LiNGAM).[1]</p>
-<h2 id="Identifiability"><a href="#Identifiability" class="headerlink" title="Identifiability"></a>Identifiability</h2><p>Showing the identifiablity of a causal model is actually exploiting its <em>cause-effect asymmetry</em>, which means the property that holds only in the true causal direction and is violated in the anti-causal direction, from the given model. Causal models with cause-effect asymmetry are said to be <em>identifiable</em>.</p>
-<p>The identifiability of LiNGAM is proved using Darmois - Skitovitch theorem, which reads,</p>
-<blockquote>
-<p><strong>Darmois-Skitovitch theorem (D-S Theorem)</strong> [2,3] <em>Define two random variables $L_{1}$ and $L_{2}$ as linear combinations of independent random variables $s_{i}, (i=1, …, q)$:</em><br>\begin{align}<br>L_{1} = \sum_{i=1}^{q} \alpha_{i} s_{i}, \quad L_{2} = \sum_{i=1}^{q} \beta_{i} s_{i},<br>\end{align}</p>
-<p><em>where $\alpha_{i}$ and $\beta_{i}$ are constant coefficients. Then, if $L_{1}$ and $L_{2}$ are independent, all variables $s_{j}$  for which $\alpha_{j} \beta_{j} \neq 0$ are Gaussian.</em></p>
-</blockquote>
-<p>In other words, this theorem means that if there exists a non-Gaussian $s_{j}$ for which $\alpha_{j} \beta_{j} \neq 0$, $L_{1}$ and $L_{2}$ are dependent.</p>
-<p>Now we assume there exist a backward model $X = bY + \tilde{\epsilon}$ for a forward LiNGAM, then in the forward model $Y = aX + \epsilon$ we have<br>\begin{align}<br>s_{1} &amp; := X \\<br>s_{2} &amp; := Y - a X<br>\end{align}</p>
-<p>where $s_{1}$ and $s_{2}$ should be independent according to the assumption of LiNGAM. Similarly in the backward model we have<br>\begin{align}<br>L_{1} &amp; := Y \\<br>L_{2} &amp; := X - b Y<br>\end{align}</p>
-<p>It is obvious that both $L_{1}$ and $L_{2}$ can be written as a linear combination of $s_{1}$ and $s_{2}$, i.e.<br>\begin{align}<br>L_{1} &amp; = a s_{1} + s_{2} \\<br>L_{2} &amp; = (1 - ba)s_{1} -b s_{2}<br>\end{align}</p>
-<p>Since $s_{2}$ is non-Gaussian, $L_{1}$ and $L_{2}$ will be dependent according to D-S theorem as long as $b \neq 0$, which is ensured by the existence of the causal relation between $X$ and $Y$. Thus, we conclude that the cause and the noise in the backward model will be dependent if the forward model follows a LiNGAM. This asymmetry of LiNGAM allows us to infer its causal direction.</p>
+<h2 id="Independence-postulate"><a href="#Independence-postulate" class="headerlink" title="Independence postulate"></a>Independence postulate</h2><p>The idea of Information Geometric Causal Inference (IGCI) is built upon the independence between $P_{Y|X}$ and $P_{X}$, where $X$ and $Y$ denote the cause and effect, respectively without loss of generality. IGCI interpret this independence in the following postulate</p>
+<p><strong>Postulate 1</strong> <em>(General structure of independence)</em> Assume that $X$ causes $Y$ ($X \to Y$). Let $x \mapsto h(x) \in \mathbb{R}$ be any function for which $h(x)$ describes local properties of the conditional $P_{Y|X}$ at the point $X = x$. Then the <em>structure function</em> $h$ and $P_{X}$ are likely to satisfy<br>\begin{align}<br>\int h(x) P(x) dx \approx \int h(x) U_{X}(x) dx, \tag{1}<br>\label{post:1}<br>\end{align}</p>
+<p>where $U_{X}(x)$ is a reference density of $X$.</p>
+<p>Note that the difference between both sides of \eqref{post:1} can be rephrased as a covariance if we formally consider $h$ and $P_{X}/U_{X}$ as functions of a random variable $X$ with distribution $U_{X}$:<br>\begin{align}<br> &amp;\int h(x) P(x) dx - \int h(x) U_{X}(x) dx \\<br>= \; &amp; \int h(x) \frac{P(x)}{U_{X}(x)} U_{X}(x) dx - \int h(x) U_{X}(x) dx \int \frac{P(x)}{U_{X}(x)} U_{X}(x) dx \\<br>=: \;  &amp; \text{Cov}_{U_{X}} \left( h, \frac{P(x)}{U_{X}(x)} \right). \tag{2}<br>\label{cov}<br>\end{align}</p>
+<p>The postulate is still vague since the structure function $h$ and the reference density are not specified. In the paper, the authors recommend to choose <em>non-informative</em> distributions to be the reference such as uniform or Gaussian ones. They define the candidate structure functions as follows:<br><strong>Definition 1</strong> <em>(Structure functions for the conditional)</em> Let $U_{X}$ and $U_{Y}$ be reference densities for $X$ and $Y$, respectively and<br>\begin{align}<br>\overrightarrow{P}_{Y} := \int P(y|x) U(x) dx<br>\end{align}</p>
+<p>denote the output distribution obtained by feeding the conditional with the reference input $U_{X}$. Similarly, we will later use<br>\begin{align}<br>\overleftarrow{P}_{X} := \int P(x|y) U(y) dy.<br>\end{align}</p>
+<p>Then we define the following <em>structure functions</em><br>\begin{align}<br>h_{1}(x) &amp; := \int P(y|x) \log \frac{ P(y|x) }{ U(y) } dy = D(P_{Y|x} \Vert U_{Y}), \\<br>h_{2}(x) &amp; := \int P(y|x) \log \frac{ P(y|x) }{ \overrightarrow{P}_{Y} } dy = D(P_{Y|x} \Vert \overrightarrow{P}_{Y}), \\<br>h_{3}(x) &amp; := \int P(y|x) \log \frac{ \overrightarrow{P}_{Y} }{ U(y) } dy \\<br>&amp;= \int P(y|x) \log \frac{ P(y|x) }{ U(y) } dy - \int P(y|x) \log \frac{ P(y|x) }{ \overrightarrow{P}_{Y} } dy \\<br>&amp; = h_{1}(x) - h_{2}(x) ,<br>\end{align}</p>
+<p>where $D(P \Vert Q)$ is the relative entropy (or KL-divergence) between two densities $P$ and $Q$.</p>
+<h2 id="Orthogonality-in-information-space"><a href="#Orthogonality-in-information-space" class="headerlink" title="Orthogonality in information space"></a>Orthogonality in information space</h2><p>To derive the relation between those densities in the information space, we need the following Lemma<br><strong>Lemma 1 (orthogonality in information space)</strong><br>Let $q,r,s$ be three probability densities. Then<br>\begin{align} \int q(x) \log \frac{r(x)}{s(x)} dx= \int r(x)\log \frac{r(x)}{s(x)}dx, \tag{3}<br>\label{ortho}<br>\end{align}</p>
+<p>which is equivalent to the following additivity of KL divergence<br>\begin{align} D(q \Vert s) = D(q \Vert r) + D(r \Vert s). \end{align}</p>
+<p>The above condition is called <em>orthogonality</em> between $\vec{qr}$ and $\vec{rs}$ [2]. Intuitively, it embodies that the vector formed by densities $q$ and $r$ is orthogonal to the one formed by $r$ and $s$ in the space of probability densities.</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>Kano, Y., &amp; Shimizu, S. (2003). Causal inference using nonnormality. In Proceedings of the international symposium on science of modeling, the 30th anniversary of the information criterion (pp. 261-270).</li>
-<li>Darmois, G. (1953). Analyse générale des liaisons stochastiques: etude particulière de l’analyse factorielle linéaire. Revue de l’Institut international de statistique, 2-8.</li>
-<li>Skitovitch, V. P. (1953). On a property of the normal distribution. DAN SSSR, 89, 217-219.</li>
+<li>Janzing, D., Mooij, J., Zhang, K., Lemeire, J., Zscheischler, J., Daniušis, P., … &amp; Schölkopf, B. (2012). Information-geometric approach to inferring causal directions. Artificial Intelligence, 182, 1-31.</li>
+<li>Amari, S. I. (2001). Information geometry on hierarchy of probability distributions. IEEE transactions on information theory, 47(5), 1701-1711.</li>
 </ol>
 
       
@@ -382,8 +379,6 @@
           
             <a href="/tags/Paper-reading/" rel="tag"># Paper-reading</a>
           
-            <a href="/tags/Math/" rel="tag"># Math</a>
-          
         </div>
       
 
@@ -395,8 +390,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/13/hsic/" rel="next" title="Understanding Hilbert-Schmidt Independence Criterion">
-                <i class="fa fa-chevron-left"></i> Understanding Hilbert-Schmidt Independence Criterion
+              <a href="/2017/12/12/enci/" rel="next" title="Kernel Embedding-based Nonstationary Causal Model Inference">
+                <i class="fa fa-chevron-left"></i> Kernel Embedding-based Nonstationary Causal Model Inference
               </a>
             
           </div>
@@ -404,10 +399,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/07/kebc/" rel="prev" title="Kernel Embedding-Based Clustering">
-                Kernel Embedding-Based Clustering <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -552,7 +543,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-definition"><span class="nav-number">1.</span> <span class="nav-text">Model definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Identifiability"><span class="nav-number">2.</span> <span class="nav-text">Identifiability</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Independence-postulate"><span class="nav-number">1.</span> <span class="nav-text">Independence postulate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Orthogonality-in-information-space"><span class="nav-number">2.</span> <span class="nav-text">Orthogonality in information space</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
@@ -702,9 +693,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://amber0309.github.io/2017/04/12/lingam/';
-          this.page.identifier = '2017/04/12/lingam/';
-          this.page.title = 'Identifiability of Linear non-Gaussian Additive Model';
+          this.page.url = 'http://amber0309.github.io/2018/01/30/igci-2012/';
+          this.page.identifier = '2018/01/30/igci-2012/';
+          this.page.title = 'Theoretical Generalization of Information Geometric Causal Inference';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Seth.disqus.com/embed.js';
