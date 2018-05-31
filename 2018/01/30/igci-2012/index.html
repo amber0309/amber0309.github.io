@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="Reticentor">
 <meta property="og:description" content="This post summarizes the logic of the journal version of Information Geometric Causal Inference [1] .">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-31T08:15:13.655Z">
+<meta property="og:updated_time" content="2018-05-31T08:23:17.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Theoretical Generalization of Information Geometric Causal Inference">
 <meta name="twitter:description" content="This post summarizes the logic of the journal version of Information Geometric Causal Inference [1] .">
@@ -364,10 +364,10 @@
 <p>(iii) Transformed orthogonality:<br>\begin{align}<br>D(P_{X} \Vert \overleftarrow{P}_{X}) = D(P_{X} \Vert U_{X}) + D(U_{Y} \Vert \overleftarrow{P}_{X}).<br>\end{align}</p>
 <p>(iv) Additivity of irregularities:<br>\begin{align}<br>D(P_{Y} \Vert U_{Y}) = D(P_{X} \Vert U_{X}) + D(\overrightarrow{P}_{Y} \Vert U_{Y}). \tag{5}<br>\label{irgl}<br>\end{align}</p>
 <p>(v) Additivity of approximation error:<br>\begin{align}<br>D(P_{X} \Vert \overleftarrow{P}_{X}) = D(P_{Y} \Vert \overrightarrow{P}_{Y}) + D(\overrightarrow{P}_{Y} \Vert U_{Y}).<br>\end{align}</p>
-<p><em>Proof</em> \eqref{irgl} is the one that actually used in practice so I only show its proof here. Since KL-divergence is conserved under bijections, $D(P_{X} \Vert U_{X}) = D(P_{Y} \Vert \overrightarrow{P}_{Y})$. By substitution \eqref{irgl} is obtained.</p>
+<p><em>Proof.</em> \eqref{irgl} is the one that actually used in practice so I only show its proof here. Since KL-divergence is conserved under bijections, $D(P_{X} \Vert U_{X}) = D(P_{Y} \Vert \overrightarrow{P}_{Y})$. By substitution \eqref{irgl} is obtained.</p>
 <p>Using the orthogonality, one can obtain the following violations in the anti-causal direction.</p>
 <p><strong>Theorem 3</strong> <em>(Violations in backward direction)</em> Let $f$ be non-trivial in the sense that the image of $U_{X}$ under $f$ does not coincide with $U_{Y}$. If one condition (and thus all) in Theorem 2 holds, then the corresponding conditions that exchange the role of X and Y are violated with definite sign:<br>\begin{align}<br>&amp; D(P_{X} \Vert \overleftarrow{P}_{X}) + D(\overleftarrow{P}_{X} \Vert U_{X}) &gt; D(P_{X} \Vert U_{X}), \\<br>&amp; \text{Cov}_{U_{Y}}( \log \frac{\overrightarrow{P}_{Y}}{U_{Y}}, \frac{P_{Y}}{U_{Y}}) &gt; 0, \\<br>&amp; D(P_{Y} \Vert U_{Y}) + D(U_{Y} \Vert \overrightarrow{P}_{Y}) &gt; D(P_{Y} \Vert \overrightarrow{P}_{Y}), \\<br>&amp; D(P_{Y} \Vert U_{Y}) + D(\overleftarrow{P}_{X} \Vert U_{X}) &gt; D(P_{X} \Vert U_{X}), \tag{6} \\<br>&amp; D(P_{X} \Vert \overleftarrow{P}_{X}) + D(\overleftarrow{P}_{X} \Vert U_{X}) &gt; D(P_{Y} \Vert\overrightarrow{P}_{Y}), \\<br>\label{anti-cond}<br>\end{align}</p>
-<p><em>Proof</em> (6) corresponds to \eqref{irgl} in Theorem 2. By reordering \eqref{irgl} we have<br>\begin{align}<br>D(P_{X} \Vert U_{X}) &amp; = D(P_{Y} \Vert U_{Y}) - D(\overrightarrow{P}_{Y} \Vert U_{Y}) \\<br>&amp; &lt; D(P_{Y} \Vert U_{Y}) + D(\overleftarrow{P}_{X} \Vert U_{X})<br>\end{align}</p>
+<p><em>Proof.</em> (6) corresponds to \eqref{irgl} in Theorem 2. By reordering \eqref{irgl} we have<br>\begin{align}<br>D(P_{X} \Vert U_{X}) &amp; = D(P_{Y} \Vert U_{Y}) - D(\overrightarrow{P}_{Y} \Vert U_{Y}) \\<br>&amp; &lt; D(P_{Y} \Vert U_{Y}) + D(\overleftarrow{P}_{X} \Vert U_{X})<br>\end{align}</p>
 <p>Q.E.D.</p>
 <h2 id="Causal-inference-method"><a href="#Causal-inference-method" class="headerlink" title="Causal inference method"></a>Causal inference method</h2><p>Observing that \eqref{irgl} implies<br>\begin{align}<br>D(P_{X} \Vert U_{X}) \le D(P_{Y} \Vert U_{Y}),<br>\end{align}</p>
 <p>whenever $X \to Y$ in bijective relations. Therefore the inference method reads:</p>
