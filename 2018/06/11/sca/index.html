@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="Reticence">
 <meta property="og:description" content="This post briefly summarizes the idea of paper Scatter component analysis: A unified framework for domain adaptation and domain generalization [1].">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-11T14:29:43.024Z">
+<meta property="og:updated_time" content="2018-06-11T15:39:16.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understanding Scatter Component Analysis">
 <meta name="twitter:description" content="This post briefly summarizes the idea of paper Scatter component analysis: A unified framework for domain adaptation and domain generalization [1].">
@@ -365,7 +365,7 @@
 <h3 id="Class-scatter"><a href="#Class-scatter" class="headerlink" title="Class scatter"></a>Class scatter</h3><p>For each class $k \in \lbrace 1, \dots, C \rbrace$, let $\mathbb{P}^{l}_{X|k}$ denote the conditional distribution on $\mathcal{X}$ induced by the total labeled domain $\mathbb{P}^{l}_{XY} = \frac{1}{q} \sum^{q}_{j=1} \mathbb{P}^{j}_{XY} $ when $Y=k$ (the number of labeled domains $q$ does not necessarily equal to the number of source domains $m$). The <em>within-class</em> scatter and the <em>between-class</em> scatter are defined as</p>
 <p><strong>Definition 4 (Within-class scatter)</strong><br>\begin{align}<br>\Psi_{\phi}(\mathbb{P}^{l}_{X|k}) := \mathbb{E}_{x \sim \mathbb{P}^{l}_{X|k}} \left[ \Vert \mu_{ \mathbb{P}^{l}_{X|k} } - \phi(x)  \Vert^{2}_{\mathcal{H}} \right].<br>\end{align}</p>
 <p><strong>Definition 5 (Between-class scatter)</strong><br>\begin{align}<br>\Psi \left( \lbrace \mu_{ \mathbb{P}^{l}_{X|k=1} }, \dots, \mu_{ \mathbb{P}^{l}_{X|k=C}} \rbrace \right) :=  \frac{1}{C} \sum^{C}_{k=1} \Vert \bar{\mu}_{ \mathbb{P}^{l}_{X} } - \mu_{ \mathbb{P}^{l}_{X|k} } \Vert^{2},<br>\end{align}</p>
-<p>where $\mu{\mathbb{P}}^{l}_{X} = \frac{1}{C} \sum^{C}_{k=1} \mu_{ \mathbb{P}^{l}_{X|k} }$.</p>
+<p>where $\mu_{\mathbb{P}}^{l}_{X} = \frac{1}{C} \sum^{C}_{k=1} \mu_{ \mathbb{P}^{l}_{X|k} }$.</p>
 <p>Obviously, within-class scatter, which is the expected distance between the mean embedding of each conditional distribution induced by the total label domain and each canonical feature map, is desired to be small. Between-class scatter, which is the expected distance between the mean of those mean embedding of conditional distributions and each one of them, is desired to be large for preserving discriminative power.</p>
 <h2 id="Objective-function"><a href="#Objective-function" class="headerlink" title="Objective function"></a>Objective function</h2><p>From the interpretation of the definitions, total scatter and between-class scatter are expected to be maximized while domain scatter and within-class scatter are expected to be minimized. This leads to the following objective of SCA<br>\begin{align}<br>\text{sup} \frac{ \lbrace \text{total scatter} \rbrace  + \lbrace \text{between-class scatter} \rbrace }{ \lbrace \text{domain scatter} \rbrace  + \lbrace \text{within-class scatter} \rbrace }.<br>\end{align}</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
