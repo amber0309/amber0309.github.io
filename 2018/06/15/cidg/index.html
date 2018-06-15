@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="vD9ZFqXJP5gjavJEuRxzVECXkQfhch-RdbE_wGBDO4w" />
+<meta name="msvalidate.01" content="D575565888CFF91FE870483EAB52BE88" />
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ML,Paper-reading,Embedding," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="This post summarizes the idea of Domain Generalization via Conditional Invariant Representations [1].">
+<meta name="keywords" content="ML,Paper-reading,Embedding">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Understanding Conditional Invariant Domain Generalization">
+<meta property="og:url" content="http://amber0309.github.io/2018/06/15/cidg/index.html">
+<meta property="og:site_name" content="Reticence">
+<meta property="og:description" content="This post summarizes the idea of Domain Generalization via Conditional Invariant Representations [1].">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://amber0309.github.io/2018/06/15/cidg/scatter1.png">
+<meta property="og:image" content="http://amber0309.github.io/2018/06/15/cidg/scatter2.png">
+<meta property="og:updated_time" content="2018-06-15T15:21:50.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Understanding Conditional Invariant Domain Generalization">
+<meta name="twitter:description" content="This post summarizes the idea of Domain Generalization via Conditional Invariant Representations [1].">
+<meta name="twitter:image" content="http://amber0309.github.io/2018/06/15/cidg/scatter1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://amber0309.github.io/2018/06/15/cidg/"/>
+
+
+
+
+
+  <title>Understanding Conditional Invariant Domain Generalization | Reticence</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Reticence</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2018/06/15/cidg/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="__Seth__">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/Fang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reticence">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Understanding Conditional Invariant Domain Generalization</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-15T12:05:31+08:00">
+                2018-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/15/cidg/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/15/cidg/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>This post summarizes the idea of <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16595" target="_blank" rel="noopener">Domain Generalization via Conditional Invariant Representations</a> [1].</p>
+<a id="more"></a>
+<h2 id="Problem-definition"><a href="#Problem-definition" class="headerlink" title="Problem definition"></a>Problem definition</h2><p>Denote $\mathcal{X}$ and $\mathcal{Y}$ as the input feature and label spaces, respectively. A domain defined on $\mathcal{X} \times \mathcal{Y}$ can be represented by a joint probability distribution $\mathbb{P}(X, Y)$. For simplicity, we denote the joint probability distribution $\mathbb{P}^{s}(X, Y)$ of the $s$-th source domain as $\mathbb{P}^{s}$. The domain $\mathbb{P}^{s}$ is associated with a sample $D_{s} = \lbrace x^{s}_{i}, y^{s}_{i} \rbrace^{n^{s}}_{i=1}$, where $(x^{s}_{i}, y^{s}_{i}) \sim \mathbb{P}^{s}$ and $n^{s}$ denotes the sample size of the domain $\mathbb{P}^{s}$. Then we can define domain generalization as follows.</p>
+<p><strong>Definition 1 (Domain generalization)</strong> <em>Given multiple related source domains $\Omega = \lbrace \mathbb{P}^{1}, \mathbb{P}^{2}, \dots, \mathbb{P}^{m} \rbrace$ and each domain is associated with a sample $D_{s} = \lbrace x^{s}_{i}, y^{s}_{i} \rbrace^{ n^{s} }_{i=1} \sim \mathbb{P}^{s}$, where $s = \lbrace 1, 2, \dots, m \rbrace$. The goal of domain generalization is to learn a classification function $f : \mathcal{X} \to \mathcal{Y}$ from source domain datasets $\lbrace D_{s} \rbrace^{m}_{s=1}$ and apply it to an unseen but related target domain $\mathbb{P}^{t}(X, Y)$.</em></p>
+<h2 id="Related-work-and-causal-motivation"><a href="#Related-work-and-causal-motivation" class="headerlink" title="Related work and causal motivation"></a>Related work and causal motivation</h2><p>Domain generalization has been widely applied in classification tasks [2,3,4,5]. Previous work that are closely related to [1] assume that conditional distribution of the labels given the features $\mathbb{P}(Y|X)$ keeps stable or unchanged across domains while the marginal distribution of the features varies in different domains. This is motivated from standard classification perspective. Specifically, $\mathbb{P}(Y|X)$, which models the relation between $X$ and $Y$, is considered to be fixed while the changes in $\mathbb{P}(X)$ stem from some other influences such as selection bias.</p>
+<p>However, the above assumption is too ideal from the causal perspective. A widely believed and adopted postulate in causality, which describes the independence between the cause and the causal mechanism is given below:</p>
+<blockquote>
+<p><strong>Postulate 1 (independence of input and mechanism)</strong> <em>If $X$ causes $Y$ ($X \to Y$), then the marginal distribution of the cause, $\mathbb{P}(X)$, and the conditional distribution of the effect given the cause, $\mathbb{P}(Y|X)$, are “independent” in the sense that $\mathbb{P}(Y|X)$ contains no information about $\mathbb{P}(X)$ and vice versa.</em></p>
+</blockquote>
+<p>In the postulate above, The (causal) conditional $\mathbb{P}(Y|X)$ can be thought of as the mechanism transforming cause $X$ to effect $Y$. Now let us get back to the domain generalization problem. In the typical context, class label $Y$ should be the cause and feature $X$ the effect so $\mathbb{P}(X|Y)$ and $\mathbb{P}(Y)$ are independent. In the anti-causal direction, $\mathbb{P}(Y|X)$ and $\mathbb{P}(X)$ are likely to be correlated or change together since $\mathbb{P}(Y|X)$ also contains certain information about the cause $X$. Therefore, existing methods, which assume $\mathbb{P}(Y|X)$ is fixed and $\mathbb{P}(X)$ varies across domains can be easily violated in reality.</p>
+<p>In [1], the authors assume that $\mathbb{P}(X|Y)$ (the conditional of the effect given the cause) varies across domains while the marginal distribution $\mathbb{P}(Y)$ (the marginal of the cause) keeps stable. This assumption is more reasonable compared with those in previous works.</p>
+<h2 id="Conditional-invariant-domain-generalization-CIDG"><a href="#Conditional-invariant-domain-generalization-CIDG" class="headerlink" title="Conditional invariant domain generalization (CIDG)"></a>Conditional invariant domain generalization (CIDG)</h2><p>CIDG method aims to find a conditional invariant representation $h(X)$ (a linear transformation of the original features) to reduce the variance of the conditional distribution $\mathbb{P}(h(X)|Y)$ across source domains. To achieve this, two regularization terms are proposed.</p>
+<h3 id="Total-scatter-of-class-conditional-distributions"><a href="#Total-scatter-of-class-conditional-distributions" class="headerlink" title="Total scatter of class-conditional distributions"></a>Total scatter of class-conditional distributions</h3><p>Suppose there are $m$ related domains $\lbrace \mathbb{P}^{1}, \mathbb{P}^{2}, \dots, \mathbb{P}^{m} \rbrace$ on $\mathcal{X} \times \mathcal{Y}$. The marginal distribution on $\mathcal{X}$ of the $s$-th domain is denoted as $\mathbb{P}^{s}_{X}$. Suppose the class labels of each domain vary from 1 to $C$. For simplicity, the $j$-th class conditional distribution $\mathbb{P}^{s}(X|Y=j)$ of the $s$-th domain is denoted as $\mathbb{P}^{s}_{j}$. The total scatter of class-conditional distributions across domains can be formulated as:<br>\begin{align}<br>\Phi \left( \lbrace \mu_{\mathbb{P}^{1}_{1}}, \mu_{\mathbb{P}^{1}_{2}}, \dots, \mu_{\mathbb{P}^{m}_{C}} \right) = \sum^{C}_{j=1} \frac{1}{m} \sum^{m}_{s=1} \Vert \mu_{\mathbb{P}^{s}_{j}} - \bar{\mu}_{j} \Vert^{2}_{\mathcal{H}}, \tag{1}<br>\label{eq1}<br>\end{align}</p>
+<p>where $\mu_{\mathbb{P}^{s}_{j}}$ is the mean embedding of $\mathbb{P}^{s}(X|Y=j)$ and $\bar{\mu}_{j} = \frac{1}{m} \sum^{m}_{s=1} \mu_{\mathbb{P}^{s}_{j}}$. $\frac{1}{m} \sum^{m}_{s=1} \Vert \mu_{\mathbb{P}^{s}_{j}} - \bar{\mu}_{j} \Vert^{2}_{\mathcal{H}}$ is called <em>domain scatter</em> in [5] and <em>distributional variance</em> in [2].</p>
+<p>CIDG measures the domain scatter with respect to each class-conditional distribution whereas previous work [5] measures that with respect to the margianal distribution $\mathbb{P}^{s}_{X}$. Obviously, \eqref{eq1} is desired to be minimized. An illustration of scatter of class-conditional distributions is given in the figure below.</p>
+<p><img src="scatter1.png" width="70%" height="70%" align="center"></p>
+<h3 id="Feature-transformation"><a href="#Feature-transformation" class="headerlink" title="Feature transformation"></a>Feature transformation</h3><p>Note that the goal is to find a conditional invariant representation $h(X)$ (a linear transformation of the original features) to reduce the variance of the conditional distribution $\mathbb{P}(h(X)|Y)$ across source domains.</p>
+<p>Denote the feature matrix $\mathbf{X} = [x_{1}, x_{2}, \dots, x_{n}]^{T} \in \mathbb{R}^{n \times d}$ as the data matrix of samples from $m$ source domains, where $d$ is the dimension of the feature space $\mathcal{X}$ and $n = \sum^{m}_{s=1} n^{s}$. Define a set of functions $\boldsymbol{\Phi} = [\phi(x_{1}), \phi(x_{2}), \dots, \phi(x_{n})]^{T}$ related to the feature map $\phi: \mathbb{R}^{d} \to \mathcal{H}$.</p>
+<p>In the feature space, the transformation can be a matrix $\mathbf{W}$ satisfying $h(x) = \mathbf{W}^{T} \phi(x)$. According to [6], $\mathbf{W}$ can be formulated as the linear combination of $\boldsymbol{\Phi}$, i.e., $\mathbf{W} = \boldsymbol{\Phi}^{T} \mathbf{B}$, where coefficient matrix $\mathbf{B} \in \mathbb{R}^{n \times q}$ and $q$ is the dimensionality of the subspace of $h(X)$.</p>
+<h3 id="Scatter-of-class-prior-normalized-marginal-distributions"><a href="#Scatter-of-class-prior-normalized-marginal-distributions" class="headerlink" title="Scatter of class prior-normalized marginal distributions"></a>Scatter of class prior-normalized marginal distributions</h3><p>The scatter of each class-conditional distribution is estimated locally using the samples from that class. When the number of examples in each class is small, it can easily overfit the data. To further improve the estimation accuracy, we propose another regularization term which measures the scatter of class-prior normalized marginal distributions. The new regularization term is able to measure the global distance between all class-conditionals. In the $s$-th domain, the marginal distribution is defined as<br>\begin{align}<br>\mathbb{P}^{s}(X) = \sum^{C}_{j=1} \mathbb{P}^{s}(X|Y=j) \mathbb{P}^{s}(Y=j).<br>\end{align}</p>
+<p>To mitigate the changes in $\mathbb{P}(X)$ induced by different $\mathbb{P}(Y)$, $\mathbb{P}(X)$ is enforced to be uniform. Then the class-prior normalized marginal distribution is defined as:<br>\begin{align}<br>\mathbb{P}^{s}_{N}(X) = \sum^{C}_{j=1} \mathbb{P}^{s}(X|Y=j) \frac{1}{C}.<br>\end{align}</p>
+<p>The scatter of the normalized marginal distribution across domains can be formulated as:<br>\begin{align}<br>\Psi^{prior} = \frac{1}{m} \sum^{m}_{s=1} \Vert \bar{\mu}_{N} - \mu_{ \mathbb{P}^{s}_{N} } \Vert^{2}_{\mathcal{H}}, \tag{2}<br>\label{eq2}<br>\end{align}</p>
+<p>where $\mu_{ \mathbb{P}^{s}_{N} }$ is the mean embedding of $\mathbb{P}^{s}_{N}(X)$ and $\bar{\mu}_{N} = \frac{1}{m} \sum^{m}_{s=1} \mu_{ \mathbb{P}^{s}_{N} }$.</p>
+<p>When $\mathbb{P}(X|Y)$ is domain-invariant, same prior $\mathbb{P}(Y)$ ensures that $\mathbb{P}(X)$ is also domain invariant. Therefore, \eqref{eq2} measures the difference across the marginal distributions $\mathbb{P}(X)$ and is desired to be minimized. An illustration of scatter of class prior-normalized marginal distributions is given in the figure below.</p>
+<p><img src="scatter2.png" width="70%" height="70%" align="center"></p>
+<h3 id="Preserving-discriminative-power"><a href="#Preserving-discriminative-power" class="headerlink" title="Preserving discriminative power"></a>Preserving discriminative power</h3><p>Another two terms ($\boldsymbol{\Phi}^{between}_{\mathbf{B}}$ and $\boldsymbol{\Phi}^{within}_{\mathbf{B}}$) are included in the objective function to help preserve the discriminative power. Specifically, the examples with the same label should be similar and the examples with different labels should be well separated. The explicit definitions of them are omitted since the same terms were already used in [5].</p>
+<h3 id="Objective-function"><a href="#Objective-function" class="headerlink" title="Objective function"></a>Objective function</h3><p>The objective of CIDG is:<br>\begin{align}<br>\arg \max_{\mathbf{B}} \frac{ \boldsymbol{\Phi}^{between} }{ \boldsymbol{\Phi}^{con} + \boldsymbol{\Phi}^{prior} + \boldsymbol{\Phi}^{within} }.<br>\end{align}</p>
+<p>It is solved by reformulating as a constrained optimization problem and then finding the optimum using Lagrange multipliers.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li>Li, Y., Gong, M., Tian, X., Liu, T &amp; Tao, D. (2018, February). Domain generalization via conditional invariant representations. In AAAI.</li>
+<li>Muandet, K., Balduzzi, D., &amp; Schölkopf, B. (2013, February). Domain generalization via invariant feature representation. In International Conference on Machine Learning (pp. 10-18).</li>
+<li>Xu, Z., Li, W., Niu, L., &amp; Xu, D. (2014, September). Exploiting low-rank structure from latent domains for domain generalization. In European Conference on Computer Vision (pp. 628-643). Springer, Cham.</li>
+<li>Erfani, S., Baktashmotlagh, M., Moshtaghi, M., Nguyen, V., Leckie, C., Bailey, J., &amp; Kotagiri, R. (2016). Robust domain generalisation by enforcing distribution invariance. In Proceedings of the Twenty-Fifth International Joint Conference on Artificial Intelligence (pp. 1455-1461). AAAI Press/International Joint Conferences on Artificial Intelligence.</li>
+<li>Ghifary, M., Balduzzi, D., Kleijn, W. B., &amp; Zhang, M. (2017). Scatter component analysis: A unified framework for domain adaptation and domain generalization. IEEE transactions on pattern analysis and machine intelligence, 39(7), 1414-1430.</li>
+<li>Schölkopf, B., Smola, A., &amp; Müller, K. R. (1998). Nonlinear component analysis as a kernel eigenvalue problem. Neural computation, 10(5), 1299-1319.</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/Paper-reading/" rel="tag"># Paper-reading</a>
+          
+            <a href="/tags/Embedding/" rel="tag"># Embedding</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/11/sca/" rel="next" title="Understanding Scatter Component Analysis">
+                <i class="fa fa-chevron-left"></i> Understanding Scatter Component Analysis
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/Fang.jpg"
+               alt="__Seth__" />
+          <p class="site-author-name" itemprop="name">__Seth__</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/amber0309" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-definition"><span class="nav-number">1.</span> <span class="nav-text">Problem definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-work-and-causal-motivation"><span class="nav-number">2.</span> <span class="nav-text">Related work and causal motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conditional-invariant-domain-generalization-CIDG"><span class="nav-number">3.</span> <span class="nav-text">Conditional invariant domain generalization (CIDG)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Total-scatter-of-class-conditional-distributions"><span class="nav-number">3.1.</span> <span class="nav-text">Total scatter of class-conditional distributions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature-transformation"><span class="nav-number">3.2.</span> <span class="nav-text">Feature transformation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scatter-of-class-prior-normalized-marginal-distributions"><span class="nav-number">3.3.</span> <span class="nav-text">Scatter of class prior-normalized marginal distributions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Preserving-discriminative-power"><span class="nav-number">3.4.</span> <span class="nav-text">Preserving discriminative power</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Objective-function"><span class="nav-number">3.5.</span> <span class="nav-text">Objective function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">4.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">__Seth__</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Seth.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://amber0309.github.io/2018/06/15/cidg/';
+          this.page.identifier = '2018/06/15/cidg/';
+          this.page.title = 'Understanding Conditional Invariant Domain Generalization';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Seth.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
