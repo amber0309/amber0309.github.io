@@ -93,20 +93,20 @@
 
 
 
-<meta name="description" content="This post summarizes the idea of Domain Generalization via Conditional Invariant Representations [1].">
+<meta name="description" content="This post summarizes paper Domain Generalization via Conditional Invariant Representations [1].">
 <meta name="keywords" content="ML,Paper-reading,Embedding">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Understanding Conditional Invariant Domain Generalization">
 <meta property="og:url" content="http://amber0309.github.io/2018/06/15/cidg/index.html">
 <meta property="og:site_name" content="Reticence">
-<meta property="og:description" content="This post summarizes the idea of Domain Generalization via Conditional Invariant Representations [1].">
+<meta property="og:description" content="This post summarizes paper Domain Generalization via Conditional Invariant Representations [1].">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://amber0309.github.io/2018/06/15/cidg/scatter1.png">
 <meta property="og:image" content="http://amber0309.github.io/2018/06/15/cidg/scatter2.png">
-<meta property="og:updated_time" content="2018-06-15T15:21:50.019Z">
+<meta property="og:updated_time" content="2018-06-15T16:04:21.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understanding Conditional Invariant Domain Generalization">
-<meta name="twitter:description" content="This post summarizes the idea of Domain Generalization via Conditional Invariant Representations [1].">
+<meta name="twitter:description" content="This post summarizes paper Domain Generalization via Conditional Invariant Representations [1].">
 <meta name="twitter:image" content="http://amber0309.github.io/2018/06/15/cidg/scatter1.png">
 
 
@@ -353,7 +353,7 @@
       
 
       
-        <p>This post summarizes the idea of <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16595" target="_blank" rel="noopener">Domain Generalization via Conditional Invariant Representations</a> [1].</p>
+        <p>This post summarizes paper <a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16595" target="_blank" rel="noopener">Domain Generalization via Conditional Invariant Representations</a> [1].</p>
 <a id="more"></a>
 <h2 id="Problem-definition"><a href="#Problem-definition" class="headerlink" title="Problem definition"></a>Problem definition</h2><p>Denote $\mathcal{X}$ and $\mathcal{Y}$ as the input feature and label spaces, respectively. A domain defined on $\mathcal{X} \times \mathcal{Y}$ can be represented by a joint probability distribution $\mathbb{P}(X, Y)$. For simplicity, we denote the joint probability distribution $\mathbb{P}^{s}(X, Y)$ of the $s$-th source domain as $\mathbb{P}^{s}$. The domain $\mathbb{P}^{s}$ is associated with a sample $D_{s} = \lbrace x^{s}_{i}, y^{s}_{i} \rbrace^{n^{s}}_{i=1}$, where $(x^{s}_{i}, y^{s}_{i}) \sim \mathbb{P}^{s}$ and $n^{s}$ denotes the sample size of the domain $\mathbb{P}^{s}$. Then we can define domain generalization as follows.</p>
 <p><strong>Definition 1 (Domain generalization)</strong> <em>Given multiple related source domains $\Omega = \lbrace \mathbb{P}^{1}, \mathbb{P}^{2}, \dots, \mathbb{P}^{m} \rbrace$ and each domain is associated with a sample $D_{s} = \lbrace x^{s}_{i}, y^{s}_{i} \rbrace^{ n^{s} }_{i=1} \sim \mathbb{P}^{s}$, where $s = \lbrace 1, 2, \dots, m \rbrace$. The goal of domain generalization is to learn a classification function $f : \mathcal{X} \to \mathcal{Y}$ from source domain datasets $\lbrace D_{s} \rbrace^{m}_{s=1}$ and apply it to an unseen but related target domain $\mathbb{P}^{t}(X, Y)$.</em></p>
