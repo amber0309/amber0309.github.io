@@ -102,7 +102,7 @@
 <meta property="og:description" content="This post shows two different derivations of the variational lower bound. Source link: Xitong Yang’s Blog">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://amber0309.github.io/2018/02/05/elbo/mdl.png">
-<meta property="og:updated_time" content="2018-06-17T14:40:42.506Z">
+<meta property="og:updated_time" content="2018-06-17T14:51:01.971Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fwd. Understanding the Variational Lower Bound">
 <meta name="twitter:description" content="This post shows two different derivations of the variational lower bound. Source link: Xitong Yang’s Blog">
@@ -358,7 +358,7 @@
 <a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Variational Bayesian (VB) Methods are a family of techniques that are very popular in statistical machine learning. One powerful feature of VB methods is the inference-optimization duality [1]: we can view statistical inference problems (i.e. infer the value of a random variable given the value of another random variable) as optimization problems (i.e. find the parameter values that minimize some objective function). Furthermore, the <em>variational lower bound</em>, also called <em>evidence lower bound</em> (ELBO), plays an essential role in the VB derivations. In this note, we aim to introduce the basic ideas of variational lower bound, which can help to understand the derivations of the learning rules in the papers related to “hard attention” mechanism [2, 3, 4, 5].</p>
 <h2 id="Variational-Lower-Bound"><a href="#Variational-Lower-Bound" class="headerlink" title="Variational Lower Bound"></a>Variational Lower Bound</h2><h3 id="Problem-setup"><a href="#Problem-setup" class="headerlink" title="Problem setup"></a>Problem setup</h3><p>Assume that $X$ are observations (data) and $Z$ are hidden variables. Note that we are general – the hidden variables might include the “parameters”. The relationship of these two variables can be represented using the following graphical model.</p>
-<p><img src="mdl.png" width="70%" height="70%" align="center"></p>
+<p><img src="mdl.png" width="35%" height="35%" align="center"></p>
 <p>Moreover, uppercase $P(X)$ denotes the probability distribution over that variable, and lowercase $p(X)$ is the density function of the distribution of $X$. The posterior distribution of the hidden variables can then be written as follows using the <em>Bayes’ Theorem</em>.</p>
 <p>\begin{align}<br>p(Z|X) = \frac{ p(X|Z) p(Z) }{ p(X) } = \frac{ p(X|Z) p(Z) }{ \int_{Z} p(X,Z) }.<br>\end{align}</p>
 <h3 id="First-derivation-the-Jensen’s-inequality"><a href="#First-derivation-the-Jensen’s-inequality" class="headerlink" title="First derivation: the Jensen’s inequality"></a>First derivation: the Jensen’s inequality</h3><p>Starting from the log probability of the observations (the marginal probability of $X$), we have:</p>
