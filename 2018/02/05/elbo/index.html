@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="vD9ZFqXJP5gjavJEuRxzVECXkQfhch-RdbE_wGBDO4w" />
+<meta name="msvalidate.01" content="D575565888CFF91FE870483EAB52BE88" />
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ML,Probabilistic-model," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="This post shows two different derivations of the variational lower bound. Source link: Xitong Yang’s Blog  IntroductionVariational Bayesian (VB) Methods are a family of techniques that are very popula">
+<meta name="keywords" content="ML,Probabilistic-model">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fwd. Understanding the Variational Lower Bound">
+<meta property="og:url" content="http://amber0309.github.io/2018/02/05/elbo/index.html">
+<meta property="og:site_name" content="Reticence">
+<meta property="og:description" content="This post shows two different derivations of the variational lower bound. Source link: Xitong Yang’s Blog  IntroductionVariational Bayesian (VB) Methods are a family of techniques that are very popula">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-06-17T13:39:38.370Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fwd. Understanding the Variational Lower Bound">
+<meta name="twitter:description" content="This post shows two different derivations of the variational lower bound. Source link: Xitong Yang’s Blog  IntroductionVariational Bayesian (VB) Methods are a family of techniques that are very popula">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://amber0309.github.io/2018/02/05/elbo/"/>
+
+
+
+
+
+  <title>Fwd. Understanding the Variational Lower Bound | Reticence</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Reticence</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2018/02/05/elbo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="__Seth__">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/Fang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reticence">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Fwd. Understanding the Variational Lower Bound</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-05T20:42:40+08:00">
+                2018-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/05/elbo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/02/05/elbo/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>This post shows two different derivations of the variational lower bound.</p>
+<p>Source link: <a href="https://xyang35.github.io/2017/04/14/variational-lower-bound/#xu2015show" target="_blank" rel="noopener">Xitong Yang’s Blog
+</a></p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Variational Bayesian (VB) Methods are a family of techniques that are very popular in statistical machine learning. One powerful feature of VB methods is the inference-optimization duality [1]: we can view statistical inference problems (i.e. infer the value of a random variable given the value of another random variable) as optimization problems (i.e. find the parameter values that minimize some objective function). Furthermore, the <em>variational lower bound</em>, also called <em>evidence lower bound</em> (ELBO), plays an essential role in the VB derivations. In this note, we aim to introduce the basic ideas of variational lower bound, which can help to understand the derivations of the learning rules in the papers related to “hard attention” mechanism [2, 3, 4, 5].</p>
+<h2 id="Variational-Lower-Bound"><a href="#Variational-Lower-Bound" class="headerlink" title="Variational Lower Bound"></a>Variational Lower Bound</h2><h3 id="Problem-setup"><a href="#Problem-setup" class="headerlink" title="Problem setup"></a>Problem setup</h3><p>Assume that $X$ are observations (data) and $Z$ are hidden variables. Note that we are general – the hidden variables might include the “parameters”. The relationship of these two variables can be represented using the following graphical model.</p>
+<p>Moreover, uppercase $P(X)$ denotes the probability distribution over that variable, and lowercase $p(X)$ is the density function of the distribution of $X$. The posterior distribution of the hidden variables can then be written as follows using the <em>Bayes’ Theorem</em>.</p>
+<p>\begin{align}<br>p(Z|X) = \frac{ p(X|Z) p(Z) }{ p(X) } = \frac{ p(X|Z) p(Z) }{ \int_{Z} p(X,Z) }.<br>\end{align}</p>
+<h3 id="First-derivation-the-Jensen’s-inequality"><a href="#First-derivation-the-Jensen’s-inequality" class="headerlink" title="First derivation: the Jensen’s inequality"></a>First derivation: the Jensen’s inequality</h3><p>Starting from the log probability of the observations (the marginal probability of $X$), we have:</p>
+<p>\begin{align}<br>\log p(X) &amp; = \log \int_{Z} p(X,Z) \\<br>&amp; = \log \int_{Z} p(X,Z) \frac{q(Z)}{q(Z)} \\<br>&amp; = \log \left( \mathbb{E}_{q} \left[ \frac{p(X,Z)}{q(Z)} \right] \right) \\<br>&amp; \ge \mathbb{E}_{q} \left[ \frac{p(X,Z)}{q(Z)} \right] \tag{1} \\<br>&amp; = \mathbb{E}_{q} \left[ \log p(X,Z) \right] + H[Z]. \tag{2}<br>\end{align}</p>
+<p>(2) is the variational lower bound, also called ELBO.</p>
+<p>The $q(Z)$ is a distribution we use to approximation the true posterior distribution p(Z|X) in VB. For here, we can view it as an arbitrary distribution and the derivations still hold. (1) is derived by applying the Jensen’s inequality $f( \mathbb{E}[X] ) \le \mathbb{E}[f(X)]$ for the concave log function. $H[Z]=−\mathbb{E}_{q}[\log q(Z)] is the Shannon entropy.</p>
+<p>Denote $L = \mathbb{E}_{q} \left[ \log p(X,Z) \right] + H(Z)$. It is obvious that $L$ is a lower bound of the log probability of the observations. As a result, if in some cases we want to maximize the marginal probability, we can instead maximize its variational lower bound $L$.</p>
+<h3 id="Second-derivation-KL-divergence"><a href="#Second-derivation-KL-divergence" class="headerlink" title="Second derivation: KL divergence"></a>Second derivation: KL divergence</h3><p>In previous section, we did not pay much attention on the distribution $p(Z)$. However, this distribution $p(Z)$ is actually the core motivation of the VB methods. In many cases, the computation of the posterior distribution $p(Z|X)$ is always intractable. For example, we need to integrate (sum up) all configurations of the hidden variables in order to computer the denominator.</p>
+<p>The main idea behind variational methods is: to find some <em>approximation</em> distributions $q(Z)$ that are as closed as possible to the true posterior distribution $p(Z|X)$. These approximation distribution can have their own variational parameters: $q(Z|\theta)$, and we try to find the setting of the parameters that make $q$ close to the posterior of interest. Obviously the distribution $q(Z)$ should be relatively easy and more tractable for inference.</p>
+<p>To measure the closeness of the two distribution $q(Z)$ and $p(Z|X)$, a common metric is the Kullback-Leibler (KL) divergence. The KL divergence for variational inference is:</p>
+<p>\begin{align}<br>KL\left[ q(Z) \Vert p(Z|X) \right] &amp; = \int_{Z} q(Z) \log \frac{q(Z)}{p(Z|X)} \\<br>&amp; = - \int_{Z} q(Z) \log \frac{ p(Z|X) }{ q(Z) } \\<br>&amp; = - \left( \int_{Z} q(Z) \log \frac{ p(X,Z) }{ q(Z) } - \int_{Z} q(Z) \log p(X) \right) \\<br>&amp; = - \int_{Z} q(Z) \log \frac{ p(X,Z) }{ q(Z) } + \log p(X) \int_{Z} q(Z) \\<br>&amp; = -L + \log p(X),<br>\end{align}</p>
+<p>where $L$ is the variational lower bound defined above. The last equality is obtained by the normalization constraint: $\int_{Z} q(Z) = 1$. Rearrange the equations we have:</p>
+<p>\begin{align}<br>L = \log p(X) - KL\left[ q(Z) \Vert p(Z|X) \right].<br>\end{align}</p>
+<p>As KL divergence is always $\ge 0$, once again we get $L \le \log p(X)$ is a lower bound of the log probability of observations. And we also know the difference between them is exactly the KL divergence of the approximation and true distribution. In others words, the lower bound $L$ hits the log probability <em>iff</em> the approximation distribution is perfectly closed to the true posterior distribution.</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><h3 id="Multiple-Object-Recognition-with-Visual-Attention"><a href="#Multiple-Object-Recognition-with-Visual-Attention" class="headerlink" title="Multiple Object Recognition with Visual Attention"></a>Multiple Object Recognition with Visual Attention</h3><p>Now, we can use our understanding of the variational lower bound to deduce the learning rules in practical problems. We use the paper [2] as an example.</p>
+<p>First of all, we want to maximize the log likelihood of the class label: $\log p(y|I,W)$. Here $I$ is the image, $W$ is the model parameters and $y$ is the class label, which can be viewed as an observable variable. Then, the objective function above can be rewritten by marginalizing over the locations $l$ (hidden variables):</p>
+<p>\begin{align}<br>\log p(y|I,W) = \log \sum_{l} p(l|I,W) p(y|l,I,W).<br>\end{align}</p>
+<p>We can obtained its lower bound directly using Jensen’s inequality:</p>
+<p>\begin{align}<br>\log \sum_{l} p(l|I,W) p(y|l,I,W) \ge \sum_{l} \sum_{l} p(l|I,W) \log p(y|l,I,W).<br>\end{align}</p>
+<p>We can also get the same result using the variational lower bound of the marginal probability of observations and setting $q(l)=p(l|I,W)$:</p>
+<p>\begin{align}<br>\log p(y|I,W) \ge \sum_{l} q(l) \log \frac{ p(y,l|I,W) }{q(l)} = \sum_{l} p(l|I,W) \log p(y|l,I,W).<br>\end{align}</p>
+<p>Then, we can maximize the variational lower bound instead by taking derivatives of it with respect to the model parameter $W$. Almost the same derivations are also used in [4].</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In this note, we introduce what variational lower bound is and its role in VB methods. We deduce the variational lower bound in two different ways and provide clear ideas about its relationship with other entities. We also go through a concrete exampling showing how to use the variational lower bound to obtain practical learning rules, which is very useful for understanding related papers.</p>
+<h2 id="Acknowledgement"><a href="#Acknowledgement" class="headerlink" title="Acknowledgement"></a>Acknowledgement</h2><p>This note is a reading note that borrows many ideas from the following papers or posts [1, 6, 7, 8, 9].</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li>E. Jang. A Beginner’s Guide to Variational Methods: Mean-Field Approximation. <a href="http://blog.evjang.com/2016/08/variational-bayes.html" target="_blank" rel="noopener">http://blog.evjang.com/2016/08/variational-bayes.html</a>, 2016.</li>
+<li>Ba, J., Mnih, V., &amp; Kavukcuoglu, K. (2014). Multiple object recognition with visual attention. arXiv preprint arXiv:1412.7755.</li>
+<li>Lei, T., Barzilay, R., &amp; Jaakkola, T. (2016). Rationalizing neural predictions. arXiv preprint arXiv:1606.04155.</li>
+<li>Xu, K., Ba, J., Kiros, R., Cho, K., Courville, A., Salakhudinov, R., … &amp; Bengio, Y. (2015, June). Show, attend and tell: Neural image caption generation with visual attention. In International Conference on Machine Learning (pp. 2048-2057).</li>
+<li>Mnih, V., Heess, N., &amp; Graves, A. (2014). Recurrent models of visual attention. In Advances in neural information processing systems (pp. 2204-2212).</li>
+<li>D. M. Blei. Variational inference. Lecture from Princeton, variational inference, 2011.</li>
+<li>Fox, C. W., &amp; Roberts, S. J. (2012). A tutorial on variational Bayesian inference. Artificial intelligence review, 38(2), 85-95.</li>
+<li>Tzikas, D. G., Likas, A. C., &amp; Galatsanos, N. P. (2008). The variational approximation for Bayesian inference. IEEE Signal Processing Magazine, 25(6), 131-146.</li>
+<li>Z. Ghahramani. Variational methods. Lecture from CMU, Statistical Approaches to Learning and Discovery, 2003.</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/Probabilistic-model/" rel="tag"># Probabilistic-model</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/30/igci-2012/" rel="next" title="Generalized Derivation of Information Geometric Causal Inference">
+                <i class="fa fa-chevron-left"></i> Generalized Derivation of Information Geometric Causal Inference
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/11/sca/" rel="prev" title="Understanding Scatter Component Analysis">
+                Understanding Scatter Component Analysis <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/Fang.jpg"
+               alt="__Seth__" />
+          <p class="site-author-name" itemprop="name">__Seth__</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/amber0309" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variational-Lower-Bound"><span class="nav-number">2.</span> <span class="nav-text">Variational Lower Bound</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-setup"><span class="nav-number">2.1.</span> <span class="nav-text">Problem setup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#First-derivation-the-Jensen’s-inequality"><span class="nav-number">2.2.</span> <span class="nav-text">First derivation: the Jensen’s inequality</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Second-derivation-KL-divergence"><span class="nav-number">2.3.</span> <span class="nav-text">Second derivation: KL divergence</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">3.</span> <span class="nav-text">Example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiple-Object-Recognition-with-Visual-Attention"><span class="nav-number">3.1.</span> <span class="nav-text">Multiple Object Recognition with Visual Attention</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Acknowledgement"><span class="nav-number">5.</span> <span class="nav-text">Acknowledgement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">__Seth__</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Seth.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://amber0309.github.io/2018/02/05/elbo/';
+          this.page.identifier = '2018/02/05/elbo/';
+          this.page.title = 'Fwd. Understanding the Variational Lower Bound';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Seth.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
