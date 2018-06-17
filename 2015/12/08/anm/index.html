@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="Reticence">
 <meta property="og:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-13T10:09:48.603Z">
+<meta property="og:updated_time" content="2018-06-17T05:33:43.874Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understanding Additive Noise Model">
 <meta name="twitter:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
@@ -366,14 +366,17 @@
 <p>It is hard for me to grasp the infomation Eq. (\ref{condition}) conveys. By now my personal interpretation of it is that only by fulfilling such a <em>complicated</em> and <em>stange</em> differential equation can the backward model exist. Therefore, one may say that the model that is identifiable is <em>typically</em> the case, however, not always.</p>
 <h2 id="Causal-inference"><a href="#Causal-inference" class="headerlink" title="Causal inference"></a>Causal inference</h2><p>The inference procedure is very intuitive. Consider $X$ and $Y$ which are statistically dependent,</p>
 <ol>
-<li>test whether the data fits the model $Y=f(X)+\epsilon$ by <ul>
+<li><p>test whether the data fits the model $Y=f(X)+\epsilon$ by</p>
+<ul>
 <li>doing nonlinear regression of $Y$ on $X$;</li>
 <li>computing the corresponding residuals $\hat{\epsilon}$;</li>
 <li>testing whether $\hat{\epsilon}$ is independent of $X$.</li>
 </ul>
 </li>
-<li>test whether the data fits the backward model $X=g(Y) + \varepsilon$ similarly.</li>
-<li>conclude the inference result<ul>
+<li><p>test whether the data fits the backward model $X=g(Y) + \varepsilon$ similarly.</p>
+</li>
+<li><p>conclude the inference result</p>
+<ul>
 <li>cannot infer the direction if both models are accepted or rejected;</li>
 <li>$X \to Y$, if only $Y=f(X)+\epsilon$ is accepted;</li>
 <li>$Y \to X$, if only $X=g(Y) + \varepsilon$ is accepted.</li>
