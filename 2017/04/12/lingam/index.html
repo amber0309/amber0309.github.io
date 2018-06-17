@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="This post shows the proof of the identifiability of Linear non-Gaussian Additive Model.[1]">
+<meta name="description" content="This post shows the proof of the identifiability of Linear non-Gaussian Additive Model. [1]">
 <meta name="keywords" content="ML,Causality,Paper-reading,Math">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Identifiability of Linear non-Gaussian Additive Model">
 <meta property="og:url" content="http://amber0309.github.io/2017/04/12/lingam/index.html">
 <meta property="og:site_name" content="Reticence">
-<meta property="og:description" content="This post shows the proof of the identifiability of Linear non-Gaussian Additive Model.[1]">
+<meta property="og:description" content="This post shows the proof of the identifiability of Linear non-Gaussian Additive Model. [1]">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-17T05:40:24.944Z">
+<meta property="og:updated_time" content="2018-06-17T17:15:08.193Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Identifiability of Linear non-Gaussian Additive Model">
-<meta name="twitter:description" content="This post shows the proof of the identifiability of Linear non-Gaussian Additive Model.[1]">
+<meta name="twitter:description" content="This post shows the proof of the identifiability of Linear non-Gaussian Additive Model. [1]">
 
 
 
@@ -350,14 +350,14 @@
       
 
       
-        <p>This post shows the proof of the identifiability of <a href="http://www.ar.sanken.osaka-u.ac.jp/~sshimizu/papers/aic30_web2.pdf" target="_blank" rel="noopener">Linear non-Gaussian Additive Model</a>.[1]</p>
+        <p>This post shows the proof of the identifiability of <a href="http://www.ar.sanken.osaka-u.ac.jp/~sshimizu/papers/aic30_web2.pdf" target="_blank" rel="noopener">Linear non-Gaussian Additive Model</a>. <a href="#1">[1]</a></p>
 <a id="more"></a>
 <h2 id="Model-definition"><a href="#Model-definition" class="headerlink" title="Model definition"></a>Model definition</h2><p>Let $X$ be the cause and $Y$ be effect ($X \to Y$) without loss of generality. The causal realtion between them is given by<br>\begin{align}<br>Y = a X + \epsilon, \tag{1}<br>\label{df}<br>\end{align}</p>
-<p>where $a$ is a constant coefficient and $\epsilon$ is a non-Gaussian noise which is independent of $X$. The model in \eqref{df} is called Linear non-Gaussian Additive Model (LiNGAM).[1]</p>
+<p>where $a$ is a constant coefficient and $\epsilon$ is a non-Gaussian noise which is independent of $X$. The model in \eqref{df} is called Linear non-Gaussian Additive Model (LiNGAM).<a href="#1">[1]</a></p>
 <h2 id="Identifiability"><a href="#Identifiability" class="headerlink" title="Identifiability"></a>Identifiability</h2><p>Showing the identifiablity of a causal model is actually exploiting its <em>cause-effect asymmetry</em>, which means the property that holds only in the true causal direction and is violated in the anti-causal direction, from the given model. Causal models with cause-effect asymmetry are said to be <em>identifiable</em>.</p>
 <p>The identifiability of LiNGAM is proved using Darmois - Skitovitch theorem, which reads,</p>
 <blockquote>
-<p><strong>Darmois-Skitovitch theorem (D-S Theorem)</strong> [2,3] <em>Define two random variables $L_{1}$ and $L_{2}$ as linear combinations of independent random variables $s_{i}, (i=1, …, q)$:</em><br>\begin{align}<br>L_{1} = \sum_{i=1}^{q} \alpha_{i} s_{i}, \quad L_{2} = \sum_{i=1}^{q} \beta_{i} s_{i},<br>\end{align}</p>
+<p><strong>Darmois-Skitovitch theorem (D-S Theorem)</strong> <a href="#2">[2]</a> <a href="#3">[3]</a> <em>Define two random variables $L_{1}$ and $L_{2}$ as linear combinations of independent random variables $s_{i}, (i=1, …, q)$:</em><br>\begin{align}<br>L_{1} = \sum_{i=1}^{q} \alpha_{i} s_{i}, \quad L_{2} = \sum_{i=1}^{q} \beta_{i} s_{i},<br>\end{align}</p>
 <p><em>where $\alpha_{i}$ and $\beta_{i}$ are constant coefficients. Then, if $L_{1}$ and $L_{2}$ are independent, all variables $s_{j}$  for which $\alpha_{j} \beta_{j} \neq 0$ are Gaussian.</em></p>
 </blockquote>
 <p>In other words, this theorem means that if there exists a non-Gaussian $s_{j}$ for which $\alpha_{j} \beta_{j} \neq 0$, $L_{1}$ and $L_{2}$ are dependent.</p>
@@ -366,9 +366,9 @@
 <p>It is obvious that both $L_{1}$ and $L_{2}$ can be written as a linear combination of $s_{1}$ and $s_{2}$, i.e.<br>\begin{align}<br>L_{1} &amp; = a s_{1} + s_{2} \\<br>L_{2} &amp; = (1 - ba)s_{1} -b s_{2}<br>\end{align}</p>
 <p>Since $s_{2}$ is non-Gaussian, $L_{1}$ and $L_{2}$ will be dependent according to D-S theorem as long as $b \neq 0$, which is ensured by the existence of the causal relation between $X$ and $Y$. Thus, we conclude that the cause and the noise in the backward model will be dependent if the forward model follows a LiNGAM. This asymmetry of LiNGAM allows us to infer its causal direction.</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>Kano, Y., &amp; Shimizu, S. (2003). Causal inference using nonnormality. In Proceedings of the international symposium on science of modeling, the 30th anniversary of the information criterion (pp. 261-270).</li>
-<li>Darmois, G. (1953). Analyse générale des liaisons stochastiques: etude particulière de l’analyse factorielle linéaire. Revue de l’Institut international de statistique, 2-8.</li>
-<li>Skitovitch, V. P. (1953). On a property of the normal distribution. DAN SSSR, 89, 217-219.</li>
+<li><a name="1"></a> Kano, Y., &amp; Shimizu, S. (2003). Causal inference using nonnormality. In Proceedings of the international symposium on science of modeling, the 30th anniversary of the information criterion (pp. 261-270).</li>
+<li><a name="2"></a> Darmois, G. (1953). Analyse générale des liaisons stochastiques: etude particulière de l’analyse factorielle linéaire. Revue de l’Institut international de statistique, 2-8.</li>
+<li><a name="3"></a> Skitovitch, V. P. (1953). On a property of the normal distribution. DAN SSSR, 89, 217-219.</li>
 </ol>
 
       
