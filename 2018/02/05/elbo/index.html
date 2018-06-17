@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="Reticence">
 <meta property="og:description" content="This post shows two different derivations of the variational lower bound. Source link: Xitong Yang’s Blog">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-17T13:47:58.267Z">
+<meta property="og:updated_time" content="2018-06-17T13:53:42.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fwd. Understanding the Variational Lower Bound">
 <meta name="twitter:description" content="This post shows two different derivations of the variational lower bound. Source link: Xitong Yang’s Blog">
@@ -361,7 +361,7 @@
 <h3 id="First-derivation-the-Jensen’s-inequality"><a href="#First-derivation-the-Jensen’s-inequality" class="headerlink" title="First derivation: the Jensen’s inequality"></a>First derivation: the Jensen’s inequality</h3><p>Starting from the log probability of the observations (the marginal probability of $X$), we have:</p>
 <p>\begin{align}<br>\log p(X) &amp; = \log \int_{Z} p(X,Z) \\<br>&amp; = \log \int_{Z} p(X,Z) \frac{q(Z)}{q(Z)} \\<br>&amp; = \log \left( \mathbb{E}_{q} \left[ \frac{p(X,Z)}{q(Z)} \right] \right) \\<br>&amp; \ge \mathbb{E}_{q} \left[ \frac{p(X,Z)}{q(Z)} \right] \tag{1} \label{eq1} \\<br>&amp; = \mathbb{E}_{q} \left[ \log p(X,Z) \right] + H[Z]. \tag{2} \label{eq2}<br>\end{align}</p>
 <p>\eqref{eq2} is the variational lower bound, also called ELBO.</p>
-<p>The $q(Z)$ is a distribution we use to approximation the true posterior distribution p(Z|X) in VB. For here, we can view it as an arbitrary distribution and the derivations still hold. \eqref{eq1} is derived by applying the Jensen’s inequality $f( \mathbb{E}[X] ) \le \mathbb{E}[f(X)]$ for the concave log function. $H[Z]=−\mathbb{E}_{q}[\log q(Z)] is the Shannon entropy.</p>
+<p>The $q(Z)$ is a distribution we use to approximation the true posterior distribution $p(Z|X)$ in VB. For here, we can view it as an arbitrary distribution and the derivations still hold. \eqref{eq1} is derived by applying the Jensen’s inequality $f( \mathbb{E}[X] ) \le \mathbb{E}[f(X)]$ for the concave log function. $H[Z]=−\mathbb{E}_{q}[\log q(Z)]$ is the Shannon entropy.</p>
 <p>Denote $L = \mathbb{E}_{q} \left[ \log p(X,Z) \right] + H(Z)$. It is obvious that $L$ is a lower bound of the log probability of the observations. As a result, if in some cases we want to maximize the marginal probability, we can instead maximize its variational lower bound $L$.</p>
 <h3 id="Second-derivation-KL-divergence"><a href="#Second-derivation-KL-divergence" class="headerlink" title="Second derivation: KL divergence"></a>Second derivation: KL divergence</h3><p>In previous section, we did not pay much attention on the distribution $p(Z)$. However, this distribution $p(Z)$ is actually the core motivation of the VB methods. In many cases, the computation of the posterior distribution $p(Z|X)$ is always intractable. For example, we need to integrate (sum up) all configurations of the hidden variables in order to computer the denominator.</p>
 <p>The main idea behind variational methods is: to find some <em>approximation</em> distributions $q(Z)$ that are as closed as possible to the true posterior distribution $p(Z|X)$. These approximation distribution can have their own variational parameters: $q(Z|\theta)$, and we try to find the setting of the parameters that make $q$ close to the posterior of interest. Obviously the distribution $q(Z)$ should be relatively easy and more tractable for inference.</p>
