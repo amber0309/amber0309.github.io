@@ -102,7 +102,7 @@
 <meta property="og:description" content="This post shows two different derivations of the variational lower bound. Source link: Xitong Yang’s Blog">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://amber0309.github.io/2018/02/05/elbo/mdl.png">
-<meta property="og:updated_time" content="2018-06-17T14:51:01.971Z">
+<meta property="og:updated_time" content="2018-06-18T02:14:46.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fwd. Understanding the Variational Lower Bound">
 <meta name="twitter:description" content="This post shows two different derivations of the variational lower bound. Source link: Xitong Yang’s Blog">
@@ -356,7 +356,7 @@
 <p>Source link: <a href="https://xyang35.github.io/2017/04/14/variational-lower-bound/#xu2015show" target="_blank" rel="noopener">Xitong Yang’s Blog
 </a></p>
 <a id="more"></a>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Variational Bayesian (VB) Methods are a family of techniques that are very popular in statistical machine learning. One powerful feature of VB methods is the inference-optimization duality [1]: we can view statistical inference problems (i.e. infer the value of a random variable given the value of another random variable) as optimization problems (i.e. find the parameter values that minimize some objective function). Furthermore, the <em>variational lower bound</em>, also called <em>evidence lower bound</em> (ELBO), plays an essential role in the VB derivations. In this note, we aim to introduce the basic ideas of variational lower bound, which can help to understand the derivations of the learning rules in the papers related to “hard attention” mechanism [2, 3, 4, 5].</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Variational Bayesian (VB) Methods are a family of techniques that are very popular in statistical machine learning. One powerful feature of VB methods is the inference-optimization duality <a href="#1">[1]</a>: we can view statistical inference problems (i.e. infer the value of a random variable given the value of another random variable) as optimization problems (i.e. find the parameter values that minimize some objective function). Furthermore, the <em>variational lower bound</em>, also called <em>evidence lower bound</em> (ELBO), plays an essential role in the VB derivations. In this note, we aim to introduce the basic ideas of variational lower bound, which can help to understand the derivations of the learning rules in the papers related to “hard attention” mechanism <a href="#2">[2]</a> <a href="#3">[3]</a> <a href="#4">[4]</a> <a href="#5">[5]</a>.</p>
 <h2 id="Variational-Lower-Bound"><a href="#Variational-Lower-Bound" class="headerlink" title="Variational Lower Bound"></a>Variational Lower Bound</h2><h3 id="Problem-setup"><a href="#Problem-setup" class="headerlink" title="Problem setup"></a>Problem setup</h3><p>Assume that $X$ are observations (data) and $Z$ are hidden variables. Note that we are general – the hidden variables might include the “parameters”. The relationship of these two variables can be represented using the following graphical model.</p>
 <p><img src="mdl.png" width="35%" height="35%" align="center"></p>
 <p>Moreover, uppercase $P(X)$ denotes the probability distribution over that variable, and lowercase $p(X)$ is the density function of the distribution of $X$. The posterior distribution of the hidden variables can then be written as follows using the <em>Bayes’ Theorem</em>.</p>
@@ -373,26 +373,26 @@
 <p>where $L$ is the variational lower bound defined above. The last equality is obtained by the normalization constraint: $\int_{Z} q(Z) = 1$. Rearrange the equations we have:</p>
 <p>\begin{align}<br>L = \log p(X) - KL\left[ q(Z) \Vert p(Z|X) \right].<br>\end{align}</p>
 <p>As KL divergence is always $\ge 0$, once again we get $L \le \log p(X)$ is a lower bound of the log probability of observations. And we also know the difference between them is exactly the KL divergence of the approximation and true distribution. In others words, the lower bound $L$ hits the log probability <em>iff</em> the approximation distribution is perfectly closed to the true posterior distribution.</p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><h3 id="Multiple-Object-Recognition-with-Visual-Attention"><a href="#Multiple-Object-Recognition-with-Visual-Attention" class="headerlink" title="Multiple Object Recognition with Visual Attention"></a>Multiple Object Recognition with Visual Attention</h3><p>Now, we can use our understanding of the variational lower bound to deduce the learning rules in practical problems. We use the paper [2] as an example.</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><h3 id="Multiple-Object-Recognition-with-Visual-Attention"><a href="#Multiple-Object-Recognition-with-Visual-Attention" class="headerlink" title="Multiple Object Recognition with Visual Attention"></a>Multiple Object Recognition with Visual Attention</h3><p>Now, we can use our understanding of the variational lower bound to deduce the learning rules in practical problems. We use the paper <a href="#2">[2]</a> as an example.</p>
 <p>First of all, we want to maximize the log likelihood of the class label: $\log p(y|I,W)$. Here $I$ is the image, $W$ is the model parameters and $y$ is the class label, which can be viewed as an observable variable. Then, the objective function above can be rewritten by marginalizing over the locations $l$ (hidden variables):</p>
 <p>\begin{align}<br>\log p(y|I,W) = \log \sum_{l} p(l|I,W) p(y|l,I,W).<br>\end{align}</p>
 <p>We can obtained its lower bound directly using Jensen’s inequality:</p>
 <p>\begin{align}<br>\log \sum_{l} p(l|I,W) p(y|l,I,W) \ge \sum_{l} \sum_{l} p(l|I,W) \log p(y|l,I,W).<br>\end{align}</p>
 <p>We can also get the same result using the variational lower bound of the marginal probability of observations and setting $q(l)=p(l|I,W)$:</p>
 <p>\begin{align}<br>\log p(y|I,W) \ge \sum_{l} q(l) \log \frac{ p(y,l|I,W) }{q(l)} = \sum_{l} p(l|I,W) \log p(y|l,I,W).<br>\end{align}</p>
-<p>Then, we can maximize the variational lower bound instead by taking derivatives of it with respect to the model parameter $W$. Almost the same derivations are also used in [4].</p>
+<p>Then, we can maximize the variational lower bound instead by taking derivatives of it with respect to the model parameter $W$. Almost the same derivations are also used in <a href="#4">[4]</a>.</p>
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In this note, we introduce what variational lower bound is and its role in VB methods. We deduce the variational lower bound in two different ways and provide clear ideas about its relationship with other entities. We also go through a concrete exampling showing how to use the variational lower bound to obtain practical learning rules, which is very useful for understanding related papers.</p>
-<h2 id="Acknowledgement"><a href="#Acknowledgement" class="headerlink" title="Acknowledgement"></a>Acknowledgement</h2><p>This note is a reading note that borrows many ideas from the following papers or posts [1, 6, 7, 8, 9].</p>
+<h2 id="Acknowledgement"><a href="#Acknowledgement" class="headerlink" title="Acknowledgement"></a>Acknowledgement</h2><p>This note is a reading note that borrows many ideas from the following papers or posts <a href="#1">[1]</a> <a href="#6">[6]</a> <a href="#7">[7]</a> <a href="#8">[8]</a> <a href="#9">[9]</a>.</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li>E. Jang. A Beginner’s Guide to Variational Methods: Mean-Field Approximation. <a href="http://blog.evjang.com/2016/08/variational-bayes.html" target="_blank" rel="noopener">http://blog.evjang.com/2016/08/variational-bayes.html</a>, 2016.</li>
-<li>Ba, J., Mnih, V., &amp; Kavukcuoglu, K. (2014). Multiple object recognition with visual attention. arXiv preprint arXiv:1412.7755.</li>
-<li>Lei, T., Barzilay, R., &amp; Jaakkola, T. (2016). Rationalizing neural predictions. arXiv preprint arXiv:1606.04155.</li>
-<li>Xu, K., Ba, J., Kiros, R., Cho, K., Courville, A., Salakhudinov, R., … &amp; Bengio, Y. (2015, June). Show, attend and tell: Neural image caption generation with visual attention. In International Conference on Machine Learning (pp. 2048-2057).</li>
-<li>Mnih, V., Heess, N., &amp; Graves, A. (2014). Recurrent models of visual attention. In Advances in neural information processing systems (pp. 2204-2212).</li>
-<li>D. M. Blei. Variational inference. Lecture from Princeton, variational inference, 2011.</li>
-<li>Fox, C. W., &amp; Roberts, S. J. (2012). A tutorial on variational Bayesian inference. Artificial intelligence review, 38(2), 85-95.</li>
-<li>Tzikas, D. G., Likas, A. C., &amp; Galatsanos, N. P. (2008). The variational approximation for Bayesian inference. IEEE Signal Processing Magazine, 25(6), 131-146.</li>
-<li>Z. Ghahramani. Variational methods. Lecture from CMU, Statistical Approaches to Learning and Discovery, 2003.</li>
+<li><a name="1"></a> E. Jang. A Beginner’s Guide to Variational Methods: Mean-Field Approximation. <a href="http://blog.evjang.com/2016/08/variational-bayes.html" target="_blank" rel="noopener">http://blog.evjang.com/2016/08/variational-bayes.html</a>, 2016.</li>
+<li><a name="2"></a> Ba, J., Mnih, V., &amp; Kavukcuoglu, K. (2014). Multiple object recognition with visual attention. arXiv preprint arXiv:1412.7755.</li>
+<li><a name="3"></a> Lei, T., Barzilay, R., &amp; Jaakkola, T. (2016). Rationalizing neural predictions. arXiv preprint arXiv:1606.04155.</li>
+<li><a name="4"></a> Xu, K., Ba, J., Kiros, R., Cho, K., Courville, A., Salakhudinov, R., … &amp; Bengio, Y. (2015, June). Show, attend and tell: Neural image caption generation with visual attention. In International Conference on Machine Learning (pp. 2048-2057).</li>
+<li><a name="5"></a> Mnih, V., Heess, N., &amp; Graves, A. (2014). Recurrent models of visual attention. In Advances in neural information processing systems (pp. 2204-2212).</li>
+<li><a name="6"></a> D. M. Blei. Variational inference. Lecture from Princeton, variational inference, 2011.</li>
+<li><a name="7"></a> Fox, C. W., &amp; Roberts, S. J. (2012). A tutorial on variational Bayesian inference. Artificial intelligence review, 38(2), 85-95.</li>
+<li><a name="8"></a> Tzikas, D. G., Likas, A. C., &amp; Galatsanos, N. P. (2008). The variational approximation for Bayesian inference. IEEE Signal Processing Magazine, 25(6), 131-146.</li>
+<li><a name="9"></a> Z. Ghahramani. Variational methods. Lecture from CMU, Statistical Approaches to Learning and Discovery, 2003.</li>
 </ol>
 
       

@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized.">
+<meta name="description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) [2] is briefly summarized.">
 <meta name="keywords" content="ML,Causality,Paper-reading">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Understanding Information Geometric Causal Inference">
 <meta property="og:url" content="http://amber0309.github.io/2016/12/08/igci/index.html">
 <meta property="og:site_name" content="Reticence">
-<meta property="og:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized.">
+<meta property="og:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) [2] is briefly summarized.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-17T05:38:03.474Z">
+<meta property="og:updated_time" content="2018-06-18T02:21:38.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understanding Information Geometric Causal Inference">
-<meta name="twitter:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) is briefly summarized.">
+<meta name="twitter:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) [2] is briefly summarized.">
 
 
 
@@ -350,14 +350,14 @@
       
 
       
-        <p>In this post, the basic idea of <a href="http://event.cwi.nl/uai2010/papers/UAI2010_0121.pdf" target="_blank" rel="noopener">Information Geometric Causal Inference</a> (IGCI) is briefly summarized.</p>
+        <p>In this post, the basic idea of <a href="http://event.cwi.nl/uai2010/papers/UAI2010_0121.pdf" target="_blank" rel="noopener">Information Geometric Causal Inference</a> (IGCI) <a href="#2">[2]</a> is briefly summarized.</p>
 <a id="more"></a>
 <h2 id="Orthogonality-in-information-space"><a href="#Orthogonality-in-information-space" class="headerlink" title="Orthogonality in information space"></a>Orthogonality in information space</h2><p>First of all, the <em>relative entropy distance</em> or <em>Kullback-Leibler divergence</em> (KL divergence) between two probability densities $p$ and $q$, for which $p$ is absolutely continuous with respect to $q$, is defined as</p>
 <p>\begin{align} D(p||q):= \int p(x)\log \frac{p(x)}{q(x)}dx. \end{align}</p>
 <p>It can be interpreted as the distance between two probability densities. In the following, two elementary properties of KL divergence will be used. One is positivity, i.e., $D(p||q) \ge 0$. The other is its invariance under bijective mappings, i.e., $D(p_{f}||q_{f}) = D(p||q)$ for any bijection $f$, where $p_{f}$ and $q_{f}$ are the images of $p$ and $q$ under $f$ on the corresponding variables.</p>
 <p>Then we need the following Lemma in information space<br><strong>Lemma 1 (orthogonality in information space)</strong><br>Let $q,r,s$ be three probability densities. Then<br>\begin{align} \int q(x) \log \frac{r(x)}{s(x)} dx= \int r(x)\log \frac{r(x)}{s(x)}dx,<br>\end{align}</p>
 <p>which is equivalent to the following additivity of KL divergence<br>\begin{align} D(q||s) = D(q||r) + D(r||s). \end{align}</p>
-<p>The above condition is called <em>orthogonality</em> between $\vec{qr}$ and $\vec{rs}$ [1]. Intuitively, it embodies that the vector formed by densities $q$ and $r$ is orthogonal to the one formed by $r$ and $s$ in the space of probability densities.</p>
+<p>The above condition is called <em>orthogonality</em> between $\vec{qr}$ and $\vec{rs}$ <a href="#1">[1]</a>. Intuitively, it embodies that the vector formed by densities $q$ and $r$ is orthogonal to the one formed by $r$ and $s$ in the space of probability densities.</p>
 <h2 id="Causal-model"><a href="#Causal-model" class="headerlink" title="Causal model"></a>Causal model</h2><p>Without loss of generality, $x$ is assumed to be the cause and $y$ the effect.</p>
 <h3 id="Independence-assumption-between-p-x-and-f"><a href="#Independence-assumption-between-p-x-and-f" class="headerlink" title="Independence assumption between $p(x)$ and $f$"></a>Independence assumption between $p(x)$ and $f$</h3><p>Consider the density of $x$, $p(x)$, on $[0,1]$ and a $f$ be a diffeomorphism of $[0,1]$ with $f(0)=0$ and $f(1)=1$, we denote the inverse of $f$ by $g:=f^{-1}$. The relation between the cause $x$ and the effect $y$ is $y=f(x)$ which is deterministic. IGCI assumes the independence between $p(x)$ and $f$ as<br>\begin{align} \int_{0}^{1} p(x) \log f^{\prime}(x) dx= \int_{0}^{1} \log f^{\prime}(x)dx. \label{asmp} \tag{1} \end{align}</p>
 <p>This assumption can be interpreted as follows: regard $p(x)$ and $\log f^{\prime}(x)$ as two random variables on $[0,1]$. Then their covariane w.r.t. the uniform distribution on $[0,1]$, $u(x)$, reads<br>\begin{align} cov\left(p(x), \log f^{\prime}(x)\right)&amp; = \mathbb{E}_{u}\left[ p(x) \log f^{\prime}(x) \right] - \mathbb{E}_{u}\left[ p(x) \right]\mathbb{E}_{u}\left[ \log f^{\prime}(x) \right] \\<br>&amp; = \int_{0}^{1} p(x) \log f^{\prime}(x) dx - \int_{0}^{1} p(x)dx \int_{0}^{1} \log f^{\prime}(x)dx \\<br>&amp; = \int_{0}^{1} p(x) \log f^{\prime}(x) dx - \int_{0}^{1} \log f^{\prime}(x)dx.<br>\end{align}</p>
@@ -371,7 +371,7 @@
 <p>The same goes for $v_{g}(x)$.</p>
 <p>Then by applying Lemma 1 on Eq. ($\ref{asmp}$), we have<br>\begin{align} \int_{0}^{1} p(x) \log f^{\prime}(x) dx &amp;= \int_{0}^{1} \log f^{\prime}(x)dx \\<br>\int_{0}^{1} p(x) \log \frac{1}{f^{\prime}(x)} dx &amp;= \int_{0}^{1} \log \frac{1}{f^{\prime}(x)} dx \\<br>\int_{0}^{1} p(x) \log \frac{u(x)}{f^{\prime}(x)} dx &amp;= \int_{0}^{1} u(x) \log \frac{u(x)}{f^{\prime}(x)} dx \\<br>D(p(x)|| v_{g}(x)) &amp;= D(p(x)|| u(x)) + D(u(x)|| v_{g}(x)).<br>\end{align}</p>
 <p>Since KL divergence is conserved under bijective maps, the above relation between three KL divergences is also equivalent to<br>\begin{align} D(p(y)\vert\vert v(y)) = D(p(x)\vert\vert u(x)) + D(u_{f}(y)\vert\vert v(y)). \label{ddd} \tag{2} \end{align}</p>
-<p>In [2], the relation is interpreted as follows</p>
+<p>In <a href="#2">[2]</a>, the relation is interpreted as follows</p>
 <blockquote>
 <p>Since D(p(x)|| u(x)) depends only on the structure of $p(x)$ and D(u_{f}(y)|| v(y)) depends on the structure of $f$, it seems reasonable to postulate that the vector $\vec{pu}$ and $\vec{uv_{g}}$ are typically (close to) orthogonal. We interprete by saying that the amount of irregularities of $p(y)$ is given by the irregularities of $p(x)$ plus thos of $f$.</p>
 </blockquote>
@@ -385,8 +385,8 @@
 </ul>
 <h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>The original MATLAB code and my Python re-implementation are available at <a href="https://github.com/amber0309/IGCI" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li>Amari, S. I. (2001). Information geometry on hierarchy of probability distributions. IEEE transactions on information theory, 47(5), 1701-1711.</li>
-<li>Daniusis, P., Janzing, D., Mooij, J., Zscheischler, J., Steudel, B., Zhang, K., &amp; Schölkopf, B. (2012). Inferring deterministic causal relations. arXiv preprint arXiv:1203.3475.</li>
+<li><a name="1"></a> Amari, S. I. (2001). Information geometry on hierarchy of probability distributions. IEEE transactions on information theory, 47(5), 1701-1711.</li>
+<li><a name="2"></a> Daniusis, P., Janzing, D., Mooij, J., Zscheischler, J., Steudel, B., Zhang, K., &amp; Schölkopf, B. (2012). Inferring deterministic causal relations. arXiv preprint arXiv:1203.3475.</li>
 </ol>
 
       

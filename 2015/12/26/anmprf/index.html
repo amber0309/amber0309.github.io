@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="Reticence">
 <meta property="og:description" content="This post shows the derivation step by step of the condition that ANM [1] is not identifiable (Eq. (4) in [1]).">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-17T05:34:59.520Z">
+<meta property="og:updated_time" content="2018-06-18T02:06:39.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Derivation of Theorem 1 in ANM">
 <meta name="twitter:description" content="This post shows the derivation step by step of the condition that ANM [1] is not identifiable (Eq. (4) in [1]).">
@@ -350,9 +350,9 @@
       
 
       
-        <p>This post shows the derivation step by step of the condition that ANM <a href="https://is.tuebingen.mpg.de/fileadmin/user_upload/files/publications/NIPS2008-Hoyer-neu_5406[0].pdf" target="_blank" rel="noopener">[1]</a> is not identifiable (Eq. (4) in <a href="https://is.tuebingen.mpg.de/fileadmin/user_upload/files/publications/NIPS2008-Hoyer-neu_5406[0].pdf" target="_blank" rel="noopener">[1]</a>).</p>
+        <p>This post shows the derivation step by step of the condition that ANM <a href="#1">[1]</a> is not identifiable (Eq. (4) in <a href="#1">[1]</a>).</p>
 <a id="more"></a>
-<h2 id="Identifiability-of-ANM"><a href="#Identifiability-of-ANM" class="headerlink" title="Identifiability of ANM"></a>Identifiability of ANM</h2><p>The identifiability results of ANM is given by the following theorem in <a href="https://is.tuebingen.mpg.de/fileadmin/user_upload/files/publications/NIPS2008-Hoyer-neu_5406[0].pdf" target="_blank" rel="noopener">[1]</a></p>
+<h2 id="Identifiability-of-ANM"><a href="#Identifiability-of-ANM" class="headerlink" title="Identifiability of ANM"></a>Identifiability of ANM</h2><p>The identifiability results of ANM is given by the following theorem in <a href="#1">[1]</a></p>
 <blockquote>
 <p><strong>Theorem 1</strong> <em>Let the joint probability density of $x$ and $y$ be given by</em><br>\begin{align}<br>p(x,y) = p_{\epsilon}(y-f(x))p_{x}(x), \tag{2}<br>\end{align}</p>
 <p><em>where $p_{\epsilon}$, $p_{x}$ are probability densities on $\mathbb{R}$. If there is a backward model of the same form, i.e.,</em><br>\begin{align}<br>p(x,y) = p_{\varepsilon}(x-g(y))p_{y}(y), \tag{3}<br>\end{align}</p>
@@ -372,7 +372,7 @@
 <p>Then<br>\begin{align}<br>\frac{\partial}{\partial x}\left( \frac{\partial^{2} \pi / \partial x^{2}}{ \partial^{2} \pi / \partial x \partial y } \right) = \frac{\partial}{\partial x} \left[ \frac{\tilde{\nu}{\prime \prime}(x-g(y))}{-\tilde{\nu}{\prime \prime}(x-g(y))g^{\prime} (y)} \right] = \frac{\partial}{\partial x}\left[ \frac{-1}{g^{\prime} (y)} \right] = 0. \tag{10}<br>\end{align}</p>
 <p>At last, by combining Eq. (9) and (10) we obtain the condition shown in Eq. (4).</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li>Hoyer, P. O., Janzing, D., Mooij, J. M., Peters, J., &amp; Schölkopf, B. (2009). Nonlinear causal discovery with additive noise models. In Advances in neural information processing systems (pp. 689-696).</li>
+<li><a name="1"></a> Hoyer, P. O., Janzing, D., Mooij, J. M., Peters, J., &amp; Schölkopf, B. (2009). Nonlinear causal discovery with additive noise models. In Advances in neural information processing systems (pp. 689-696).</li>
 </ol>
 
       
