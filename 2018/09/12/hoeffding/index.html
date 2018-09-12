@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ML,Causality,Paper-reading," />
+  <meta name="keywords" content="ML,Math,Theory," />
 
 
 
@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) [2] is briefly summarized.">
-<meta name="keywords" content="ML,Causality,Paper-reading">
+<meta name="description" content="This post derives the results of concentration inequality in Hilbert space.">
+<meta name="keywords" content="ML,Math,Theory">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Understanding Information Geometric Causal Inference">
-<meta property="og:url" content="http://amber0309.github.io/2016/12/08/igci/index.html">
+<meta property="og:title" content="Hoeffding&#39;s Inequality in Hilbert Space">
+<meta property="og:url" content="http://amber0309.github.io/2018/09/12/hoeffding/index.html">
 <meta property="og:site_name" content="A Reticent Blog">
-<meta property="og:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) [2] is briefly summarized.">
+<meta property="og:description" content="This post derives the results of concentration inequality in Hilbert space.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-18T02:21:38.389Z">
+<meta property="og:updated_time" content="2018-09-12T15:53:16.689Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Understanding Information Geometric Causal Inference">
-<meta name="twitter:description" content="In this post, the basic idea of Information Geometric Causal Inference (IGCI) [2] is briefly summarized.">
+<meta name="twitter:title" content="Hoeffding&#39;s Inequality in Hilbert Space">
+<meta name="twitter:description" content="This post derives the results of concentration inequality in Hilbert space.">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://amber0309.github.io/2016/12/08/igci/"/>
+  <link rel="canonical" href="http://amber0309.github.io/2018/09/12/hoeffding/"/>
 
 
 
 
 
-  <title>Understanding Information Geometric Causal Inference | A Reticent Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Hoeffding's Inequality in Hilbert Space | A Reticent Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2016/12/08/igci/">
+    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2018/09/12/hoeffding/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="__Seth__">
@@ -289,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Understanding Information Geometric Causal Inference</h1>
+          <h1 class="post-title" itemprop="name headline">Hoeffding's Inequality in Hilbert Space</h1>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-08T13:28:14+08:00">
-                2016-12-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-12T22:37:42+08:00">
+                2018-09-12
               </time>
             
 
@@ -320,9 +320,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/12/08/igci/#comments" itemprop="discussionUrl">
+                <a href="/2018/09/12/hoeffding/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/12/08/igci/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/09/12/hoeffding/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -350,43 +350,30 @@
       
 
       
-        <p>In this post, the basic idea of <a href="http://event.cwi.nl/uai2010/papers/UAI2010_0121.pdf" target="_blank" rel="noopener">Information Geometric Causal Inference</a> (IGCI) <a href="#2">[2]</a> is briefly summarized.</p>
+        <p>This post derives the results of concentration inequality in Hilbert space.</p>
 <a id="more"></a>
-<h2 id="Orthogonality-in-information-space"><a href="#Orthogonality-in-information-space" class="headerlink" title="Orthogonality in information space"></a>Orthogonality in information space</h2><p>First of all, the <em>relative entropy distance</em> or <em>Kullback-Leibler divergence</em> (KL divergence) between two probability densities $p$ and $q$, for which $p$ is absolutely continuous with respect to $q$, is defined as</p>
-<p>\begin{align} D(p||q):= \int p(x)\log \frac{p(x)}{q(x)}dx. \end{align}</p>
-<p>It can be interpreted as the distance between two probability densities. In the following, two elementary properties of KL divergence will be used. One is positivity, i.e., $D(p||q) \ge 0$. The other is its invariance under bijective mappings, i.e., $D(p_{f}||q_{f}) = D(p||q)$ for any bijection $f$, where $p_{f}$ and $q_{f}$ are the images of $p$ and $q$ under $f$ on the corresponding variables.</p>
-<p>Then we need the following Lemma in information space<br><strong>Lemma 1 (orthogonality in information space)</strong><br>Let $q,r,s$ be three probability densities. Then<br>\begin{align} \int q(x) \log \frac{r(x)}{s(x)} dx= \int r(x)\log \frac{r(x)}{s(x)}dx,<br>\end{align}</p>
-<p>which is equivalent to the following additivity of KL divergence<br>\begin{align} D(q||s) = D(q||r) + D(r||s). \end{align}</p>
-<p>The above condition is called <em>orthogonality</em> between $\vec{qr}$ and $\vec{rs}$ <a href="#1">[1]</a>. Intuitively, it embodies that the vector formed by densities $q$ and $r$ is orthogonal to the one formed by $r$ and $s$ in the space of probability densities.</p>
-<h2 id="Causal-model"><a href="#Causal-model" class="headerlink" title="Causal model"></a>Causal model</h2><p>Without loss of generality, $x$ is assumed to be the cause and $y$ the effect.</p>
-<h3 id="Independence-assumption-between-p-x-and-f"><a href="#Independence-assumption-between-p-x-and-f" class="headerlink" title="Independence assumption between $p(x)$ and $f$"></a>Independence assumption between $p(x)$ and $f$</h3><p>Consider the density of $x$, $p(x)$, on $[0,1]$ and a $f$ be a diffeomorphism of $[0,1]$ with $f(0)=0$ and $f(1)=1$, we denote the inverse of $f$ by $g:=f^{-1}$. The relation between the cause $x$ and the effect $y$ is $y=f(x)$ which is deterministic. IGCI assumes the independence between $p(x)$ and $f$ as<br>\begin{align} \int_{0}^{1} p(x) \log f^{\prime}(x) dx= \int_{0}^{1} \log f^{\prime}(x)dx. \label{asmp} \tag{1} \end{align}</p>
-<p>This assumption can be interpreted as follows: regard $p(x)$ and $\log f^{\prime}(x)$ as two random variables on $[0,1]$. Then their covariane w.r.t. the uniform distribution on $[0,1]$, $u(x)$, reads<br>\begin{align} cov\left(p(x), \log f^{\prime}(x)\right)&amp; = \mathbb{E}_{u}\left[ p(x) \log f^{\prime}(x) \right] - \mathbb{E}_{u}\left[ p(x) \right]\mathbb{E}_{u}\left[ \log f^{\prime}(x) \right] \\<br>&amp; = \int_{0}^{1} p(x) \log f^{\prime}(x) dx - \int_{0}^{1} p(x)dx \int_{0}^{1} \log f^{\prime}(x)dx \\<br>&amp; = \int_{0}^{1} p(x) \log f^{\prime}(x) dx - \int_{0}^{1} \log f^{\prime}(x)dx.<br>\end{align}</p>
-<p>Therefore, $p(x)$ is uncorrelated with $\log f^{\prime}(x)$ if the independence assumption holds.</p>
-<p>Remarkbly, in the backward direction a positive correlation between $p(y)$ and $\log g^{\prime}(y)$ is derived. The l.h.s of (4) could be equivalent to<br>\begin{align} \int_{0}^{1} p(x) \log f^{\prime}(x) dx= \int_{0}^{1} p(y) \log \frac{1}{g^{\prime}(y)} dy = -\int_{0}^{1} p(y) \log g^{\prime}(y) dy.<br>\end{align}</p>
-<p>Similarly for the r.h.s we have<br>\begin{align} \int_{0}^{1} \log f^{\prime}(x) dx= \int_{g(0)}^{g(1)} g^{\prime}(y) \log f^{\prime}(g(y)) dy = -\int_{0}^{1} g^{\prime}(y) \log g^{\prime}(y) dy.<br>\end{align}</p>
-<p>where we use $g^{\prime}(y) = \frac{1}{f^{\prime}(x)}$ and integration by substitution in the above derivations. Then the independence assumption leads to<br>\begin{align} \int_{0}^{1} p(y) \log g^{\prime}(y) dy = \int_{0}^{1} g^{\prime}(y) \log g^{\prime}(y) dy<br>\end{align}</p>
-<p>where we observe that $g^{\prime}(y) = p(y)$. Then the covariance between them w.r.t. the uniform distribution on $[0,1]$, $v(y)$, reads<br>\begin{align} cov\left(p(y), \log g^{\prime}(y)\right)&amp; = \mathbb{E}_{v}\left[ p(y) \log g^{\prime}(y) \right] - \mathbb{E}_{v}\left[ p(y) \right]\mathbb{E}_{v}\left[ \log g^{\prime}(y) \right] \\<br>&amp; = \int_{0}^{1} p(y) \log g^{\prime}(y) dy - \int_{0}^{1} p(y)dy \int_{0}^{1} \log g^{\prime}(y)dy \\<br>&amp; = \int_{0}^{1} g^{\prime}(y) \log g^{\prime}(y) dy - \int_{0}^{1} \log g^{\prime}(y)dy \\<br>&amp; = \int_{0}^{1} g^{\prime}(y) \log \frac{ g^{\prime}(y)}{v(y)} dy + \int_{0}^{1} v(y) \log \frac{v(y)}{ g^{\prime}(y)} dy \\<br>&amp; = D(g^{\prime}||v) + D(v||g^{\prime}) \ge 0.<br>\end{align}</p>
-<h3 id="Reformulation-in-information-space"><a href="#Reformulation-in-information-space" class="headerlink" title="Reformulation in information space"></a>Reformulation in information space</h3><p>We firstly introduce the <em>reference measures</em>, $u(x)$ and $v(y)$. They denote the uniform distributions for $x$ and $y$, respectively. Also, we let $u_{f}$ and $v_{g}$ be their images under $f$ and $g$:<br>\begin{align} u_{f}(y) := u(x) g^{\prime}(y) = g^{\prime}(y). \\<br>v_{g}(x) := v(y) f^{\prime}(x) = f^{\prime}(x).<br>\end{align}</p>
-<p>which are derived by simple variable transformation and the property of uniform distribuitons. For $u_{f}(y)$ we have<br>\begin{align} u_{f}(y)dy &amp;= u(x)dx \\<br>u_{f}(y) &amp;= u(x)\frac{dx}{dy} \\<br>u_{f}(y) &amp;= u(x)g^{\prime}(y) \\<br>u_{f}(y) &amp;= u(x)g^{\prime}(y).\end{align}</p>
-<p>The same goes for $v_{g}(x)$.</p>
-<p>Then by applying Lemma 1 on Eq. ($\ref{asmp}$), we have<br>\begin{align} \int_{0}^{1} p(x) \log f^{\prime}(x) dx &amp;= \int_{0}^{1} \log f^{\prime}(x)dx \\<br>\int_{0}^{1} p(x) \log \frac{1}{f^{\prime}(x)} dx &amp;= \int_{0}^{1} \log \frac{1}{f^{\prime}(x)} dx \\<br>\int_{0}^{1} p(x) \log \frac{u(x)}{f^{\prime}(x)} dx &amp;= \int_{0}^{1} u(x) \log \frac{u(x)}{f^{\prime}(x)} dx \\<br>D(p(x)|| v_{g}(x)) &amp;= D(p(x)|| u(x)) + D(u(x)|| v_{g}(x)).<br>\end{align}</p>
-<p>Since KL divergence is conserved under bijective maps, the above relation between three KL divergences is also equivalent to<br>\begin{align} D(p(y)\vert\vert v(y)) = D(p(x)\vert\vert u(x)) + D(u_{f}(y)\vert\vert v(y)). \label{ddd} \tag{2} \end{align}</p>
-<p>In <a href="#2">[2]</a>, the relation is interpreted as follows</p>
-<blockquote>
-<p>Since D(p(x)|| u(x)) depends only on the structure of $p(x)$ and D(u_{f}(y)|| v(y)) depends on the structure of $f$, it seems reasonable to postulate that the vector $\vec{pu}$ and $\vec{uv_{g}}$ are typically (close to) orthogonal. We interprete by saying that the amount of irregularities of $p(y)$ is given by the irregularities of $p(x)$ plus thos of $f$.</p>
-</blockquote>
-<h2 id="Causal-Inference"><a href="#Causal-Inference" class="headerlink" title="Causal Inference"></a>Causal Inference</h2><p>In the above model where $x$ causes $y$ ($x \to y$), we can define from Eq. ($\ref{ddd}$) that<br>\begin{align} C_{x\to y} := D(p(x)|| u(x)) - D(p(y)|| v(y)) = - D(u_{f}(y)|| v(y)) \le 0.<br>\end{align}</p>
-<p>In models where $y \to x$, we have<br>\begin{align} C_{y\to x} := D(p(y)|| v(y)) - D(p(x)|| u(x)) \le 0.<br>\end{align}</p>
-<p>Therefore, except in cases where $D(u_{f}(y)|| v(y))=0$ (i.e. the function is “too simple”), inference could be conducted by simply checking the sign of $C_{x\to y}$. This is called the Information Geometric Causal Inference (IGCI):</p>
-<p><strong>Information Geometric Causal Inference (IGCI)</strong>: Given $C_{x\to y}$, infer</p>
-<ul>
-<li>$x \to y$ if $C_{x\to y} &lt; 0$</li>
-<li>$y \to x$ if $C_{x\to y} &gt; 0$.</li>
-</ul>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>The original MATLAB code and my Python re-implementation are available at <a href="https://github.com/amber0309/IGCI" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Hoeffding’s-inequality"><a href="#Hoeffding’s-inequality" class="headerlink" title="Hoeffding’s inequality"></a>Hoeffding’s inequality</h2><h3 id="General-case"><a href="#General-case" class="headerlink" title="General case"></a>General case</h3><p>Let $X_{1}, \dots, X_{n}$ be independent random variables bounded by the interval $[a_{i}, b_{i}]$. We define the empirical mean of these variables by</p>
+<p>\begin{align}<br>\bar{X} = \frac{1}{n} \sum^{n}_{i=1} X_{i}.<br>\end{align}</p>
+<p>Theorem 2 of <a href="#1">[1]</a> states that</p>
+<p>\begin{align}<br>\text{P} \left( \left\vert \bar{X} - \mathbb{E}[ \bar{X} ] \right\vert \geq \epsilon \right) \le \exp\left( - \frac{ 2n^{2} \epsilon^{2} }{ \sum^{n}_{i=1}(b_{i} - a_{i})^{2} } \right), \tag{1}<br>\label{eq:hoeff}<br>\end{align}</p>
+<p>which is valid for positive values of $\epsilon$.</p>
+<h3 id="Special-case-zero-mean"><a href="#Special-case-zero-mean" class="headerlink" title="Special case: zero mean"></a>Special case: zero mean</h3><p>When the mean of the random varialbes is zero and $\vert X_{i} \vert \le C $ for $i = 1, \dots, n$, then \eqref{eq:hoeff} becomes</p>
+<p>\begin{align}<br>\text{P} \left( \left\vert \bar{X} \right\vert \geq \epsilon \right) \le 2 \exp\left( - \frac{ 2n^{2} \epsilon^{2} }{ n (2C)^{2} } \right) = 2 \exp\left( - \frac{ n \epsilon^{2} }{  2 C^{2} } \right).<br>\end{align}</p>
+<p>Set $\delta = 2 \exp\left( -\frac{ n \epsilon^{2} }{ 2 C^{2} } \right)$, then with probability at least $1- \delta$:<br>\begin{align}<br>    \left\vert \bar{X} \right\vert = \left\vert \frac{1}{n} \sum^{n}_{i=1} X_{i} \right\vert &lt; \sqrt{2}C \sqrt{ \frac{ \log 2 \delta^{-1} }{n} }. \tag{2}<br>    \label{eq:zero_mean}<br>\end{align}</p>
+<h2 id="Hoeffding’s-inequality-in-Hilbert-space"><a href="#Hoeffding’s-inequality-in-Hilbert-space" class="headerlink" title="Hoeffding’s inequality in Hilbert space"></a>Hoeffding’s inequality in Hilbert space</h2><h3 id="Special-case-zero-mean-1"><a href="#Special-case-zero-mean-1" class="headerlink" title="Special case: zero mean"></a>Special case: zero mean</h3><p>Similar result holds for zero mean independent random variables $\phi(X_{1}), \dots, \phi(X_{n})$ with values in a separable complex Hilbert space <a href="#2">[2]</a>. Assume that $ \Vert \phi(X_{i}) \Vert \le C $, for $i = 1, \dots, n$, then we have</p>
+<p>\begin{align}<br>    \left\Vert \frac{1}{n} \sum^{n}_{i=1} \phi(X_{i}) \right\Vert &lt; \sqrt{2}C \sqrt{ \frac{ \log 2 \delta^{-1} }{n} }, \tag{3}<br>    \label{eq:zero_mean_hil}<br>\end{align}</p>
+<p>which is simply deduced by replacing the absolute value in \eqref{eq:zero_mean} by the norm in Hilbert space.</p>
+<h3 id="General-case-1"><a href="#General-case-1" class="headerlink" title="General case"></a>General case</h3><p>Now consider independent uncentered variables $\phi( X_{i} )$ with mean $M$, bounded by $C$. Let $\phi( X^{\prime}_{i} ) = \phi( X_{i} ) - M$ denote the recentered variables. According to the triangle inequality,</p>
+<p>\begin{align}<br>\left\Vert \phi( X^{\prime}_{i} ) \right\Vert \le \left\Vert \phi( X_{i} ) \right\Vert + \left\Vert M \right\Vert \le 2C.<br>\end{align}</p>
+<p>Therefore, based on \eqref{eq:zero_mean_hil}, with probability at least $1 - \delta$:</p>
+<p>\begin{align}<br>\left\Vert \frac{1}{n} \sum^{n}_{i=1} \phi( X^{\prime}_{i} ) \right\Vert &lt; 2 \sqrt{2} C \sqrt{ \frac{ \log 2 \delta^{-1} }{n} }.<br>\end{align}</p>
+<p>By replacing $\phi( X^{\prime}_{i} )$ with $\phi( X_{i} ) - M$ we obtain with probability at least $1 - \delta$</p>
+<p>\begin{align}<br>\left\Vert \frac{1}{n} \sum^{n}_{i=1} \phi( X_{i} ) - \mathbb{E}[ \bar{X} ] \right\Vert &lt; 2 \sqrt{2} C \sqrt{ \frac{ \log 2 \delta^{-1} }{n} }.<br>\end{align}</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a name="1"></a> Amari, S. I. (2001). Information geometry on hierarchy of probability distributions. IEEE transactions on information theory, 47(5), 1701-1711.</li>
-<li><a name="2"></a> Daniusis, P., Janzing, D., Mooij, J., Zscheischler, J., Steudel, B., Zhang, K., &amp; Schölkopf, B. (2012). Inferring deterministic causal relations. arXiv preprint arXiv:1203.3475.</li>
+<li><p><a name="1"></a> Hoeffding, W. (1963). Probability inequalities for sums of bounded random variables. Journal of the American statistical association, 58(301), 13-30.</p>
+</li>
+<li><p><a name="2"></a> Rosasco, L., Belkin, M., &amp; Vito, E. D. (2010). On learning with integral operators. Journal of Machine Learning Research, 11(Feb), 905-934.</p>
+</li>
 </ol>
 
       
@@ -407,9 +394,9 @@
           
             <a href="/tags/ML/" rel="tag"># ML</a>
           
-            <a href="/tags/Causality/" rel="tag"># Causality</a>
+            <a href="/tags/Math/" rel="tag"># Math</a>
           
-            <a href="/tags/Paper-reading/" rel="tag"># Paper-reading</a>
+            <a href="/tags/Theory/" rel="tag"># Theory</a>
           
         </div>
       
@@ -422,8 +409,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/08/g-eigen/" rel="next" title="The Solution of Quadratic Form Maximization">
-                <i class="fa fa-chevron-left"></i> The Solution of Quadratic Form Maximization
+              <a href="/2018/06/15/cidg/" rel="next" title="Understanding Conditional Invariant Domain Generalization">
+                <i class="fa fa-chevron-left"></i> Understanding Conditional Invariant Domain Generalization
               </a>
             
           </div>
@@ -431,10 +418,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/13/hsic/" rel="prev" title="Understanding Hilbert-Schmidt Independence Criterion">
-                Understanding Hilbert-Schmidt Independence Criterion <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -579,7 +562,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Orthogonality-in-information-space"><span class="nav-number">1.</span> <span class="nav-text">Orthogonality in information space</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Causal-model"><span class="nav-number">2.</span> <span class="nav-text">Causal model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Independence-assumption-between-p-x-and-f"><span class="nav-number">2.1.</span> <span class="nav-text">Independence assumption between $p(x)$ and $f$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reformulation-in-information-space"><span class="nav-number">2.2.</span> <span class="nav-text">Reformulation in information space</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Causal-Inference"><span class="nav-number">3.</span> <span class="nav-text">Causal Inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hoeffding’s-inequality"><span class="nav-number">1.</span> <span class="nav-text">Hoeffding’s inequality</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General-case"><span class="nav-number">1.1.</span> <span class="nav-text">General case</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Special-case-zero-mean"><span class="nav-number">1.2.</span> <span class="nav-text">Special case: zero mean</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hoeffding’s-inequality-in-Hilbert-space"><span class="nav-number">2.</span> <span class="nav-text">Hoeffding’s inequality in Hilbert space</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Special-case-zero-mean-1"><span class="nav-number">2.1.</span> <span class="nav-text">Special case: zero mean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#General-case-1"><span class="nav-number">2.2.</span> <span class="nav-text">General case</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
@@ -718,9 +701,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://amber0309.github.io/2016/12/08/igci/';
-          this.page.identifier = '2016/12/08/igci/';
-          this.page.title = 'Understanding Information Geometric Causal Inference';
+          this.page.url = 'http://amber0309.github.io/2018/09/12/hoeffding/';
+          this.page.identifier = '2018/09/12/hoeffding/';
+          this.page.title = 'Hoeffding\'s Inequality in Hilbert Space';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Seth.disqus.com/embed.js';
