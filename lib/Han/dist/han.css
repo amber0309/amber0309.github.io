@@ -68,8 +68,9 @@ dfn {
   font-style: italic;
 }
 h1 {
+  border-bottom: 1px solid #ccc;
   font-size: 2em;
-  margin: .67em 0;
+  margin: 0em 0;
 }
 mark {
   background-color: #ff0;
@@ -111,6 +112,7 @@ hr {
   box-sizing: content-box; /* 1 */
   height: 0; /* 1 */
   overflow: visible; /* 2 */
+  padding: 2px 0 2px 0;
 }
 button,
 input,

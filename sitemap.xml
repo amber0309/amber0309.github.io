@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://amber0309.github.io/about/index.html</loc>
+    
+    <lastmod>2018-09-29T18:18:13.304Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://amber0309.github.io/2018/09/12/hoeffding/</loc>
     
     <lastmod>2018-09-12T16:28:46.823Z</lastmod>
@@ -131,13 +138,6 @@
     <loc>http://amber0309.github.io/2016/11/08/g-eigen/</loc>
     
     <lastmod>2018-06-17T05:37:03.886Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://amber0309.github.io/about/index.html</loc>
-    
-    <lastmod>2018-06-10T15:43:28.627Z</lastmod>
     
   </url>
   
