@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python,Software," />
+  <meta name="keywords" content="Python,Sublime,Anaconda,Software," />
 
 
 
@@ -94,14 +94,14 @@
 
 
 <meta name="description" content="This post saves the content of sublime-build file for reference.">
-<meta name="keywords" content="Python,Software">
+<meta name="keywords" content="Python,Sublime,Anaconda,Software">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Build System Configuration in Sublime Text 3 for Anaconda Virtual Environment">
 <meta property="og:url" content="http://amber0309.github.io/2018/11/05/sublime-build/index.html">
 <meta property="og:site_name" content="A Reticent Blog">
 <meta property="og:description" content="This post saves the content of sublime-build file for reference.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-05T14:28:08.670Z">
+<meta property="og:updated_time" content="2018-11-05T14:43:49.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Build System Configuration in Sublime Text 3 for Anaconda Virtual Environment">
 <meta name="twitter:description" content="This post saves the content of sublime-build file for reference.">
@@ -355,9 +355,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;cmd&quot;: [&quot;C:/software/Anaconda3/envs/tensorflow/python.exe&quot;, &quot;-u&quot;, &quot;$file&quot;],</span><br><span class="line">    &quot;file_regex&quot;: &quot;^[ ]*File \&quot;(...*?)\&quot;, line ([0-9]*)&quot;,</span><br><span class="line">    &quot;selector&quot;: &quot;source.python&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Remarks:</p>
 <ul>
-<li>Only the second line needs to be changed.</li>
+<li>The current build system use the Python installed in a virtual environment named “tensorflow”. Change line 2 accordingly for a different virtual environment.</li>
 <li>In the example, the base Python is a Anaconda distribution of Python 3.</li>
-<li>The current build system use the Python installed in a virtual envrionment named “tensorflow”.</li>
 </ul>
 
       
@@ -377,6 +376,10 @@
         <div class="post-tags">
           
             <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Sublime/" rel="tag"># Sublime</a>
+          
+            <a href="/tags/Anaconda/" rel="tag"># Anaconda</a>
           
             <a href="/tags/Software/" rel="tag"># Software</a>
           
@@ -487,7 +490,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
