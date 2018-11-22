@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ML,Causality,Paper-reading," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -93,18 +93,17 @@
 
 
 
-<meta name="description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
-<meta name="keywords" content="ML,Causality,Paper-reading">
+<meta name="description" content="This post rephrased the section that [1] shows the connection between minimizing sum-of-squares error function and maximizing likelihood in curve fitting.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Understanding Additive Noise Model">
-<meta property="og:url" content="http://amber0309.github.io/2015/12/08/anm/index.html">
+<meta property="og:title" content="The Connection Between Minimizing Sum-of-squares and Maximizing Likelihood">
+<meta property="og:url" content="http://amber0309.github.io/2018/11/22/prml-1/index.html">
 <meta property="og:site_name" content="A Reticent Blog">
-<meta property="og:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
+<meta property="og:description" content="This post rephrased the section that [1] shows the connection between minimizing sum-of-squares error function and maximizing likelihood in curve fitting.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-18T02:04:57.655Z">
+<meta property="og:updated_time" content="2018-11-22T13:24:38.727Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Understanding Additive Noise Model">
-<meta name="twitter:description" content="This post introduces the basic idea of Additive Noise Model (ANM) for causal inference.">
+<meta name="twitter:title" content="The Connection Between Minimizing Sum-of-squares and Maximizing Likelihood">
+<meta name="twitter:description" content="This post rephrased the section that [1] shows the connection between minimizing sum-of-squares error function and maximizing likelihood in curve fitting.">
 
 
 
@@ -133,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://amber0309.github.io/2015/12/08/anm/"/>
+  <link rel="canonical" href="http://amber0309.github.io/2018/11/22/prml-1/"/>
 
 
 
 
 
-  <title>Understanding Additive Noise Model | A Reticent Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>The Connection Between Minimizing Sum-of-squares and Maximizing Likelihood | A Reticent Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -272,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2015/12/08/anm/">
+    <link itemprop="mainEntityOfPage" href="http://amber0309.github.io/2018/11/22/prml-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="__Seth__">
@@ -289,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Understanding Additive Noise Model</h1>
+          <h1 class="post-title" itemprop="name headline">The Connection Between Minimizing Sum-of-squares and Maximizing Likelihood</h1>
         
 
         <div class="post-meta">
@@ -301,8 +300,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-08T17:09:17+08:00">
-                2015-12-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-22T20:36:24+08:00">
+                2018-11-22
               </time>
             
 
@@ -320,9 +319,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2015/12/08/anm/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/22/prml-1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2015/12/08/anm/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/22/prml-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -350,42 +349,29 @@
       
 
       
-        <p>This post introduces the basic idea of <a href="https://papers.nips.cc/paper/3548-nonlinear-causal-discovery-with-additive-noise-models.pdf" target="_blank" rel="noopener">Additive Noise Model</a> (ANM) for causal inference.</p>
+        <p>This post rephrased the section that <a href="#1">[1]</a> shows the connection between minimizing sum-of-squares error function and maximizing likelihood in curve fitting.</p>
 <a id="more"></a>
-<h2 id="Model-description"><a href="#Model-description" class="headerlink" title="Model description"></a>Model description</h2><p>We focus on the two-variable (often termed a <em>cause-effect pair</em>) case where the relation between the cause $X$ and the effect $Y$ is given by<br>\begin{align}<br>Y = f(X) + \epsilon, \tag{1}<br>\end{align}</p>
-<p>where $f$ is an arbitrary function and noise $\epsilon$, which is independent of $X$, may have arbitrary probability densities $p(\epsilon)$.</p>
-<p>The goal of causal inference is, given data $\mathcal{D}=\lbrace (x_{i}, y_{i}) \rbrace^{N}_{i = 1}$ sampled independently from the joint distribution of the casue and the effect $p(X,Y)$, to infer whether $X$ causes $Y$ ($X \to Y$) or the opposite ($Y \to X$).</p>
-<h2 id="Identifiability"><a href="#Identifiability" class="headerlink" title="Identifiability"></a>Identifiability</h2><p>As the most commonly used benchmark approach for inferring the causal direction of cause-effect pairs, ANM can be viewed as the first to exploit <em>cause-effect asymmetry</em>, which means the property that only holds in the true causal direction and is violated in the anti-causal direction. The causal models with cause-effect asymmetry are said to be <em>identifiable</em>. The analysis of most subsequent causal inference approaches can all be viewed as finding the cause-effect asymmetry based on different model assumptions.</p>
-<p>In ANM, this kind of asymmetry stems from how the data fits an ANM in both hypothetical direcitons. In other words, how likely the given data is generated from an ANM. First of all, note that not all cases in ANM is identifiable. For example, when $f(X) = X$ and $\epsilon$ is Gaussian, the backward model still fulfills an ANM.</p>
-<p>Besides the simple linear-Gaussian and some other relatively artificial cases, the identifiability of ANM is given by the following Theorem (<a href="#1">[1]</a>, Theorem 1)</p>
-<p><strong>Theorem 1</strong> <em>Let the joint probability density of $X$ and $Y$ be given by</em><br>\begin{align}<br>p(X,Y) = p_{\epsilon}(Y-f(X))p_{X}(X), \tag{2}<br>\end{align}</p>
-<p><em>where $p_{\epsilon}$, $p_{X}$ are probability densities on $\mathbb{R}$. If there is a backward model of the same form, i.e.,</em><br>\begin{align}<br>p(X,Y) = p_{\varepsilon}(X-g(Y))p_{Y}(Y), \tag{3}<br>\end{align}</p>
-<p><em>then, denoting $\nu := \log p_{\epsilon}$ and $\xi := \log p_{X}$, the triple $(f, p_{X}, p_{\epsilon})$ must satisfy the following differential equation for all $x$, $y$ with $\nu^{\prime\prime}(Y-f(X)) f^{\prime}(X) \neq 0$:</em><br>\begin{align}<br>\xi^{\prime\prime\prime} = \xi^{\prime\prime}\left( -\frac{\nu^{\prime\prime\prime} f^{\prime}}{\nu^{\prime\prime} } + \frac{f^{\prime\prime}}{f^{\prime}} \right) - 2\nu^{\prime\prime} f^{\prime\prime} f^{\prime} + \nu^{\prime} f^{\prime\prime\prime} + \frac{ \nu^{\prime} \nu^{\prime\prime\prime} f^{\prime} f^{\prime\prime} }{ \nu^{\prime\prime} } - \frac{ \nu^{\prime} \left( f^{\prime\prime}\right)^{2} }{f^{\prime}}, \tag{4}<br>\label{condition}<br>\end{align}</p>
-<p><em>where the arguments $Y-f(X)$, $X$, and $X$ for $\nu$, $\xi$, $f$ and their derivatives are skipped for clarity. Moreover, if for a fixed pair $(f, \nu)$ there exists $Y\in \mathbb{R}$ such that $\nu^{\prime\prime} (Y-f(X)) f^{\prime}(X) \neq 0$ for all but a countable set of points $X \in \mathbb{R}$, the set of all $p_{X}$ for which $p$ has a backward model is contained in a 3-dimensional affine space.</em></p>
-<p>The theorem is proved by taking derivative of the log of joint distribution $p(X,Y)$ for both models. Specifically, let the log of the joint distribution be $\pi(X,Y)$. Then $\frac{\partial}{\partial X}\left( \frac{\partial^{2} \pi / \partial X^{2}}{ \partial^{2} \pi / \partial X \partial Y } \right)$ of the two hypothetical models should be consistent if the backward model exists. The condition shown in Eq. (\ref{condition}) is deduced by computing the derivatives of both models and making them equal.</p>
-<p>It is hard for me to grasp the infomation \eqref{condition} conveys. By now my personal interpretation of it is that only by fulfilling such a <em>complicated</em> and <em>stange</em> differential equation can the backward model exist. Therefore, one may say that the model that is identifiable is <em>typically</em> the case, however, not always.</p>
-<h2 id="Causal-inference"><a href="#Causal-inference" class="headerlink" title="Causal inference"></a>Causal inference</h2><p>The inference procedure is very intuitive. Consider $X$ and $Y$ which are statistically dependent,</p>
-<ol>
-<li><p>test whether the data fits the model $Y=f(X)+\epsilon$ by</p>
+<h2 id="Problem-definition"><a href="#Problem-definition" class="headerlink" title="Problem definition"></a>Problem definition</h2><p>The goal in the curve fitting problem is to be able to make predictions for the target variable $T$ given some new value of the input variable $X$ on the basis of a set of training data comprising $N$ input values $\mathbf{X} = \left[ x_{1}, \dots, x_{1} \right]^{T}$ and their corresponding target values $\mathbf{T} = \left[ t_{1}, \dots, t_{N} \right]^{T}$.</p>
+<h2 id="Probabilistic-perspective-solution"><a href="#Probabilistic-perspective-solution" class="headerlink" title="Probabilistic perspective solution"></a>Probabilistic perspective solution</h2><p>We can express our uncertainty over the value of the target variable using a probability distribution.</p>
+<p>For this purpose, we shall assume that, given the input value $x$, the corresponding target value $t$ has a Gaussian distribution with a mean equal to the value $y(x, \mathbf{w}) = \sum^{M}_{k=0} w_{k} x^{k}$, where $M$ is the order of the polynomial function $y$. Under this assumption there is</p>
+<p>\begin{align}<br>p(t \vert x, \mathbf{w}, \beta ) = \mathcal{N}\left( t \vert y(x, \mathbf{w}), \beta^{-1} \right), \tag{1}<br>\label{eq:noise_dist}<br>\end{align}</p>
+<p>where the precision parameter $\beta$ corresponds to the inverse variance of the distribution.</p>
+<p>Then we use the training data to determine the values of the unknown parameters $\mathbf{w}$ and $\beta$ by maximum likelihood. If the data are assumed to be drawn independently from the distribution \eqref{eq:noise_dist}, then the likelihood function is given by</p>
+<p>\begin{align}<br>p(\mathbf{T} \vert \mathbf{X}, \mathbf{w}, \beta ) = \prod^{N}_{n=1} \mathcal{N}\left( t_{n} \vert y(x_{n}, \mathbf{w}), \beta^{-1} \right). \tag{2}<br>\label{eq:lik}<br>\end{align}</p>
+<p>Substituting for the form of the Gaussian distribution, we obtain the log likelihood function in the form</p>
+<p>\begin{align}<br>\ln p(\mathbf{T} \vert \mathbf{X}, \mathbf{w}, \beta ) = - \frac{\beta}{2} \sum^{N}_{n=1} \left[ y(x_{n}, \mathbf{w}) - t_{n} \right]^{2} + \frac{N}{2} \ln \beta - \frac{N}{2} \ln 2 \pi. \tag{3}<br>\label{eq:log-lik}<br>\end{align}</p>
+<p>Consider first the determination of the maximum likelihood solution for the polynomial coefficients, which will be denoted by $\mathbf{w}_{ML}$. These are determined by maximizing \eqref{eq:log-lik} with respect to $\mathbf{w}$. For this purpose,</p>
 <ul>
-<li>doing nonlinear regression of $Y$ on $X$;</li>
-<li>computing the corresponding residuals $\hat{\epsilon}$;</li>
-<li>testing whether $\hat{\epsilon}$ is independent of $X$.</li>
+<li><p>we can omit the last two terms on the right-hand side of \eqref{eq:log-lik} because they do not depend on $\mathbf{w}$;</p>
+</li>
+<li><p>we can replace the coefficient $\beta / 2$ with $1 / 2$ since scaling the log likelihood by a positive constant coefficient does not alter the location of the maximum with respect to $\mathbf{w}$;</p>
+</li>
+<li><p>we can equivalently minimize the negative log likelihood instead of maximizing the log likelihood.</p>
+</li>
 </ul>
-</li>
-<li><p>test whether the data fits the backward model $X=g(Y) + \varepsilon$ similarly.</p>
-</li>
-<li><p>conclude the inference result</p>
-<ul>
-<li>cannot infer the direction if both models are accepted or rejected;</li>
-<li>$X \to Y$, if only $Y=f(X)+\epsilon$ is accepted;</li>
-<li>$Y \to X$, if only $X=g(Y) + \varepsilon$ is accepted.</li>
-</ul>
-</li>
-</ol>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>The code provided by the paper authors is available at <a href="https://github.com/amber0309/Additive-Noise-Model" target="_blank" rel="noopener">GitHub</a>.</p>
+<p>As a result, we see that maximizing likelihood is equivalent, so far as determining $\mathbf{w}$ is concerned, to minimizing the sum-of-squares error function $\sum^{N}_{n=1} \left[ y(x_{n}, \mathbf{w}) - t_{n} \right]^{2}$. Thus the sum-of-squares error function has arisen as a consequence of maximizing likelihood under the assumption of a Gaussian noise distribution.</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a name="1"></a> Hoyer, P. O., Janzing, D., Mooij, J. M., Peters, J., &amp; Schölkopf, B. (2009). Nonlinear causal discovery with additive noise models. In Advances in neural information processing systems (pp. 689-696).</li>
+<li><a name="1"></a> Bishop, Christopher M. (2006). Pattern Recognition and Machine Learning (Information Science and Statistics). Springer-Verlag, Berlin, Heidelberg.</li>
 </ol>
 
       
@@ -402,16 +388,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/ML/" rel="tag"># ML</a>
-          
-            <a href="/tags/Causality/" rel="tag"># Causality</a>
-          
-            <a href="/tags/Paper-reading/" rel="tag"># Paper-reading</a>
-          
-        </div>
-      
 
       
       
@@ -421,15 +397,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/11/05/sublime-build/" rel="next" title="Build System Configuration in Sublime Text 3 for Anaconda Virtual Environment">
+                <i class="fa fa-chevron-left"></i> Build System Configuration in Sublime Text 3 for Anaconda Virtual Environment
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/26/anmprf/" rel="prev" title="Derivation of Theorem 1 in ANM">
-                Derivation of Theorem 1 in ANM <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -574,7 +550,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-description"><span class="nav-number">1.</span> <span class="nav-text">Model description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Identifiability"><span class="nav-number">2.</span> <span class="nav-text">Identifiability</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Causal-inference"><span class="nav-number">3.</span> <span class="nav-text">Causal inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-definition"><span class="nav-number">1.</span> <span class="nav-text">Problem definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Probabilistic-perspective-solution"><span class="nav-number">2.</span> <span class="nav-text">Probabilistic perspective solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
@@ -713,9 +689,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://amber0309.github.io/2015/12/08/anm/';
-          this.page.identifier = '2015/12/08/anm/';
-          this.page.title = 'Understanding Additive Noise Model';
+          this.page.url = 'http://amber0309.github.io/2018/11/22/prml-1/';
+          this.page.identifier = '2018/11/22/prml-1/';
+          this.page.title = 'The Connection Between Minimizing Sum-of-squares and Maximizing Likelihood';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Seth.disqus.com/embed.js';
