@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Commonly used math commands. StatementsNumbered1234567891011121314151617% the counter of post restarts at every new section.\newtheorem&amp;#123;post&amp;#125;&amp;#123;Postulate&amp;#125;[section]% assp created, its">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LaTeX Math Commands">
+<meta property="og:url" content="http://example.com/2016/03/23/latex-math/index.html">
+<meta property="og:site_name" content="Memo">
+<meta property="og:description" content="Commonly used math commands. StatementsNumbered1234567891011121314151617% the counter of post restarts at every new section.\newtheorem&amp;#123;post&amp;#125;&amp;#123;Postulate&amp;#125;[section]% assp created, its">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2016/03/23/latex-math/latex-math/mat.png">
+<meta property="article:published_time" content="2016-03-23T15:46:07.000Z">
+<meta property="article:modified_time" content="2021-11-30T14:11:05.538Z">
+<meta property="article:author" content="__Seth__">
+<meta property="article:tag" content="LaTeX">
+<meta property="article:tag" content="Academic">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2016/03/23/latex-math/latex-math/mat.png">
+
+<link rel="canonical" href="http://example.com/2016/03/23/latex-math/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>LaTeX Math Commands | Memo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Memo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2016/03/23/latex-math/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="__Seth__">
+      <meta itemprop="description" content="Personal Notes">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Memo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LaTeX Math Commands
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-03-23 23:46:07" itemprop="dateCreated datePublished" datetime="2016-03-23T23:46:07+08:00">2016-03-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-30 22:11:05" itemprop="dateModified" datetime="2021-11-30T22:11:05+08:00">2021-11-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Commonly used math commands.</p>
+<h1 id="Statements"><a href="#Statements" class="headerlink" title="Statements"></a>Statements</h1><h2 id="Numbered"><a href="#Numbered" class="headerlink" title="Numbered"></a>Numbered</h2><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% the counter of post restarts at every new section.</span></span><br><span class="line"><span class="keyword">\newtheorem</span>&#123;post&#125;&#123;Postulate&#125;[section]</span><br><span class="line"></span><br><span class="line"><span class="comment">% assp created, its counter will reset every time using a new post</span></span><br><span class="line"><span class="keyword">\newtheorem</span>&#123;assp&#125;&#123;Assumption&#125;[post]</span><br><span class="line"></span><br><span class="line"><span class="comment">% dfnt created, it uses the same counter as post.</span></span><br><span class="line"><span class="keyword">\newtheorem</span>&#123;dfnt&#125;[post]&#123;Definition&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% set the styling for the numbered environment defined right below it.</span></span><br><span class="line"><span class="comment">% Theorem styles: definition, plain, remark.</span></span><br><span class="line"><span class="keyword">\theoremstyle</span>&#123;definition&#125;</span><br><span class="line"><span class="keyword">\newtheorem</span>&#123;thrm&#125;&#123;Theorem&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% others</span></span><br><span class="line"><span class="keyword">\newtheorem</span>&#123;prop&#125;&#123;Proposition&#125;</span><br><span class="line"><span class="keyword">\newtheorem</span>&#123;lema&#125;&#123;Lemma&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<p>Usage</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;thrm&#125;[title]</span><br><span class="line"><span class="keyword">\label</span>&#123;thrm:1&#125;</span><br><span class="line">The content of the theorem.</span><br><span class="line"><span class="keyword">\end</span>&#123;thrm&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Unnumbered"><a href="#Unnumbered" class="headerlink" title="Unnumbered"></a>Unnumbered</h2><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\newtheorem</span>*&#123;remark&#125;&#123;Remark&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Proofs"><a href="#Proofs" class="headerlink" title="Proofs"></a>Proofs</h2><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>&#123;amsthm&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% change the symbol at the end of a proof</span></span><br><span class="line"><span class="keyword">\renewcommand</span><span class="keyword">\qedsymbol</span>&#123;<span class="built_in">$</span><span class="keyword">\blacksquare</span><span class="built_in">$</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% start a proof environment</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;proof&#125;</span><br><span class="line">[content]</span><br><span class="line"><span class="keyword">\end</span>&#123;proof&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h1><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\DeclareMathOperator</span>*&#123;<span class="keyword">\argmin</span>&#125;&#123;arg<span class="keyword">\,</span>min&#125;</span><br><span class="line"><span class="keyword">\DeclareMathOperator</span>*&#123;<span class="keyword">\argmax</span>&#125;&#123;arg<span class="keyword">\,</span>max&#125;</span><br><span class="line"><span class="keyword">\DeclareMathOperator</span>*&#123;<span class="keyword">\minimize</span>&#125;&#123;minimize&#125;</span><br><span class="line"><span class="keyword">\DeclareMathOperator</span>&#123;<span class="keyword">\tr</span>&#125;&#123;tr&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% x is independent of y</span></span><br><span class="line"><span class="built_in">$</span>x <span class="keyword">\perp</span><span class="keyword">\!</span><span class="keyword">\!</span><span class="keyword">\!</span><span class="keyword">\perp</span> y<span class="built_in">$</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h1><h2 id="Equation-with-large-brace"><a href="#Equation-with-large-brace" class="headerlink" title="Equation with large brace"></a>Equation with large brace</h2><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;equation&#125;</span><br><span class="line">  D<span class="built_in">_</span>&#123;it&#125; =</span><br><span class="line">    <span class="keyword">\begin</span>&#123;cases&#125;</span><br><span class="line">      1 <span class="built_in">&amp;</span> <span class="keyword">\text</span>&#123;if bank <span class="built_in">$</span>i<span class="built_in">$</span> issues ABs at time <span class="built_in">$</span>t<span class="built_in">$</span>&#125;<span class="keyword">\\</span></span><br><span class="line">      2 <span class="built_in">&amp;</span> <span class="keyword">\text</span>&#123;if bank <span class="built_in">$</span>i<span class="built_in">$</span> issues CBs at time <span class="built_in">$</span>t<span class="built_in">$</span>&#125;<span class="keyword">\\</span></span><br><span class="line">      0 <span class="built_in">&amp;</span> <span class="keyword">\text</span>&#123;otherwise&#125;</span><br><span class="line">    <span class="keyword">\end</span>&#123;cases&#125;</span><br><span class="line"><span class="keyword">\end</span>&#123;equation&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Matrix-in-text"><a href="#Matrix-in-text" class="headerlink" title="Matrix in text"></a>Matrix in text</h2><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% a, b in the first row, c, d the second.</span></span><br><span class="line"><span class="built_in">$</span><span class="keyword">\mathbf</span>&#123;A&#125; = <span class="keyword">\begin</span>&#123;bmatrix&#125;</span><br><span class="line">a <span class="built_in">&amp;</span> b <span class="keyword">\\</span></span><br><span class="line">c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;bmatrix&#125;<span class="built_in">$</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% other options for replacing &#x27;bmatrix&#x27;</span></span><br><span class="line"><span class="comment">% matrix, pmatrix, vmatrix, Vmatrix</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="./latex-math/mat.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LaTeX/" rel="tag"># LaTeX</a>
+              <a href="/tags/Academic/" rel="tag"># Academic</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/12/08/latex-fig/" rel="prev" title="LaTeX Commands for Figures">
+      <i class="fa fa-chevron-left"></i> LaTeX Commands for Figures
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/30/latex-tab/" rel="next" title="LaTeX Commands for Tables">
+      LaTeX Commands for Tables <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Statements"><span class="nav-number">1.</span> <span class="nav-text">Statements</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Numbered"><span class="nav-number">1.1.</span> <span class="nav-text">Numbered</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unnumbered"><span class="nav-number">1.2.</span> <span class="nav-text">Unnumbered</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proofs"><span class="nav-number">1.3.</span> <span class="nav-text">Proofs</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Operators"><span class="nav-number">2.</span> <span class="nav-text">Operators</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Expressions"><span class="nav-number">3.</span> <span class="nav-text">Expressions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Equation-with-large-brace"><span class="nav-number">3.1.</span> <span class="nav-text">Equation with large brace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matrix-in-text"><span class="nav-number">3.2.</span> <span class="nav-text">Matrix in text</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">__Seth__</p>
+  <div class="site-description" itemprop="description">Personal Notes</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/amber0309" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;amber0309" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">__Seth__</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
